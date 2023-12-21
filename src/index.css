@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/src/assets/fonts/PlusJakartaSans-VariableFont_wght.ttf");
+}
+
 @layer base {
   #root {
     @apply w-[100vw] h-[100vh] overflow-x-hidden;
@@ -12,11 +17,19 @@
 }
 
 @layer components {
-  .btn-primary{
-    @apply bg-primary text-white font-bold
+  .btn-primary {
+    @apply font-bold text-white bg-primary;
   }
 }
 
 @layer utilities {
-  
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+  .transition-200 {
+    @apply transition-all duration-200 ease-in-out;
+  }
 }
