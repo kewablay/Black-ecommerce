@@ -5,13 +5,24 @@ export default {
     extend: {
       colors: {
         bg: "#F9F9F9",
-        // orange
-        primary: "#FF753A",
+        bgDark: "#1c211f",
+        // green
+        primary: "#3F8A38",
+        primaryLight: "#B9E6B7",
+        primaryLighter: "#EDF1F0",
+        hilitePrimary: "#EBFFEB",
         // blue
-        secondary: "#22A1EC",
-        secondaryLight: "#C7DDF9",
+        secondaryDark: "#65B7FF",
+        secondary: "#B7E2E6",
+        secondaryLight: "#B7BFE6",
+        // purple
+        secondaryDarker: "#C1B7E6",
+
+        // orange
+        tertiary: "#E6BBB7",
+
         textGray: "#7E7E7E",
-        bgGray: "#F2F4F5",
+        bgGray: "#F7F8FF",
       },
       boxShadow: {
         custom: "0px 2px 4px 0px rgba(0, 0, 0, 0.25);",
@@ -22,6 +33,8 @@ export default {
 
         md: "768px",
         // => @media (min-width: 768px) { ... }
+
+        lgTab: { min: "1024px", max: "1279px" },
 
         lg: "1024px",
         // => @media (min-width: 1024px) { ... }
@@ -87,6 +100,14 @@ export default {
             fontWeight: "500",
           },
         ],
+        //  28px
+        650: [
+          "26px",
+          {
+            lineHeight: "2rem",
+            fontWeight: "500",
+          },
+        ],
         //  32px
         700: [
           "2rem",
@@ -104,11 +125,30 @@ export default {
           },
         ],
         //  40px
-        900: [
+        850: [
           "2.5rem",
           {
-            lineHeight: "2.5rem",
+            lineHeight: "130%",
             fontWeight: "900",
+            letterSpacing: "-2px",
+          },
+        ],
+        //  64px
+        900: [
+          "64px",
+          {
+            lineHeight: "110%",
+            fontWeight: "800",
+            letterSpacing: "-2.44px",
+          },
+        ],
+        //  90px
+        950: [
+          "90px",
+          {
+            lineHeight: "95px",
+            fontWeight: "800",
+            letterSpacing: "-2.44px",
           },
         ],
 
@@ -124,7 +164,6 @@ export default {
           {
             lineHeight: "120.33%",
             fontWeight: "500",
-            letterSpacing: '-1.44px',
             fontWeight: "700",
           },
         ],
