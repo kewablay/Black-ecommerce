@@ -1,17 +1,22 @@
 import React from "react";
 import ReviewCard from "./ReviewCard";
+import SwipperNavButtons from "../../components/shared/SwipperNavButtons";
 
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/pagination";
 
 // import required modules
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css/scrollbar";
+import { Arrow } from "../../assets/icons/svgIcons";
 
 function CustomerReviews() {
+  const swipper = useSwiper();
+
   const reviews = [
     {
       message:
@@ -38,10 +43,6 @@ function CustomerReviews() {
       {/* section title  */}
       <div className="mb-10 flex-between">
         <h3 className="section-title">Customer Reviews</h3>
-        {/* <div className="flex gap-4">
-          <button>Left</button>
-          <button>Right</button>
-        </div> */}
       </div>
       {/* section title end */}
 
@@ -56,7 +57,7 @@ function CustomerReviews() {
           }}
           loop={true}
           navigation={true}
-          modules={[Autoplay]}
+          modules={[Autoplay, Pagination]}
           className="mySwiper"
           // slidesPerView={2}
           breakpoints={{
@@ -64,6 +65,7 @@ function CustomerReviews() {
             768: { slidesPerView: 1.2 },
             992: { slidesPerView: 1.7 },
             1200: { slidesPerView: 2.1 },
+            1536: { slidesPerView: 2.5 },
           }}
         >
           {reviews.map((review, index) => (
@@ -76,6 +78,9 @@ function CustomerReviews() {
               />
             </SwiperSlide>
           ))}
+          <div className="mt-5 flex-center">
+            <SwipperNavButtons />
+          </div>
         </Swiper>
       </div>
     </div>
