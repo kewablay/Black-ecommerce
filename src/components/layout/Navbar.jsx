@@ -6,10 +6,10 @@ function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <nav className=" shadow-md mb-3">
-      <div className="wrapper container mx-auto p-5 flex-between">
+    <nav className="mb-3 shadow-md ">
+      <div className="container p-5 mx-auto wrapper flex-between">
         <div>
-          <Link to={"#"} className="font-bold">
+          <Link to={"/"} className="font-bold">
             Logo
           </Link>
         </div>
@@ -25,10 +25,10 @@ function Navbar() {
             showMenu ? "-left-0" : "-left-[100%]"
           } absolute z-50  flex flex-col delay-75 gap-4 p-10 shadow-md bg-slate-100 top-0 w-[90%] h-screen justify-center text-800 font-normal transition-200 lg:static lg:p-0 lg:text-300 lg:flex-row lg:w-fit lg:bg-white lg:shadow-none lg:h-auto`}
         >
-          <Link to={"#"}>Home</Link>
-          <Link to={"#"}>Categories</Link>
-          <Link to={"#"}>Shop</Link>
-          <Link to={"#"}>Contact</Link>
+          <Link to={"/"}>Home</Link>
+          <Link to={"/shop"}>Categories</Link>
+          <Link to={"/shop"}>Shop</Link>
+          <Link to={"/orders"}>Orders</Link>
 
           <button
             className="absolute top-4 right-4 lg:hidden"

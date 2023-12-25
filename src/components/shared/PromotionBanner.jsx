@@ -4,7 +4,8 @@ import { BgPath } from "../../assets/icons/svgIcons";
 import BgSoftText from "./BgSoftText";
 
 function PromotionBanner() {
-  const BannerHeights = "sm:h-[22rem] md:h-[22rem] lg:h-[28rem] xl:h-32rem]";
+  const BannerHeights =
+    "h-[30rem] sm:h-[22rem] md:h-[22rem] lg:h-[28rem] xl:h-32rem]";
 
   return (
     <div

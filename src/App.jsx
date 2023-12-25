@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import { Homepage, Login } from "./pages";
+import { Homepage, Login, Shop, ProductDetail } from "./pages";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" Component={Homepage} />
-        <Route exact path="/login" Component={Login} />
-      </Routes>
-    </Router>
+    <div className="font-plusJakartaSans">
+      <Router>
+        <Routes>
+          <Route exact path="/" Component={Homepage} />
+          <Route path="/login" Component={Login} />
+          <Route path="/shop" Component={Shop} />
+          <Route path="/product/:id" Component={ProductDetail} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ import CustomerReviews from "../features/CustomerReviews/CustomerReviews";
 
 function Homepage() {
   return (
-    <div className="text-xl font-bold font-plusJakartaSans">
+    <div>
       <MainLayout>
         <Header />
         <Categories />
