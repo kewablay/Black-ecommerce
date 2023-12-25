@@ -233,3 +233,30 @@ export function Comma() {
     </svg>
   );
 }
+
+export function TickIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="17"
+      viewBox="0 0 16 17"
+      fill="none"
+    >
+      <path
+        d="M13.7786 6.96632C14.1142 7.76016 14.2866 8.61342 14.2855 9.47527C14.2855 13.0337 11.4007 15.9186 7.84221 15.9186C4.28373 15.9186 1.39893 13.0337 1.39893 9.47527C1.39893 5.91678 4.28373 3.03198 7.84221 3.03198C9.01167 3.03198 10.1081 3.34341 11.0535 3.88822"
+        stroke="#45A618"
+        stroke-width="1.16995"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M14.6701 1.16016L7.84236 11.0263L4.14355 7.44665V9.20674L7.97659 12.9653L14.6701 3.25566V1.16016Z"
+        stroke="#45A618"
+        stroke-width="1.16995"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}

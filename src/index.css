@@ -24,6 +24,9 @@
   .btn-primary {
     @apply font-bold text-white bg-primary;
   }
+  .btn-lg {
+    @apply w-full px-6 py-4 rounded-sm text-300;
+  }
 }
 
 @layer utilities {
@@ -44,5 +47,11 @@
   }
   .section-title {
     @apply font-bold text-650 lg:text-700;
+  }
+  .section {
+    @apply container mx-auto mb-20;
+  }
+  .section-contained {
+    @apply container px-4 mx-auto mb-20;
   }
 }

@@ -4,10 +4,9 @@ import { Link } from "react-router-dom";
 
 function Button({ size, type, text, onClick, link }) {
   return (
-    // <Link to={link} className={`${type} ${size}`} onClick={onClick}>
-    //   {text}
-    // </Link>
-    <p>{text}</p>
+    <Link to={link} className={`${type} ${size}`} onClick={onClick}>
+      {text}
+    </Link>
   );
 }
 

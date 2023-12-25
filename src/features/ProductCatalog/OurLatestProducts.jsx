@@ -29,7 +29,7 @@ function OurLatestProducts() {
     },
   ];
   return (
-    <div className="container px-4 mx-auto mb-20">
+    <div className="section-contained">
       {/* section title */}
       <div className="mb-10 text-center">
         <small className="text-textGray text-200">NEW ARRIVALS</small>
