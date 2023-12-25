@@ -1,28 +1,24 @@
 import React from "react";
-import { TickIcon } from "../../assets/icons/svgIcons";
+import PlanInfo from "./PlanInfo";
 
 function PaymentCard({ plan, price, desc, duration }) {
   return (
-    <div className="p-5 space-y-5 bg-white rounded-lg shadow-md">
+    <div className="p-10 space-y-10 bg-white border rounded-lg shadow-lg hover:border-primary transition-100">
       {/* plan and description  */}
-      <div>
+
+      <div className="text-center">
         <h4 className="font-bold text-600">{plan}</h4>
         <p className="mt-3 text-textGray">{desc}</p>
       </div>
 
       {/* price */}
-      <h2 className="text-700">${price}</h2>
+      <h2 className="text-center text-700">${price}</h2>
 
       {/* other info  */}
-      <div>
-        <div className="flex gap-2">
-          <div>
-            <TickIcon />
-          </div>
-
-          <p>Duration</p>
-          <span className="text-textGray">{duration}</span>
-        </div>
+      <div className="space-y-2">
+        <PlanInfo title={"Duration"} content={duration} />
+        <PlanInfo title={"Payment Frequency"} content={"Monthly"} />
+        <PlanInfo title={"No interest"} />
       </div>
 
       {/* button */}

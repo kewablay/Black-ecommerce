@@ -2,7 +2,6 @@ import React from "react";
 import MainLayout from "../components/layout/MainLayout";
 import PaymentCard from "../features/PaymentPlan/PaymentCard";
 
-
 function SelectPayment() {
   const paymentPlans = [
     {
@@ -36,16 +35,16 @@ function SelectPayment() {
         </div>
 
         {/* Payment plan list  */}
-        <div>
-          {paymentPlans.map((paymentPlan, index) => {
+        <div className="grid gap-8 section-contained md:grid-cols-2 lg:grid-cols-3">
+          {paymentPlans.map((paymentPlan, index) => (
             <PaymentCard
               key={index}
               plan={paymentPlan.plan}
               desc={paymentPlan.desc}
               duration={paymentPlan.duration}
               price={paymentPlan.price}
-            />;
-          })}
+            />
+          ))}
         </div>
       </MainLayout>
     </div>
