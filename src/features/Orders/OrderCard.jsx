@@ -1,16 +1,6 @@
 import React from "react";
 
-function OrderCard({
-  image,
-  title,
-  price,
-  category,
-
-  id,
-
-  date,
-  status,
-}) {
+function OrderCard({ image, title, price, date, status }) {
   return (
     <div className="relative grid gap-1 p-4 rounded-lg shadow-md sm:grid-cols-4 sm:gap-5 ">
       {/* card image */}
