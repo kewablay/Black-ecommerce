@@ -54,4 +54,9 @@
   .section-contained {
     @apply container px-4 mx-auto mb-20;
   }
+  .input-style{
+    @apply p-5 border bg-bgGray rounded-lg focus-within:outline-secondary
+  }
 }
+
+

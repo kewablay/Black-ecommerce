@@ -1,5 +1,6 @@
 import React from "react";
 import PlanInfo from "./PlanInfo";
+import { Link } from "react-router-dom";
 
 function PaymentCard({ plan, price, desc, duration }) {
   return (
@@ -23,7 +24,12 @@ function PaymentCard({ plan, price, desc, duration }) {
 
       {/* button */}
       <div>
-        <button className="rounded-full btn-primary btn-lg">Select Plan</button>
+        <Link
+          to={"/payment-info"}
+          className="block text-center rounded-full btn-primary btn-lg"
+        >
+          Select Plan
+        </Link>
       </div>
     </div>
   );
