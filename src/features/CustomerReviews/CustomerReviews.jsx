@@ -40,8 +40,9 @@ function CustomerReviews() {
 
   return (
     <div className="py-16 section-contained sm:px-8 bg-primaryLighter rounded-xl">
-      {/* section title  */}
-      <div className="mb-10 flex-between">
+      {/* section title */}
+      <div className="mb-10 text-center">
+        <small className="text-textGray text-200">WHAT THEY SAY</small>
         <h3 className="section-title">Customer Reviews</h3>
       </div>
       {/* section title end */}
