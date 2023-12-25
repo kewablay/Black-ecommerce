@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import { Homepage, Login, Shop, ProductDetail, SelectPayment } from "./pages";
+import { Homepage, Login, Shop, ProductDetail, SelectPayment, Orders } from "./pages";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
           <Route path="/shop" Component={Shop} />
           <Route path="/product/:id" Component={ProductDetail} />
           <Route path="/select-payment" Component={SelectPayment} />
+          <Route path="/orders" Component={Orders} />
         </Routes>
       </Router>
     </div>
