@@ -39,7 +39,7 @@ function CustomerReviews() {
   ];
 
   return (
-    <div className="container px-5 py-16 mx-auto mb-20 sm:px-8 bg-primaryLighter rounded-xl">
+    <div className="py-16 section-contained sm:px-8 bg-primaryLighter rounded-xl">
       {/* section title  */}
       <div className="mb-10 flex-between">
         <h3 className="section-title">Customer Reviews</h3>

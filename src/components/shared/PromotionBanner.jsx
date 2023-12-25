@@ -9,7 +9,7 @@ function PromotionBanner() {
 
   return (
     <div
-      className={`container mx-auto relative z-10 grid items-center gap-10 px-5 pt-20  mb-20 overflow-hidden rounded-xl bg-secondaryLight sm:pt-0 sm:grid-cols-2 ${BannerHeights}`}
+      className={`section-contained relative z-10 grid items-center gap-10 pt-20 overflow-hidden rounded-xl bg-secondaryLight sm:pt-0 sm:grid-cols-2 ${BannerHeights}`}
     >
       {/* intro text  */}
       <div className="text-center sm:text-left sm:pl-10 lg:pl-20 ">
