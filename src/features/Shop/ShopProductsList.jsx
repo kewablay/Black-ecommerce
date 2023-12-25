@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "../../components/shared/ProductCard";
 
-function HotDeals() {
+function ShopProductsList() {
   const products = [
     {
       id: 1,
@@ -21,24 +21,42 @@ function HotDeals() {
       price: "1200",
       image: "/src/assets/images/samsungS21.png",
     },
+
     {
       id: 4,
       title: "IPhone 15 pro max - 256GB",
       price: "1200",
       image: "/src/assets/images/iphone15pro.png",
     },
+    {
+      id: 5,
+      title: "Samsung Galaxy S21  -128GB",
+      price: "1200",
+      image: "/src/assets/images/samsungS21.png",
+    },
+    {
+      id: 6,
+      title: "iPhone 13 pro unlocked - 128 GB",
+      price: "1200",
+      image: "/src/assets/images/iphone13pro.png",
+    },
+    {
+      id: 7,
+      title: "IPhone 12 pro - 32GB",
+      price: "1200",
+      image: "/src/assets/images/iphone12.png",
+    },
+    {
+      id: 8,
+      title: "Samsung Galaxy S21  -128GB",
+      price: "1200",
+      image: "/src/assets/images/samsungS21.png",
+    },
   ];
 
   return (
     <div className="container px-4 mx-auto mb-20">
-      {/* section title */}
-      <div className="mb-10 text-center">
-        <small className="text-textGray text-200">FLASH SALES</small>
-        <h3 className="section-title">Hot Deals</h3>
-      </div>
-      {/* section title end */}
-
-      {/* Product List */}
+      {/* products list */}
       <div className="grid grid-cols-2 gap-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product, index) => (
           <ProductCard
@@ -50,9 +68,8 @@ function HotDeals() {
           />
         ))}
       </div>
-      {/* Product List end*/}
     </div>
   );
 }
 
-export default HotDeals;
+export default ShopProductsList;

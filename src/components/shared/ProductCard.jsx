@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function ProductCard({ title, image, price }) {
+function ProductCard({ title, image, price, id }) {
+  const navigate = useNavigate();
   return (
-    <div>
+    <div onClick={() => navigate(`/product/${id}`)} className="cursor-pointer">
       {/* image */}
       <div className="h-[13rem] p-4 bg-bgGray rounded-xl flex-center">
         <img src={image} alt="." className="w-[80%] sm:w-[60%]" />

@@ -7,6 +7,10 @@
   src: url("/src/assets/fonts/PlusJakartaSans-VariableFont_wght.ttf");
 }
 
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 @layer base {
   #root {
     @apply w-[100vw] h-[100vh] overflow-x-hidden;
@@ -33,12 +37,12 @@
     @apply transition-all duration-200 ease-in-out;
   }
   .hero-text {
-    @apply text-850 lgTab:text-900 lg:text-950
+    @apply text-850 lgTab:text-900 lg:text-950;
   }
-  .large-text{
-    @apply font-bold text-700 lgTab:text-700 lg:text-850
+  .large-text {
+    @apply font-bold text-700 lgTab:text-700 lg:text-850;
   }
   .section-title {
-    @apply font-bold text-650 lg:text-700
+    @apply font-bold text-650 lg:text-700;
   }
 }

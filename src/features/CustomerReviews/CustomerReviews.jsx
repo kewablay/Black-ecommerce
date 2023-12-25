@@ -52,7 +52,7 @@ function CustomerReviews() {
           // centeredSlides={true}
           spaceBetween={30}
           autoplay={{
-            delay: 2500,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           loop={true}
@@ -61,7 +61,7 @@ function CustomerReviews() {
           className="mySwiper"
           // slidesPerView={2}
           breakpoints={{
-            480: { slidesPerView: 1 },
+            380: { slidesPerView: 1 },
             768: { slidesPerView: 1.2 },
             992: { slidesPerView: 1.7 },
             1200: { slidesPerView: 2.1 },

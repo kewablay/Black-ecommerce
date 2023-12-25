@@ -112,8 +112,9 @@ export default {
         700: [
           "2rem",
           {
-            lineHeight: "2rem",
-            fontWeight: "500",
+            lineHeight: "120%",
+            fontWeight: "700",
+            letterSpacing: "-2px",
           },
         ],
         //  36px
@@ -122,6 +123,7 @@ export default {
           {
             lineHeight: "130%",
             fontWeight: "900",
+            letterSpacing: "-2px",
           },
         ],
         //  40px
