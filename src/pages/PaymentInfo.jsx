@@ -2,10 +2,34 @@ import React from "react";
 import MainLayout from "../components/layout/MainLayout";
 import { InfoIcon, MasterCardIcon, VisaIcon } from "../assets/icons/svgIcons";
 import { Link } from "react-router-dom";
+import useCustomModal from "../hooks/useCustomModal";
+
+import ConfirmPaymentDetailModal from "../features/PaymentInfo/ConfirmPaymentDetailModal";
 
 function PaymentInfo() {
+  const { openModal, closeModal, ModalComponent } = useCustomModal();
+
+  const cardInfo = {
+    name: "Kojo Kewa Junior",
+    cardNumber: "12576580376589027",
+    cvv: "12309",
+    date: "23/03/2023",
+  };
+  const billingInfo = {
+    name: "Kojo Kewa Junior",
+    email: "kkj@gmail.com",
+    city: "Miami",
+    telephone: "+234186639857",
+    address1: "address 1",
+    address2: "address 2",
+    country: "US",
+    zipCode: "233",
+    cardNumber: "123457357898765",
+  };
+
   return (
     <div>
+      {ModalComponent()}
       <MainLayout>
         <div className="mt-10 section-contained">
           <h2 className="mb-10 text-center text-700">
@@ -160,12 +184,21 @@ function PaymentInfo() {
                 />
               </div>
               <div className="mt-5 ">
-                <Link
-                  to={"/confirm-details"}
-                  className="block p-5 text-center rounded-sm btn-primary"
+                <button
+                  // to={"/confirm-payment-info"}
+                  onClick={() =>
+                    openModal(
+                      <ConfirmPaymentDetailModal
+                        cardInfo={cardInfo}
+                        billingInfo={billingInfo}
+                        closeModal={closeModal}
+                      />
+                    )
+                  }
+                  className="w-full p-5 rounded-md btn-primary"
                 >
                   Continue
-                </Link>
+                </button>
               </div>
             </div>
           </form>
