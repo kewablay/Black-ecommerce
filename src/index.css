@@ -26,8 +26,11 @@
   transition: opacity 150ms ease-in-out;
   z-index: 30 !important;
 }
-.react-responsive-modal-modal{
-  margin: 0 !important;
+.react-responsive-modal-modal {
+  @media (max-width: 480px) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
 
 @layer base {
@@ -80,6 +83,6 @@
     @apply p-3 border rounded-lg;
   }
   .customModal {
-    @apply m-0   h-full w-full p-0 sm:h-auto sm:bg-white sm:shadow-lg sm:rounded-xl sm:p-10 sm:px-16 sm:pt-10  sm:w-[85%] md:w-[70%] lg:w-[50%] xl:w-[45%];
+    @apply m-0 h-full w-full p-0 sm:h-auto sm:bg-white sm:shadow-lg sm:rounded-xl sm:p-10 sm:px-16 sm:pt-10  sm:w-[85%] md:w-[70%] lg:w-[50%] xl:w-[45%];
   }
 }
