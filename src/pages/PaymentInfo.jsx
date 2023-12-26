@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import { InfoIcon, MasterCardIcon, VisaIcon } from "../assets/icons/svgIcons";
-import { Link } from "react-router-dom";
 import useCustomModal from "../hooks/useCustomModal";
 
 import ConfirmPaymentDetailModal from "../features/PaymentInfo/ConfirmPaymentDetailModal";
@@ -9,22 +8,50 @@ import ConfirmPaymentDetailModal from "../features/PaymentInfo/ConfirmPaymentDet
 function PaymentInfo() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const cardInfo = {
-    name: "Kojo Kewa Junior",
-    cardNumber: "12576580376589027",
-    cvv: "12309",
-    date: "23/03/2023",
-  };
-  const billingInfo = {
-    name: "Kojo Kewa Junior",
-    email: "kkj@gmail.com",
-    city: "Miami",
-    telephone: "+234186639857",
-    address1: "address 1",
-    address2: "address 2",
-    country: "US",
-    zipCode: "233",
-    cardNumber: "123457357898765",
+  // CARD INFO INPUT REFS
+  const cardNameRef = useRef();
+  const cardNumberRef = useRef();
+  const cvvRef = useRef();
+  const dateRef = useRef();
+  const cardTypeRef = useRef();
+
+  // BILLING IFNO INPUT REFS
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const cityRef = useRef();
+  const telephoneRef = useRef();
+  const address1Ref = useRef();
+  const address2Ref = useRef();
+  const countryRef = useRef();
+  const zipCodeRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const cardInfo = {
+      name: cardNameRef.current.value,
+      cardNumber: cardNumberRef.current.value,
+      cvv: cvvRef.current.value,
+      date: dateRef.current.value,
+    };
+    const billingInfo = {
+      name: nameRef.current.value,
+      email: emailRef.current.value,
+      city: cityRef.current.value,
+      telephone: telephoneRef.current.value,
+      address1: address1Ref.current.value,
+      address2: address2Ref.current.value,
+      country: countryRef.current.value,
+      zipCode: zipCodeRef.current.value,
+    };
+
+    openModal(
+      <ConfirmPaymentDetailModal
+        cardInfo={cardInfo}
+        billingInfo={billingInfo}
+        closeModal={closeModal}
+      />
+    );
   };
 
   return (
@@ -40,6 +67,7 @@ function PaymentInfo() {
           <form
             action="#"
             className="my-5 lg:max-w-[70%] xl:max-w-[60%] mx-auto "
+            onSubmit={handleSubmit}
           >
             {/* title  */}
             <p className="flex items-center gap-2 mb-6 font-semibold">
@@ -57,6 +85,7 @@ function PaymentInfo() {
                 id="address-name"
                 placeholder="Full Name"
                 className="input-style"
+                ref={nameRef}
               />
               <input
                 type="email"
@@ -64,6 +93,7 @@ function PaymentInfo() {
                 id="email"
                 placeholder="Email"
                 className="input-style"
+                ref={emailRef}
               />
               <div className="grid grid-cols-2 gap-3 ">
                 <input
@@ -72,6 +102,7 @@ function PaymentInfo() {
                   id="city"
                   placeholder="City"
                   className="input-style"
+                  ref={cityRef}
                 />
                 <input
                   type="tel"
@@ -79,6 +110,7 @@ function PaymentInfo() {
                   id="tel-num"
                   placeholder="Telephone"
                   className="input-style"
+                  ref={telephoneRef}
                 />
               </div>
               <input
@@ -87,6 +119,7 @@ function PaymentInfo() {
                 id="address"
                 placeholder="Address 1"
                 className="input-style"
+                ref={address1Ref}
               />
               <input
                 type="text"
@@ -94,6 +127,7 @@ function PaymentInfo() {
                 id="address-2"
                 placeholder="Address 2"
                 className="input-style"
+                ref={address2Ref}
               />
               <div className="grid grid-cols-2 gap-3 ">
                 <input
@@ -102,6 +136,7 @@ function PaymentInfo() {
                   id="country"
                   placeholder="Country"
                   className="input-style"
+                  ref={countryRef}
                 />
                 <input
                   type="text"
@@ -109,6 +144,7 @@ function PaymentInfo() {
                   id="zip-code"
                   placeholder="Zip Code"
                   className="input-style"
+                  ref={zipCodeRef}
                 />
               </div>
             </div>
@@ -160,6 +196,7 @@ function PaymentInfo() {
                 id="name"
                 placeholder="Name on card"
                 className="input-style"
+                ref={cardNameRef}
               />
               <input
                 type="text"
@@ -167,6 +204,7 @@ function PaymentInfo() {
                 id="card-number"
                 placeholder="Card number"
                 className="input-style"
+                ref={cardNumberRef}
               />
               <div className="grid grid-cols-2 gap-3 ">
                 <input
@@ -175,30 +213,29 @@ function PaymentInfo() {
                   id="cvv"
                   placeholder="CVV"
                   className="input-style"
+                  ref={cvvRef}
                 />
                 <input
                   type="date"
                   name="exp-date"
                   id="exp-date"
                   className="input-style"
+                  ref={dateRef}
                 />
               </div>
               <div className="mt-5 ">
-                <button
-                  // to={"/confirm-payment-info"}
-                  onClick={() =>
-                    openModal(
-                      <ConfirmPaymentDetailModal
-                        cardInfo={cardInfo}
-                        billingInfo={billingInfo}
-                        closeModal={closeModal}
-                      />
-                    )
-                  }
+                {/* <button
+                  type="submit"
+                  onClick={handleSubmit}
                   className="w-full p-5 rounded-md btn-primary"
                 >
                   Continue
-                </button>
+                </button> */}
+                <input
+                  type="submit"
+                  value="Continue"
+                  className="w-full p-5 rounded-md btn-primary"
+                />
               </div>
             </div>
           </form>
