@@ -71,10 +71,10 @@
     @apply font-bold text-650 lg:text-700;
   }
   .section {
-    @apply container mx-auto mb-20;
+    @apply container mx-auto mb-32;
   }
   .section-contained {
-    @apply container px-4 mx-auto mb-20;
+    @apply container px-4 mx-auto mb-32;
   }
   .input-style {
     @apply p-5 border rounded-lg bg-bgGray focus-within:outline-secondary;
