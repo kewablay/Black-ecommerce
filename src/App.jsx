@@ -9,6 +9,8 @@ import {
   SelectPayment,
   Orders,
   PaymentInfo,
+  Dashboard,
+  ManageProducts,
 } from "./pages";
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
           <Route path="/select-payment" Component={SelectPayment} />
           <Route path="/orders" Component={Orders} />
           <Route path="/payment-info" Component={PaymentInfo} />
+          <Route path="/admin" Component={Dashboard} />
+          <Route path="/admin/manage-products" Component={ManageProducts} />
         </Routes>
       </Router>
     </div>

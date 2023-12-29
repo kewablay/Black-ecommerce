@@ -5,3 +5,5 @@ export { default as ProductDetail } from "./ProductDetail";
 export { default as SelectPayment } from "./SelectPayment";
 export { default as Orders } from "./Orders";
 export { default as PaymentInfo } from "./PaymentInfo";
+export { default as Dashboard } from "./Dashboard";
+export { default as ManageProducts } from "../features/Dashboard/ManageProducts";
