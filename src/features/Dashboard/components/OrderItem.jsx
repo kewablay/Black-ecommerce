@@ -2,17 +2,25 @@ import React, { useRef, useState } from "react";
 import { MoreIcon, ViewIcon } from "../../../assets/icons/svgIcons";
 
 import useOutsideClick from "../../../hooks/useOutsideClick";
+import useCustomModal from "../../../hooks/useCustomModal";
 
-function OrderItem({ id, name, time, status }) {
+import UserDetailModal from "../../../components/modals/UserDetailModal";
+import OTPModal from "../../../components/modals/OTPModal";
+
+function OrderItem({ id, name, time, status, userData }) {
   const [showPopUpMenu, setShowPopUpMenu] = useState(false);
   const popupMenuRef = useRef();
 
   const closePopup = () => setShowPopUpMenu(false);
   const openPopupMenu = () => setShowPopUpMenu(!showPopUpMenu);
 
+  const { ModalComponent, openModal, closeModal } = useCustomModal();
+
   useOutsideClick(popupMenuRef, closePopup);
   return (
     <div className="relative grid items-center grid-cols-12 gap-5 p-2 py-4 bg-white rounded-md shadow-sm text-300">
+      {/* modal  */}
+      {ModalComponent()}
       {/* order id  */}
       <div className="col-span-2">
         <p>#{id}</p>
@@ -40,7 +48,18 @@ function OrderItem({ id, name, time, status }) {
 
       {/* Actions  */}
       <div className="relative col-span-3 flex-between">
-        <button className="flex gap-1">
+        <button
+          onClick={() =>
+            openModal(
+              <UserDetailModal
+                userData={userData}
+                isAdmin
+                closeModal={closeModal}
+              />
+            )
+          }
+          className="flex gap-1"
+        >
           <span>
             <ViewIcon />
           </span>
@@ -61,7 +80,10 @@ function OrderItem({ id, name, time, status }) {
               showPopUpMenu ? "shown" : ""
             } flex-col flex gap-1 menu-popup `}
           >
-            <button className="w-full p-2 text-left hover:bg-bgGray">
+            <button
+              onClick={() => openModal(<OTPModal closeModal={closeModal} />)}
+              className="w-full p-2 text-left hover:bg-bgGray"
+            >
               View Verification OTP
             </button>
             <button className="w-full p-2 text-left hover:bg-bgGray">

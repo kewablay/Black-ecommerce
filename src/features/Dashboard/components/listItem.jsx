@@ -1,9 +1,16 @@
 import React from "react";
 import { DeleteIcon, EditIcon } from "../../../assets/icons/svgIcons";
 
+import useCustomModal from "../../../hooks/useCustomModal";
+import EditProductModal from "../../../components/modals/EditProductModal";
+
 function listItem({ title, image, price, category }) {
+  const { openModal, closeModal, ModalComponent } = useCustomModal();
+
   return (
     <div className="grid items-center grid-cols-12 gap-5 p-2 bg-white rounded-md shadow-sm text-300">
+      {/* modal */}
+      {ModalComponent()}
       {/* image and item name  */}
       <div className="relative grid items-center grid-cols-8 col-span-4 gap-2">
         {/* image */}
@@ -33,7 +40,10 @@ function listItem({ title, image, price, category }) {
 
       {/* user actions delete and edit  */}
       <div className="flex items-center col-span-2 gap-5">
-        <button className="flex items-center gap-1">
+        <button
+          onClick={() => openModal(<EditProductModal />, "customModal")}
+          className="flex items-center gap-1"
+        >
           <span>
             <EditIcon />
           </span>

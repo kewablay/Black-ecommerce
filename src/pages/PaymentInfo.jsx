@@ -3,7 +3,7 @@ import MainLayout from "../components/layout/MainLayout";
 import { InfoIcon, MasterCardIcon, VisaIcon } from "../assets/icons/svgIcons";
 import useCustomModal from "../hooks/useCustomModal";
 
-import ConfirmPaymentDetailModal from "../features/PaymentInfo/ConfirmPaymentDetailModal";
+import UserDetailModal from "../components/modals/UserDetailModal";
 
 function PaymentInfo() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
@@ -28,13 +28,12 @@ function PaymentInfo() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const cardInfo = {
-      name: cardNameRef.current.value,
+    const userData = {
+      nameOnCard: cardNameRef.current.value,
       cardNumber: cardNumberRef.current.value,
       cvv: cvvRef.current.value,
       date: dateRef.current.value,
-    };
-    const billingInfo = {
+
       name: nameRef.current.value,
       email: emailRef.current.value,
       city: cityRef.current.value,
@@ -45,13 +44,7 @@ function PaymentInfo() {
       zipCode: zipCodeRef.current.value,
     };
 
-    openModal(
-      <ConfirmPaymentDetailModal
-        cardInfo={cardInfo}
-        billingInfo={billingInfo}
-        closeModal={closeModal}
-      />
-    );
+    openModal(<UserDetailModal userData={userData} closeModal={closeModal} />);
   };
 
   return (

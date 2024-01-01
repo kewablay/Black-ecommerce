@@ -3,7 +3,12 @@ import DashboardLayout from "./DashboardLayout";
 import { AddIcon } from "../../assets/icons/svgIcons";
 import ListItem from "./components/listItem";
 
+import useCustomModal from "../../hooks/useCustomModal";
+import AddProductModal from "../../components/modals/AddProductModal";
+
 function ManageProducts() {
+  const { openModal, closeModal, ModalComponent } = useCustomModal();
+
   const products = [
     {
       id: 1,
@@ -37,10 +42,15 @@ function ManageProducts() {
 
   return (
     <DashboardLayout>
+      {ModalComponent()}
+
       {/* heading  */}
       <div className="my-7 flex-between">
         <h2 className="font-bold text-700">Shop Products</h2>
-        <button className="flex gap-2 p-3 px-4 rounded-md btn-primary">
+        <button
+          onClick={() => openModal(<AddProductModal closeModal={closeModal} />,  "customModal")}
+          className="flex gap-2 p-3 px-4 rounded-md btn-primary"
+        >
           <span>
             <AddIcon />
           </span>

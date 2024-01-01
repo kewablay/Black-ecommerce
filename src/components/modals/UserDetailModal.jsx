@@ -1,10 +1,18 @@
 import React from "react";
 import { TickIcon } from "../../assets/icons/svgIcons";
 
-function ConfirmPaymentDetailModal({ cardInfo, billingInfo, closeModal }) {
+function UserDetailModal({ userData, closeModal, isAdmin }) {
   return (
     <div className="p-5 rounded-xl font-plusJakartaSans">
-      <h2 className="mb-5 text-center text-600">Confirm Payment Information</h2>
+      {isAdmin ? (
+        <h2 className="mb-5 text-center text-600">
+          Payment Information
+        </h2>
+      ) : (
+        <h2 className="mb-5 text-center text-600">
+          Confirm Payment Information
+        </h2>
+      )}
 
       <div className="space-y-5">
         {/* Billing info */}
@@ -18,45 +26,45 @@ function ConfirmPaymentDetailModal({ cardInfo, billingInfo, closeModal }) {
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Name</p>
-              <p className=" text-textGray">{billingInfo.name}</p>
+              <p className=" text-textGray">{userData.name}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
               <p className="font-semibold">Telephone</p>
-              <p className=" text-textGray">{billingInfo.telephone}</p>
+              <p className=" text-textGray">{userData.telephone}</p>
             </div>
           </div>
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Address 1</p>
-              <p className=" text-textGray">{billingInfo.address1}</p>
+              <p className=" text-textGray">{userData.address1}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
               <p className="font-semibold">City</p>
-              <p className=" text-textGray">{billingInfo.city}</p>
+              <p className=" text-textGray">{userData.city}</p>
             </div>
           </div>
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Address 2</p>
-              <p className=" text-textGray">{billingInfo.address2}</p>
+              <p className=" text-textGray">{userData.address2}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
               <p className="font-semibold">Zip Code</p>
-              <p className=" text-textGray">{billingInfo.zipCode}</p>
+              <p className=" text-textGray">{userData.zipCode}</p>
             </div>
           </div>
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Email</p>
-              <p className=" text-textGray">{billingInfo.email}</p>
+              <p className=" text-textGray">{userData.email}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
               <p className="font-semibold">Country</p>
-              <p className=" text-textGray">{billingInfo.country}</p>
+              <p className=" text-textGray">{userData.country}</p>
             </div>
           </div>
         </div>
@@ -72,38 +80,49 @@ function ConfirmPaymentDetailModal({ cardInfo, billingInfo, closeModal }) {
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Name on Card</p>
-              <p className=" text-textGray">{cardInfo.name}</p>
+              <p className=" text-textGray">{userData.nameOnCard}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
               <p className="font-semibold">CVV</p>
-              <p className=" text-textGray">{cardInfo.cvv}</p>
+              <p className=" text-textGray">{userData.cvv}</p>
             </div>
           </div>
           {/* ---------- */}
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Card Number</p>
-              <p className=" text-textGray">{cardInfo.cardNumber}</p>
+              <p className=" text-textGray">{userData.cardNumber}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
               <p className="font-semibold">Expr Date</p>
-              <p className=" text-textGray">{cardInfo.date}</p>
+              <p className=" text-textGray">{userData.date}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* buttons */}
-      <div className="grid grid-cols-2 gap-4 mt-5">
-        <button className="rounded-md btn-primary btn-lg">Confirm</button>
-        <button onClick={() => closeModal()} className="text-primary">
-          Continue Editing
-        </button>
-      </div>
+      {isAdmin ? (
+        <div className="mt-5">
+          <button
+            onClick={() => closeModal()}
+            className="rounded-md btn-primary btn-lg"
+          >
+            Close
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4 mt-5">
+          <button className="rounded-md btn-primary btn-lg">Confirm</button>
+          <button onClick={() => closeModal()} className="text-primary">
+            Continue Editing
+          </button>
+        </div>
+      )}
     </div>
   );
 }
 
-export default ConfirmPaymentDetailModal;
+export default UserDetailModal;
