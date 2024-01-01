@@ -521,3 +521,42 @@ export function DeleteIcon() {
     </svg>
   );
 }
+
+export function ViewIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="21"
+      viewBox="0 0 20 21"
+      fill="none"
+    >
+      <path
+        d="M10 15.1497C11.3807 15.1497 12.5 14.0304 12.5 12.6497C12.5 11.2689 11.3807 10.1497 10 10.1497C8.61929 10.1497 7.5 11.2689 7.5 12.6497C7.5 14.0304 8.61929 15.1497 10 15.1497Z"
+        stroke="#4ECB71"
+        stroke-width="1.66667"
+      />
+      <path
+        d="M17.5 12.6496C17.5 12.6496 16.6667 5.98291 10 5.98291C3.33333 5.98291 2.5 12.6496 2.5 12.6496"
+        stroke="#4ECB71"
+        stroke-width="1.66667"
+      />
+    </svg>
+  );
+}
+
+export function MoreIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="8"
+      height="14"
+      viewBox="0 0 6 19"
+      fill="none"
+    >
+      <circle cx="3" cy="2.5" r="2.5" fill="black" />
+      <circle cx="3" cy="9.5" r="2.5" fill="black" />
+      <circle cx="3" cy="16.5" r="2.5" fill="black" />
+    </svg>
+  );
+}

@@ -33,6 +33,10 @@
   }
 }
 
+.shown {
+  transform: scale(1);
+}
+
 @layer base {
   #root {
     @apply w-[100vw] h-[100vh] overflow-x-hidden;
@@ -48,6 +52,16 @@
   }
   .btn-lg {
     @apply w-full px-6 py-4 rounded-sm text-300;
+  }
+  .tooltip {
+    @apply absolute left-0 invisible top-10;
+  }
+
+  .has-tooltip:hover .tooltip {
+    @apply z-50 visible;
+  }
+  .menu-popup {
+    @apply absolute z-10 p-2 transition-transform duration-75 origin-top scale-0 bg-white rounded-md shadow-md -right-2 -bottom-28;
   }
 }
 
@@ -79,13 +93,16 @@
   .input-style {
     @apply p-5 border rounded-lg bg-bgGray focus-within:outline-secondary;
   }
-  #search{
-    @apply focus-within:outline-secondary
+  #search {
+    @apply focus-within:outline-secondary;
   }
   .reciept {
     @apply p-3 border rounded-lg;
   }
   .customModal {
     @apply m-0 h-full w-full p-0 sm:h-auto sm:bg-white sm:shadow-lg sm:rounded-xl sm:p-10 sm:px-16 sm:pt-10  sm:w-[85%] md:w-[70%] lg:w-[50%] xl:w-[45%];
+  }
+  .menu-active {
+    @apply bg-hilitePrimary;
   }
 }

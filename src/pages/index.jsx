@@ -7,3 +7,5 @@ export { default as Orders } from "./Orders";
 export { default as PaymentInfo } from "./PaymentInfo";
 export { default as Dashboard } from "./Dashboard";
 export { default as ManageProducts } from "../features/Dashboard/ManageProducts";
+export { default as ManageOrders } from "../features/Dashboard/ManageOrders";
+export { default as Chats } from "../features/Dashboard/Chats";
