@@ -11,6 +11,8 @@ import {
   PaymentInfo,
   Dashboard,
   ManageProducts,
+  Chats,
+  ManageOrders,
 } from "./pages";
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route path="/payment-info" Component={PaymentInfo} />
           <Route path="/admin" Component={Dashboard} />
           <Route path="/admin/manage-products" Component={ManageProducts} />
+          <Route path="/admin/manage-orders" Component={ManageOrders} />
+          <Route path="/admin/chats" Component={Chats} />
         </Routes>
       </Router>
     </div>
