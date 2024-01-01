@@ -8,16 +8,16 @@ function ManageOrders() {
     {
       id: 1234,
       name: "Kingsley Jackson",
-      time: "1200",
+      time: "12:00",
       status: "pending",
       OTP: 24564,
       userData: {
-        nameOnCard: "Raymond Jackson",
+        nameOnCard: "Kingsley Jackson",
         cardNumber: "123456789067",
         cvv: "1234",
         date: "12/12/2023",
-        name: "Raymond Jackson",
-        email: "raymond@gmail.com",
+        name: "Kingsley Jackson",
+        email: "Kingsley@gmail.com",
         city: "Texas",
         telephone: "023213564576",
         address1: " address1Ref.current.value",
@@ -28,19 +28,19 @@ function ManageOrders() {
     },
     {
       id: 1234,
-      name: "Kingsley Jackson",
-      time: "1200",
+      name: "Kevin Hart",
+      time: "12:00",
       status: "pending",
       OTP: 24564,
       userData: {
-        nameOnCard: "Raymond Jackson",
+        nameOnCard: "Kevin Hart",
         cardNumber: "123456789067",
         cvv: "1234",
         date: "12/12/2023",
-        name: "Raymond Jackson",
-        email: "raymond@gmail.com",
-        city: "Texas",
-        telephone: "023213564576",
+        name: "Kevin Hart",
+        email: "kevin@gmail.com",
+        city: "New York",
+        telephone: "023213564326",
         address1: " address1Ref.current.value",
         address2: "address2Ref.current.value",
         country: "USA",
@@ -76,6 +76,7 @@ function ManageOrders() {
               name={order.name}
               time={order.time}
               status={order.status}
+              userData={order.userData}
             />
           ))}
         </div>
