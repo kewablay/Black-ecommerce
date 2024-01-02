@@ -13,15 +13,17 @@ import {
   ManageProducts,
   Chats,
   ManageOrders,
+  Signup,
 } from "./pages";
 
 function App() {
   return (
-    <div className="font-plusJakartaSans">
+    <div className="w-full h-full font-plusJakartaSans">
       <Router>
         <Routes>
           <Route exact path="/" Component={Homepage} />
           <Route path="/login" Component={Login} />
+          <Route path="/signup" Component={Signup} />
           <Route path="/shop" Component={Shop} />
           <Route path="/product/:id" Component={ProductDetail} />
           <Route path="/select-payment" Component={SelectPayment} />

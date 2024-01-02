@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import LoginForm from "../features/UserAuthentication/LoginForm";
 
 function Login() {
   return (
-    <div><h1 className='text-xl font-bold'>Login Page</h1></div>
-  )
+    <div className="w-full h-full  p-5 mt-[20%] md:mt-0 md:flex-center">
+      <LoginForm />
+    </div>
+  );
 }
 
-export default Login
+export default Login;
