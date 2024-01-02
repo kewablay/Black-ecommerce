@@ -48,10 +48,10 @@
 
 @layer components {
   .btn-primary {
-    @apply font-bold text-white bg-primary;
+    @apply  font-bold text-white bg-primary hover:brightness-110;
   }
   .btn-lg {
-    @apply w-full px-6 py-4 rounded-sm text-300;
+    @apply w-full px-6 py-4 font-bold rounded-sm text-300;
   }
   .tooltip {
     @apply absolute left-0 invisible top-10;
