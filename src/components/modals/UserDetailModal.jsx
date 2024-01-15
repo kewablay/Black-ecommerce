@@ -1,5 +1,5 @@
 import React from "react";
-import { TickIcon } from "../../assets/icons/svgIcons";
+import { TickIcon } from "assets/icons/svgIcons";
 
 function UserDetailModal({ userData, closeModal, isAdmin }) {
   return (
