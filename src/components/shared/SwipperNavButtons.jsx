@@ -1,6 +1,6 @@
+import { Arrow } from "assets/icons/svgIcons";
 import React from "react";
 import { useSwiper } from "swiper/react";
-import { Arrow } from "../../assets/icons/svgIcons";
 
 function SwipperNavButtons() {
   const swipper = useSwiper();
