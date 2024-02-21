@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CloseIcon, MenuIcon } from "../../../assets/icons/svgIcons";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
   console.log("NAVBAR RENDERED .....................");
+
+  const handleLogout = () => {
+    console.log("loging out ......");
+    localStorage.removeItem("TOKEN");
+    console.log(localStorage);
+    navigate("/login");
+  };
+
   return (
     <nav className="mb-3 shadow-md ">
       <div className="container p-5 mx-auto wrapper flex-between">
@@ -29,6 +38,9 @@ function Navbar() {
           <Link to={"/shop"}>Categories</Link>
           <Link to={"/shop"}>Shop</Link>
           <Link to={"/orders"}>Orders</Link>
+          <button onClick={handleLogout} className="text-red-600 text-start">
+            Logout
+          </button>
 
           <button
             className="absolute top-4 right-4 lg:hidden"
@@ -39,7 +51,7 @@ function Navbar() {
         </div>
 
         <div className="space-x-4 text-300">
-          <Link to={"#"}>Signup</Link>
+          {/* <Link to={"#"}>Logout</Link> */}
           <button className="lg:hidden" onClick={() => setShowMenu(true)}>
             <MenuIcon />
           </button>
