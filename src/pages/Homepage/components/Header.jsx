@@ -48,7 +48,7 @@ function Header() {
         className="mySwiper"
       >
         {slides.map((slide, index) => (
-          <SwiperSlide>
+          <SwiperSlide key={index}>
             <Slide
               key={index}
               title={slide.title}

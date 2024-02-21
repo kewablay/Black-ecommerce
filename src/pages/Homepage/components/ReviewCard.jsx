@@ -10,7 +10,7 @@ function ReviewCard({ message, image, name }) {
           {/* rating starts */}
           <div className="flex gap-2 mb-3">
             {[...Array(5)].map((number, index) => (
-              <Star />
+              <Star key={index} />
             ))}
           </div>
 

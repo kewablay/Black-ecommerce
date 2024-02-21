@@ -69,7 +69,7 @@ function CustomerReviews() {
           }}
         >
           {reviews.map((review, index) => (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <ReviewCard
                 key={index}
                 message={review.message}
