@@ -2,6 +2,7 @@ import ProductCard from "components/shared/ProductCard";
 import React from "react";
 
 function ShopProductsList() {
+  console.log("SHOP PRODUCTS LIST RENDERED ...................");
   const products = [
     {
       id: 1,

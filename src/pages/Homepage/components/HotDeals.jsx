@@ -1,8 +1,8 @@
 import ProductCard from "components/shared/ProductCard";
 import React from "react";
 
-
 function HotDeals() {
+  console.log("HOT DEALS RENDERED ................");
   const products = [
     {
       id: 1,

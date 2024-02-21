@@ -3,9 +3,10 @@ import ProductCard from "components/shared/ProductCard";
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 
-
 function ProductDetail() {
   const { id } = useParams();
+
+  console.log("PRODUCT DETAIL PAGE..................");
 
   const product = {
     id: 6,
@@ -43,59 +44,57 @@ function ProductDetail() {
   ];
 
   return (
-    <div>
-      <MainLayout>
-        <div className="grid gap-8 mt-5 lg:mt-10 section-contained lg:grid-cols-2">
-          {/* image  */}
-          <div className="rounded-xl bg-bgGray flex-center">
-            <img src={product.image} alt="" className="w-[80%] sm:w-[60%]" />
-          </div>
-
-          {/* product details */}
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-700">{product.title}</h2>
-              <h4 className="mt-3 font-bold text-600 text-primary">
-                ${product.price}
-              </h4>
-            </div>
-            <p className="text-textGray text-400">{product.desc}</p>
-            <div className="mt-5 ">
-              <Link
-                to={"/select-payment"}
-                className="block text-center btn-primary btn-lg"
-              >
-                Proceed to Payment
-              </Link>
-            </div>
-          </div>
+    <MainLayout>
+      <div className="grid gap-8 mt-5 lg:mt-10 section-contained lg:grid-cols-2">
+        {/* image  */}
+        <div className="rounded-xl bg-bgGray flex-center">
+          <img src={product.image} alt="" className="w-[80%] sm:w-[60%]" />
         </div>
 
-        {/* Other products */}
-        <div className="section-contained">
-          {/* section title */}
-          <div className="mb-10 text-center">
-            <small className="text-textGray text-200">RELATED PRODUCTS</small>
-            <h3 className="section-title">Other Products</h3>
+        {/* product details */}
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-700">{product.title}</h2>
+            <h4 className="mt-3 font-bold text-600 text-primary">
+              ${product.price}
+            </h4>
           </div>
-          {/* section title end */}
-
-          {/* Product List */}
-          <div className="grid grid-cols-2 gap-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((product, index) => (
-              <ProductCard
-                key={index}
-                title={product.title}
-                image={product.image}
-                price={product.price}
-                id={product.id}
-              />
-            ))}
+          <p className="text-textGray text-400">{product.desc}</p>
+          <div className="mt-5 ">
+            <Link
+              to={"/select-payment"}
+              className="block text-center btn-primary btn-lg"
+            >
+              Proceed to Payment
+            </Link>
           </div>
-          {/* Product List end*/}
         </div>
-      </MainLayout>
-    </div>
+      </div>
+
+      {/* Other products */}
+      <div className="section-contained">
+        {/* section title */}
+        <div className="mb-10 text-center">
+          <small className="text-textGray text-200">RELATED PRODUCTS</small>
+          <h3 className="section-title">Other Products</h3>
+        </div>
+        {/* section title end */}
+
+        {/* Product List */}
+        <div className="grid grid-cols-2 gap-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
+          {products.map((product, index) => (
+            <ProductCard
+              key={index}
+              title={product.title}
+              image={product.image}
+              price={product.price}
+              id={product.id}
+            />
+          ))}
+        </div>
+        {/* Product List end*/}
+      </div>
+    </MainLayout>
   );
 }
 

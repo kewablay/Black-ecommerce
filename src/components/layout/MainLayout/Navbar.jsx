@@ -4,7 +4,7 @@ import { CloseIcon, MenuIcon } from "../../../assets/icons/svgIcons";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
-
+  console.log("NAVBAR RENDERED .....................");
   return (
     <nav className="mb-3 shadow-md ">
       <div className="container p-5 mx-auto wrapper flex-between">
