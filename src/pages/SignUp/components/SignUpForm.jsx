@@ -1,9 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef } from "react";
+import toast from "react-hot-toast";
+import { useMutation } from "react-query";
+import { Link, useNavigate } from "react-router-dom";
+import { signUpUser } from "services/auth.services";
 
 function SignUpForm() {
+  const navigate = useNavigate();
+
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  // sign up user
+  const SignUpMutation = useMutation(signUpUser, {
+    onSuccess: () => {
+      navigate("/login");
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userData = {
+      username: usernameRef.current.value,
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+
+    SignUpMutation.mutate(userData);
+
+    toast.promise(SignUpMutation.mutateAsync(userData), {
+      loading: "Signing up...",
+      success: "SignUp successful",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
+
   return (
-    <form action="#" className="lg:w-[40%] ">
+    <form onSubmit={handleSubmit} className="lg:w-[40%] ">
       {/* heading */}
       <h2 className="text-center text-800">Sign Up</h2>
 
@@ -14,29 +47,26 @@ function SignUpForm() {
           name="username"
           className="w-full input-style"
           placeholder="User name"
+          ref={usernameRef}
         />
         <input
           type="email"
           name="email"
           className="w-full input-style"
           placeholder="Email"
+          ref={emailRef}
         />
         <input
           type="password"
           name="passowrd"
           className="w-full input-style"
           placeholder="Password"
-        />
-        <input
-          type="password"
-          name="passowrd"
-          className="w-full input-style"
-          placeholder="Confirm Password"
+          ref={passwordRef}
         />
 
         <input
           type="submit"
-          value="Login"
+          value="Sign Up"
           className="py-5 rounded-md btn-primary "
         />
 

@@ -1,13 +1,19 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import { signInUser } from "services/auth.services";
+import toast from "react-hot-toast";
 
 function LoginForm() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const navigate = useNavigate();
 
-  const SignIn = useMutation(signInUser);
+  const SignInMutation = useMutation(signInUser, {
+    onSuccess: () => {
+      navigate("/"); // Redirect to homepage
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,10 +22,16 @@ function LoginForm() {
       password: passwordRef.current.value,
     };
 
-    SignIn.mutate(userData);
+    SignInMutation.mutate(userData);
+
+    toast.promise(SignInMutation.mutateAsync(userData), {
+      loading: "Logging in...",
+      success: "Login successful",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
   };
 
-  console.log("signin data: ", SignIn.data);
+  console.log("signin data: ", SignInMutation.data);
 
   return (
     <form onSubmit={handleSubmit} className="lg:w-[40%] ">
