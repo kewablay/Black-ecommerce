@@ -1,7 +1,11 @@
 import ProductCard from "components/shared/ProductCard";
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useQuery, useQueryClient, useMutation } from "react-query";
+import { signInUser, signUpUser } from "services/auth.services";
 
 function OurLatestProducts() {
+  console.log("OUR LATEST PRODUCTS RENDERED .......................");
   const products = [
     {
       id: 1,
@@ -28,6 +32,10 @@ function OurLatestProducts() {
       image: "/src/assets/images/iphone15pro.png",
     },
   ];
+
+
+
+
   return (
     <div className="section-contained">
       {/* section title */}
@@ -37,6 +45,7 @@ function OurLatestProducts() {
       </div>
 
       {/* products list */}
+
       <div className="grid grid-cols-2 gap-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product, index) => (
           <ProductCard

@@ -3,6 +3,7 @@ import React from "react";
 import PaymentCard from "./components/PaymentCard";
 
 function SelectPayment() {
+  console.log("PAYMENT PLAN PAGE..............")
   const paymentPlans = [
     {
       plan: "3 Months Plan ",

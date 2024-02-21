@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useMutation } from "react-query";
+import { signInUser } from "services/auth.services";
 
 function LoginForm() {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  const SignIn = useMutation(signInUser);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userData = {
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    };
+
+    SignIn.mutate(userData);
+  };
+
+  console.log("signin data: ", SignIn.data);
+
   return (
-    <form action="#" className="lg:w-[40%] ">
+    <form onSubmit={handleSubmit} className="lg:w-[40%] ">
       {/* heading */}
       <h2 className="text-center text-800">Login</h2>
 
@@ -14,17 +33,22 @@ function LoginForm() {
           name="email"
           className="w-full input-style"
           placeholder="Email"
+          required
+          ref={emailRef}
         />
         <input
           type="password"
-          name="passowrd"
+          name="password"
           className="w-full input-style"
           placeholder="Password"
+          required
+          ref={passwordRef}
         />
         <input
           type="submit"
           value="Login"
           className="py-5 rounded-md btn-primary"
+          // disabled={isLoading} // Disable the button while the mutation is loading
         />
         <p className="text-center text-textGray">
           Create an account to get started{" "}

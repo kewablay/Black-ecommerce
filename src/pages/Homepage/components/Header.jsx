@@ -12,6 +12,7 @@ import "swiper/css/scrollbar";
 import Slide from "components/shared/Slide";
 
 function Header() {
+  console.log("HEADER RENDERED .........................");
   const slides = [
     {
       image: "/src/assets/images/iphone-hero.png",

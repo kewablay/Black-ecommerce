@@ -8,6 +8,8 @@ import MainLayout from "components/layout/MainLayout";
 function PaymentInfo() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
+  console.log("PAYMENT INFO PAGE ...............");
+
   // CARD INFO INPUT REFS
   const cardNameRef = useRef();
   const cardNumberRef = useRef();
@@ -163,6 +165,7 @@ function PaymentInfo() {
                     name="fav_language"
                     value="Master card"
                     className="mr-2 opacity-0 peer"
+                    required
                   />
                   <div className="p-5 px-10 border rounded-lg peer-checked:border-primary flex-center">
                     <MasterCardIcon />
@@ -190,6 +193,7 @@ function PaymentInfo() {
                 placeholder="Name on card"
                 className="input-style"
                 ref={cardNameRef}
+                required
               />
               <input
                 type="text"
@@ -198,6 +202,7 @@ function PaymentInfo() {
                 placeholder="Card number"
                 className="input-style"
                 ref={cardNumberRef}
+                required
               />
               <div className="grid grid-cols-2 gap-3 ">
                 <input
@@ -207,6 +212,7 @@ function PaymentInfo() {
                   placeholder="CVV"
                   className="input-style"
                   ref={cvvRef}
+                  required
                 />
                 <input
                   type="date"
@@ -214,6 +220,7 @@ function PaymentInfo() {
                   id="exp-date"
                   className="input-style"
                   ref={dateRef}
+                  required
                 />
               </div>
               <div className="mt-5 ">
