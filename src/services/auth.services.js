@@ -3,6 +3,12 @@ import API from "./api";
 export const signUpUser = async (credentials) => {
   console.log("Signing up user ...... ");
   console.log("recieved data: ", credentials);
+  try {
+    const response = await API.post("/customer/signup", credentials);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const signInUser = async (credentials) => {
