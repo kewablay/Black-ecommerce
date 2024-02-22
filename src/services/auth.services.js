@@ -24,3 +24,16 @@ export const signInUser = async (credentials) => {
     throw error;
   }
 };
+export const signInAdmin = async (credentials) => {
+  console.log("Login in admin ...... ");
+  console.log("recieved data: ", credentials);
+  try {
+    const response = await API.post("/admin/signin", credentials);
+    // console.log("response: ", response);
+    localStorage.setItem("ADMIN_TOKEN", response.data.token);
+    return response.data;
+  } catch (error) {
+    // console.log("ERror: ", error.response.data.error);
+    throw error;
+  }
+};
