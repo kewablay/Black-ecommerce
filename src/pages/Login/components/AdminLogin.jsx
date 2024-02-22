@@ -1,17 +1,17 @@
 import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
-import { signInUser } from "services/auth.services";
+import { signInAdmin } from "services/auth.services";
 import toast from "react-hot-toast";
 
-function LoginForm({ setAdminLogin }) {
+function AdminLogin({ setAdminLogin }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
 
-  const SignInMutation = useMutation(signInUser, {
+  const AdminSignInMutation = useMutation(signInAdmin, {
     onSuccess: () => {
-      navigate("/"); // Redirect to homepage
+      navigate("/admin/manage-products"); // Redirect to homepage
     },
   });
 
@@ -22,21 +22,21 @@ function LoginForm({ setAdminLogin }) {
       password: passwordRef.current.value,
     };
 
-    SignInMutation.mutate(userData);
+    AdminSignInMutation.mutate(userData);
 
-    toast.promise(SignInMutation.mutateAsync(userData), {
+    toast.promise(AdminSignInMutation.mutateAsync(userData), {
       loading: "Logging in...",
       success: "Login successful",
       error: (error) => `Error: ${error.response.data.error}`,
     });
   };
 
-  console.log("signin data: ", SignInMutation.data);
+  console.log("signin data: ", AdminSignInMutation.data);
 
   return (
     <form onSubmit={handleSubmit} className="lg:w-[40%] ">
       {/* heading */}
-      <h2 className="text-center text-800">Login</h2>
+      <h2 className="text-center text-800">Admin Login</h2>
 
       {/* input group  */}
       <div className="flex flex-col gap-4 mt-5">
@@ -62,7 +62,6 @@ function LoginForm({ setAdminLogin }) {
           className="py-5 rounded-md btn-primary"
           // disabled={isLoading} // Disable the button while the mutation is loading
         />
-
         <div>
           <p className="text-center text-textGray">
             Create an account to get started{" "}
@@ -73,10 +72,10 @@ function LoginForm({ setAdminLogin }) {
           <p className="text-center text-textGray">
             Login as an
             <button
-              onClick={() => setAdminLogin(true)}
+              onClick={() => setAdminLogin(false)}
               className="ml-2 text-orange-600 underline"
             >
-              Admin
+              User
             </button>
           </p>
         </div>
@@ -85,4 +84,4 @@ function LoginForm({ setAdminLogin }) {
   );
 }
 
-export default LoginForm;
+export default AdminLogin;

@@ -38,7 +38,10 @@ function Navbar() {
           <Link to={"/shop"}>Categories</Link>
           <Link to={"/shop"}>Shop</Link>
           <Link to={"/orders"}>Orders</Link>
-          <button onClick={handleLogout} className="text-red-600 text-start">
+          <button
+            onClick={handleLogout}
+            className="text-red-600 text-start lg:hidden"
+          >
             Logout
           </button>
 
@@ -54,6 +57,13 @@ function Navbar() {
           {/* <Link to={"#"}>Logout</Link> */}
           <button className="lg:hidden" onClick={() => setShowMenu(true)}>
             <MenuIcon />
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className="hidden text-red-600 text-start lg:flex"
+          >
+            Logout
           </button>
         </div>
       </div>
