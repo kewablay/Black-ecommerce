@@ -3,10 +3,12 @@ import { DeleteIcon, EditIcon } from "assets/icons/svgIcons";
 
 import useCustomModal from "hooks/useCustomModal";
 import EditProductModal from "components/modals/EditProductModal";
+import { getApiImage } from "utils/getApiImage";
 
-function ListItem({ title, image, price, category }) {
+function ListItem({ name, image, price, category }) {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
+  // console.log("images: ", image);
   return (
     <div className="grid items-center grid-cols-12 gap-5 p-2 bg-white rounded-md shadow-sm text-300">
       {/* modal */}
@@ -15,16 +17,20 @@ function ListItem({ title, image, price, category }) {
       <div className="relative grid items-center grid-cols-8 col-span-4 gap-2">
         {/* image */}
         <div className="col-span-3 p-3 rounded-md bg-bgGray flex-center">
-          <img src={image} alt="." className="w-[90%] sm:w-[70%]" />
+          <img
+            src={getApiImage(image[0])}
+            alt="."
+            className="w-[90%] sm:w-[70%]"
+          />
         </div>
 
         {/* item name  */}
 
         <p className="col-span-5 cursor-default has-tooltip line-clamp-1 text-ellipsis">
-          {title}
+          {name}
           {/* tooltip */}
-          <span class="text-200 tooltip rounded shadow-lg p-1 px-2 bg-white text-textGray -mt-10">
-            {title}
+          <span className="p-1 px-2 -mt-10 bg-white rounded shadow-lg text-200 tooltip text-textGray">
+            {name}
           </span>
           {/* tooltip ends */}
         </p>
