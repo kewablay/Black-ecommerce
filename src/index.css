@@ -93,6 +93,9 @@
   .input-style {
     @apply p-5 border rounded-lg bg-bgGray focus-within:outline-secondary;
   }
+  .input-style-secondary {
+    @apply p-3 border rounded-lg bg-bgGray focus-within:outline-secondary;
+  }
   #search {
     @apply focus-within:outline-secondary;
   }

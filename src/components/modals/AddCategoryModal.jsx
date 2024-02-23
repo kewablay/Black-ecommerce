@@ -1,10 +1,11 @@
 import React, { useRef } from "react";
 import toast from "react-hot-toast";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { createCategory } from "services/categories.services";
 
 function AddCategoryModal({ closeModal }) {
   const categoryRef = useRef();
+  const queryClient = useQueryClient();
   const {
     mutate: createCategoryMutation,
     mutateAsync,
@@ -12,6 +13,8 @@ function AddCategoryModal({ closeModal }) {
   } = useMutation(createCategory, {
     onSuccess: () => {
       console.log("Category Created Successfully...");
+      queryClient.invalidateQueries("categories");
+      closeModal();
     },
   });
 
@@ -31,8 +34,6 @@ function AddCategoryModal({ closeModal }) {
       success: "Category created successfully",
       error: (error) => `Error: ${error.response.data.error}`,
     });
-
-    // closeModal();
   };
 
   return (
@@ -53,6 +54,7 @@ function AddCategoryModal({ closeModal }) {
           onClick={handleCreateCategory}
           type="submit"
           className="rounded-md btn-primary btn-lg"
+          disabled={isLoading}
         >
           Add Category
         </button>
