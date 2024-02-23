@@ -8,7 +8,8 @@ const API = axios.create({
 
 const authInterceptor = (config) => {
   //  We'll change it later
-  const token = localStorage.getItem("TOKEN");
+  const token =
+    localStorage.getItem("TOKEN") || localStorage.getItem("ADMIN_TOKEN");
   // console.log("TOKEN FROM INTERCEPTOR: ", token);
 
   if (token) {

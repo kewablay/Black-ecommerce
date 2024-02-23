@@ -29,7 +29,7 @@ export const signInAdmin = async (credentials) => {
   console.log("recieved data: ", credentials);
   try {
     const response = await API.post("/admin/signin", credentials);
-    // console.log("response: ", response);
+    console.log("response: ", response);
     localStorage.setItem("ADMIN_TOKEN", response.data.token);
     return response.data;
   } catch (error) {

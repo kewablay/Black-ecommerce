@@ -36,6 +36,11 @@ function Sidebar() {
           link={"/admin/manage-orders"}
           text={"Manage Orders"}
         />
+        <Menu
+          icon={<ManageOrdersIcon />}
+          link={"/admin/manage-categories"}
+          text={"Manage Categories"}
+        />
         <Menu icon={<Chat />} link={"/admin/chats"} text={"Chats"} />
 
         {/* LOGOUT */}
