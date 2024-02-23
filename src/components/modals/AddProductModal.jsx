@@ -1,26 +1,24 @@
-import {
-  ClearIcon,
-  CloseIcon,
-  DropImageIcon,
-  ImagesIcon,
-} from "assets/icons/svgIcons";
+import { DropImageIcon, ImagesIcon } from "assets/icons/svgIcons";
 import ImagePreview from "components/shared/ImagePreview";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
+import { useQuery } from "react-query";
+import { getCategories } from "services/categories.services";
 
 function AddProductModal() {
   const productNameRef = useRef();
   const productPriceRef = useRef();
-  // const productImageRef = useRef();
   const productCategoryRef = useRef();
   const productDescRef = useRef();
   const [selectedImages, setSelectedImages] = useState([]);
 
+  console.log("ADD PRODUCT MODAL RENDERED....................");
+
   const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
     setSelectedImages(acceptedFiles);
     console.log("files : ", acceptedFiles);
   }, []);
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
@@ -33,13 +31,42 @@ function AddProductModal() {
     setSelectedImages([]);
   };
 
+  const handleCreateProduct = (e) => {
+    e.preventDefault();
+    const newProductData = {
+      name: productNameRef.current.value,
+      price: productPriceRef.current.value,
+      categories: productCategoryRef.current.value,
+      description: productDescRef.current.value,
+      images: selectedImages,
+    };
+    console.log("New product data : ", newProductData);
+  };
+
+  const {
+    data: categories,
+    isLoading,
+    refetch: refetchCategories,
+  } = useQuery("categories", getCategories, {
+    enabled: false,
+  });
+
+  useEffect(() => {
+    refetchCategories();
+  }, []);
+
+  console.log("fetched categories: ", categories);
+
   return (
     <div className="lg:max-h-[60vh] overflow-y-scroll pr-2 mt-8 font-plusJakartaSans">
       {/* heading  */}
       <h2 className="text-center text-700">Add New Product</h2>
 
       {/* input group  */}
-      <form className="flex flex-col gap-3 mt-5 ">
+      <form
+        onSubmit={handleCreateProduct}
+        className="flex flex-col gap-3 mt-5 "
+      >
         <input
           type="text"
           name="product-name"
@@ -86,9 +113,15 @@ function AddProductModal() {
           id="category"
           className="input-style"
         >
-          <option value="Iphone Collection">Iphone Collection</option>
-          <option value="Samsung Collection">Samsung Collection</option>
-          <option value="Airpods and More">Airopds and More</option>
+          {isLoading ? (
+            <option>Loading...</option>
+          ) : (
+            categories?.map((category, index) => (
+              <option key={index} value={category?.name}>
+                {category?.name}
+              </option>
+            ))
+          )}
         </select>
 
         <textarea
@@ -102,7 +135,7 @@ function AddProductModal() {
         ></textarea>
 
         <input
-          type="button"
+          type="submit"
           value="Add Product"
           className="rounded-md btn-primary btn-lg"
         />
