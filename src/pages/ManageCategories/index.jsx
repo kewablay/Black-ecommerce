@@ -5,17 +5,27 @@ import useCustomModal from "hooks/useCustomModal";
 import DashboardLayout from "components/layout/DashboardLayout";
 import AddCategoryModal from "components/modals/AddCategoryModal";
 import CategoryItem from "./CategoryItem";
+import { useQuery } from "react-query";
+import { getCategories } from "services/categories.services";
 
 function ManageCategories() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const categories = [
-    { _id: "65d7cfcfc0d10abd10991afe", name: "Iphone Collection", __v: 0 },
-    { _id: "65d7cfe9c0d10abd10991b01", name: "Samsung Collection", __v: 0 },
-  ];
+  const {
+    data: categories,
+    isLoading,
+    isError,
+  } = useQuery("categories", getCategories, {
+    // select: (data) => {
+    //   // const sortedCategories = data?.sort(
+    //   //   (a, b) => b.propertyName - a.propertyName
+    //   // );
+    //   // Reverse the sorted array to display the last item first
+    //   return data?.reverse();
+    // },
+  });
 
-  
-
+  console.log("categories : ", categories);
 
   return (
     <DashboardLayout>
@@ -42,9 +52,15 @@ function ManageCategories() {
 
       {/* Categories list  */}
       <div className="space-y-4">
-        {categories.map((category, index) => (
-          <CategoryItem category={category} number={index + 1} key={index} />
-        ))}
+        {isLoading
+          ? "Loading....."
+          : categories?.map((category, index) => (
+              <CategoryItem
+                category={category}
+                number={index + 1}
+                key={index}
+              />
+            ))}
       </div>
     </DashboardLayout>
   );
