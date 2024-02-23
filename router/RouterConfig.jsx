@@ -5,6 +5,7 @@ import {
   Chats,
   Homepage,
   Login,
+  ManageCategories,
   ManageOrders,
   ManageProducts,
   Orders,
@@ -17,7 +18,7 @@ import {
 import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
 
-export const RouterConfig = () => { 
+export const RouterConfig = () => {
   return (
     <Routes>
       {/* PROTECTED USER ROUTES  */}
@@ -34,6 +35,7 @@ export const RouterConfig = () => {
       <Route element={<AdminRoutes />}>
         <Route path={path.MANAGE_RODUCTS} Component={ManageProducts} />
         <Route path={path.MANAGE_ORDERS} Component={ManageOrders} />
+        <Route path={path.MANAGE_CATEGORIES} Component={ManageCategories} />
         <Route path={path.CHATS} Component={Chats} />
       </Route>
 
