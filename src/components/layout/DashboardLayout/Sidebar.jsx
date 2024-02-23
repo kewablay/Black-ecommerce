@@ -2,6 +2,7 @@ import React from "react";
 import {
   Chat,
   LogoutIcon,
+  ManageCategoriesIcon,
   ManageOrdersIcon,
   ManageProductIcon,
 } from "assets/icons/svgIcons";
@@ -37,7 +38,7 @@ function Sidebar() {
           text={"Manage Orders"}
         />
         <Menu
-          icon={<ManageOrdersIcon />}
+          icon={<ManageCategoriesIcon />}
           link={"/admin/manage-categories"}
           text={"Manage Categories"}
         />

@@ -5,40 +5,49 @@ import useCustomModal from "hooks/useCustomModal";
 import AddProductModal from "components/modals/AddProductModal";
 import DashboardLayout from "components/layout/DashboardLayout";
 import ListItem from "./components/listItem";
+import { useQuery } from "react-query";
+import { getProducts } from "services/products.services";
 
 function ManageProducts() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const products = [
-    {
-      id: 1,
-      title: "IPhone 12 pro - 32GB",
-      price: "1200",
-      image: "/src/assets/images/iphone12.png",
-      category: "Iphone Collection",
-    },
-    {
-      id: 2,
-      title: "iPhone 13 pro unlocked - 128 GB",
-      price: "1200",
-      image: "/src/assets/images/iphone13pro.png",
-      category: "Iphone Collection",
-    },
-    {
-      id: 3,
-      title: "Samsung Galaxy S21  -128GB",
-      price: "1200",
-      image: "/src/assets/images/samsungS21.png",
-      category: "Samsung Collection",
-    },
-    {
-      id: 4,
-      title: "IPhone 15 pro max - 256GB",
-      price: "1200",
-      image: "/src/assets/images/iphone15pro.png",
-      category: "Iphone Collection",
-    },
-  ];
+  // const products = [
+  //   {
+  //     id: 1,
+  //     title: "IPhone 12 pro - 32GB",
+  //     price: "1200",
+  //     image: "/src/assets/images/iphone12.png",
+  //     category: "Iphone Collection",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "iPhone 13 pro unlocked - 128 GB",
+  //     price: "1200",
+  //     image: "/src/assets/images/iphone13pro.png",
+  //     category: "Iphone Collection",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Samsung Galaxy S21  -128GB",
+  //     price: "1200",
+  //     image: "/src/assets/images/samsungS21.png",
+  //     category: "Samsung Collection",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "IPhone 15 pro max - 256GB",
+  //     price: "1200",
+  //     image: "/src/assets/images/iphone15pro.png",
+  //     category: "Iphone Collection",
+  //   },
+  // ];
+
+  const {
+    data: products,
+    isLoading,
+    isError,
+  } = useQuery("products", getProducts);
+  console.log("products: ", products);
 
   return (
     <DashboardLayout>
@@ -48,7 +57,12 @@ function ManageProducts() {
       <div className="my-7 flex-between">
         <h2 className="font-bold text-700">Shop Products</h2>
         <button
-          onClick={() => openModal(<AddProductModal closeModal={closeModal} />,  "customModal")}
+          onClick={() =>
+            openModal(
+              <AddProductModal closeModal={closeModal} />,
+              "customModal"
+            )
+          }
           className="flex gap-2 p-3 px-4 rounded-md btn-primary"
         >
           <span>
@@ -70,13 +84,13 @@ function ManageProducts() {
 
         {/* list */}
         <div className="space-y-4">
-          {products.map((product, index) => (
+          {products?.map((product, index) => (
             <ListItem
               key={index}
-              title={product.title}
-              image={product.image}
+              name={product.name}
+              image={product.images}
               price={product.price}
-              category={product.category}
+              category={product.categories}
             />
           ))}
         </div>

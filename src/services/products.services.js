@@ -13,3 +13,13 @@ export const createProduct = async (newProduct) => {
     throw error;
   }
 };
+
+export const getProducts = async () => {
+  console.log("Getting Products.........");
+  try {
+    const response = await API.get("/admin/products");
+    return response.data.products;
+  } catch (error) {
+    throw error;
+  }
+};
