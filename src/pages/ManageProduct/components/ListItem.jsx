@@ -23,7 +23,7 @@ function ListItem({ title, image, price, category }) {
         <p className="col-span-5 cursor-default has-tooltip line-clamp-1 text-ellipsis">
           {title}
           {/* tooltip */}
-          <span class="text-200 tooltip rounded shadow-lg p-1 px-2 bg-white text-textGray -mt-10">
+          <span className="p-1 px-2 -mt-10 bg-white rounded shadow-lg text-200 tooltip text-textGray">
             {title}
           </span>
           {/* tooltip ends */}
