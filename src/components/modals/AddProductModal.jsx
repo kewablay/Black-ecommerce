@@ -2,10 +2,12 @@ import { DropImageIcon, ImagesIcon } from "assets/icons/svgIcons";
 import ImagePreview from "components/shared/ImagePreview";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { useQuery } from "react-query";
+import toast from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
 import { getCategories } from "services/categories.services";
+import { createProduct } from "services/products.services";
 
-function AddProductModal() {
+function AddProductModal({ closeModal }) {
   const productNameRef = useRef();
   const productPriceRef = useRef();
   const productCategoryRef = useRef();
@@ -31,18 +33,6 @@ function AddProductModal() {
     setSelectedImages([]);
   };
 
-  const handleCreateProduct = (e) => {
-    e.preventDefault();
-    const newProductData = {
-      name: productNameRef.current.value,
-      price: productPriceRef.current.value,
-      categories: productCategoryRef.current.value,
-      description: productDescRef.current.value,
-      images: selectedImages,
-    };
-    console.log("New product data : ", newProductData);
-  };
-
   const {
     data: categories,
     isLoading,
@@ -51,11 +41,42 @@ function AddProductModal() {
     enabled: false,
   });
 
+  const { mutateAsync: createProductMutation } = useMutation(createProduct, {
+    onSuccess: () => {
+      closeModal();
+    },
+  });
+
   useEffect(() => {
     refetchCategories();
   }, []);
 
-  console.log("fetched categories: ", categories);
+  // console.log("fetched categories: ", categories);
+
+  const handleCreateProduct = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", productNameRef.current.value);
+    formData.append("price", productPriceRef.current.value);
+    formData.append("categories", productCategoryRef.current.value);
+    formData.append("description", productDescRef.current.value);
+    for (let i = 0; i < selectedImages.length; i++) {
+      formData.append("images", selectedImages[i]);
+    }
+
+    // console.log("name:", formData.get("name"));
+    // console.log("price:", formData.get("price"));
+    // console.log("categories:", formData.get("categories"));
+    // console.log("description:", formData.getAll("description"));
+    // console.log("images:", formData.getAll("images"));
+
+    toast.promise(createProductMutation(formData), {
+      loading: "Creating Product...",
+      success: "Product created successfully",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
 
   return (
     <div className="lg:max-h-[60vh] overflow-y-scroll pr-2 mt-8 font-plusJakartaSans">
@@ -117,7 +138,7 @@ function AddProductModal() {
             <option>Loading...</option>
           ) : (
             categories?.map((category, index) => (
-              <option key={index} value={category?.name}>
+              <option key={index} value={category?._id}>
                 {category?.name}
               </option>
             ))
