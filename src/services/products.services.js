@@ -18,6 +18,7 @@ export const getProducts = async () => {
   console.log("Getting Products.........");
   try {
     const response = await API.get("/admin/products");
+    console.log("products from fetch: ", response.data.products);
     return response.data.products;
   } catch (error) {
     throw error;

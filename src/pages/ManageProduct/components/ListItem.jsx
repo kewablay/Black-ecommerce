@@ -4,11 +4,19 @@ import { DeleteIcon, EditIcon } from "assets/icons/svgIcons";
 import useCustomModal from "hooks/useCustomModal";
 import EditProductModal from "components/modals/EditProductModal";
 import { getApiImage } from "utils/getApiImage";
+import { useQuery } from "react-query";
+import { getCategoryById } from "services/categories.services";
 
-function ListItem({ name, image, price, category }) {
+function ListItem({ name, image, price, categoryId }) {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
+  // FETCH CATEGORY BY ID
+  const { isLoading, data: category } = useQuery(["category", categoryId], () =>
+    getCategoryById(categoryId)
+  );
+
   // console.log("images: ", image);
+  console.log("category: ", category);
   return (
     <div className="grid items-center grid-cols-12 gap-5 p-2 bg-white rounded-md shadow-sm text-300">
       {/* modal */}
@@ -42,7 +50,7 @@ function ListItem({ name, image, price, category }) {
       </div>
 
       {/* category */}
-      <div className="col-span-3">{category}</div>
+      <div className="col-span-3">{category?.name}</div>
 
       {/* user actions delete and edit  */}
       <div className="flex items-center col-span-2 gap-5">

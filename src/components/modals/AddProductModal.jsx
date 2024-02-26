@@ -3,7 +3,7 @@ import ImagePreview from "components/shared/ImagePreview";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getCategories } from "services/categories.services";
 import { createProduct } from "services/products.services";
 
@@ -13,6 +13,7 @@ function AddProductModal({ closeModal }) {
   const productCategoryRef = useRef();
   const productDescRef = useRef();
   const [selectedImages, setSelectedImages] = useState([]);
+  const queryClient = useQueryClient();
 
   console.log("ADD PRODUCT MODAL RENDERED....................");
 
@@ -43,6 +44,7 @@ function AddProductModal({ closeModal }) {
 
   const { mutateAsync: createProductMutation } = useMutation(createProduct, {
     onSuccess: () => {
+      queryClient.invalidateQueries("products");
       closeModal();
     },
   });
