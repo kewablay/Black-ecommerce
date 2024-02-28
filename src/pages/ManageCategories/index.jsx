@@ -11,19 +11,7 @@ import { getCategories } from "services/categories.services";
 function ManageCategories() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const {
-    data: categories,
-    isLoading,
-    isError,
-  } = useQuery("categories", getCategories, {
-    // select: (data) => {
-    //   // const sortedCategories = data?.sort(
-    //   //   (a, b) => b.propertyName - a.propertyName
-    //   // );
-    //   // Reverse the sorted array to display the last item first
-    //   return data?.reverse();
-    // },
-  });
+  const { data: categories, isLoading } = useQuery("categories", getCategories);
 
   console.log("categories : ", categories);
 

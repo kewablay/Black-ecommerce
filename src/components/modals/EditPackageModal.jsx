@@ -12,6 +12,7 @@ function EditPackageModal({ paymentPackage, closeModal }) {
     paymentPackage?.paymentFrequency
   );
   const [description, setDescription] = useState(paymentPackage?.description);
+  const [interest, setInterest] = useState(paymentPackage?.interest);
 
   const { mutateAsync: editPackageMutation } = useMutation(editPackage, {
     onSuccess: () => {
@@ -29,7 +30,7 @@ function EditPackageModal({ paymentPackage, closeModal }) {
         description: description,
         duration: duration,
         paymentFrequency: paymentFrequency,
-        interest: 0,
+        interest: interest,
       },
     };
 
@@ -72,6 +73,17 @@ function EditPackageModal({ paymentPackage, closeModal }) {
         />
         <input
           type="text"
+          name="interest"
+          id="interest"
+          placeholder="Interest Eg. 10, 15, 30"
+          className="input-style"
+          value={interest}
+          onChange={(e) => {
+            setInterest(e.target.value);
+          }}
+        />
+        <input
+          type="text"
           name="payment-frequency"
           id="payment-frequency"
           placeholder="Payment Frequency Eg. monthly , annually, weekly"
@@ -97,7 +109,7 @@ function EditPackageModal({ paymentPackage, closeModal }) {
 
         <input
           type="submit"
-          value="Add Package"
+          value="Update Package"
           className="rounded-md btn-primary btn-lg"
         />
       </form>

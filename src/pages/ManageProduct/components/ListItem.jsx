@@ -11,9 +11,17 @@ function ListItem({ name, image, price, categoryId }) {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
   // FETCH CATEGORY BY ID
-  const { isLoading, data: category } = useQuery(["category", categoryId], () =>
-    getCategoryById(categoryId)
+  const { isLoading, data: category } = useQuery(
+    ["categoryById", categoryId],
+    () => getCategoryById(categoryId),
+    {
+      onSuccess: (data) => {
+        // console.log("Category by id : ", data);
+      },
+    }
   );
+
+  // const category = {id: "23423423", name: "fone"}
 
   // console.log("images: ", image);
   console.log("category: ", category);
@@ -30,7 +38,7 @@ function ListItem({ name, image, price, categoryId }) {
             alt="."
             className="w-[90%] sm:w-[70%]"
           />
-        </div> 
+        </div>
 
         {/* item name  */}
 

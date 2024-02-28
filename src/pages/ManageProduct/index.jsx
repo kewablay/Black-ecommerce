@@ -14,8 +14,7 @@ function ManageProducts() {
   const {
     data: products,
     isLoading,
-    isError,
-  } = useQuery("products", getProducts);
+  } = useQuery("allProducts", getProducts);
   console.log("products: ", products);
 
   return (

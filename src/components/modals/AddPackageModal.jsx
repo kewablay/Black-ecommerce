@@ -7,6 +7,7 @@ function AddPackageModal({ closeModal }) {
   const packageNameRef = useRef();
   const durationRef = useRef();
   const paymentFrequencyRef = useRef();
+  const interestRef = useRef();
   const packageDescRef = useRef();
 
   const queryClient = useQueryClient();
@@ -29,7 +30,7 @@ function AddPackageModal({ closeModal }) {
       description: packageDescRef.current.value,
       duration: durationRef.current.value,
       paymentFrequency: paymentFrequencyRef.current.value,
-      interest: 0,
+      interest: interestRef.current.value,
     };
 
     toast.promise(packagesMutation(newPackage), {
@@ -64,6 +65,14 @@ function AddPackageModal({ closeModal }) {
           placeholder="Duration Eg. 3 months, 6 months"
           className="input-style"
           ref={durationRef}
+        />
+        <input
+          type="text"
+          name="interest"
+          id="interest"
+          placeholder="Interest , Eg. 15, 10, 20"
+          className="input-style"
+          ref={interestRef}
         />
         <input
           type="text"
