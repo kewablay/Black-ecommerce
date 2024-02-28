@@ -5,7 +5,7 @@ import AdminNav from "./AdminNav";
 
 function DashboardLayout({ children }) {
   return (
-    <div className="w-screen grid-cols-12 lg:grid bg-bgGray">
+    <div className="w-screen grid-cols-15 lg:grid bg-bgGray">
       <Sidebar />
       <MainContent>
         <AdminNav />

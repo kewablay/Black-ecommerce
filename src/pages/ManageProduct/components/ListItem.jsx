@@ -30,7 +30,7 @@ function ListItem({ name, image, price, categoryId }) {
             alt="."
             className="w-[90%] sm:w-[70%]"
           />
-        </div>
+        </div> 
 
         {/* item name  */}
 
