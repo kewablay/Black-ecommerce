@@ -1,6 +1,44 @@
-import React from "react";
+import React, { useRef } from "react";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "react-query";
+import { createPackage } from "services/packages.services";
 
-function AddPackageModal() {
+function AddPackageModal({ closeModal }) {
+  const packageNameRef = useRef();
+  const durationRef = useRef();
+  const paymentFrequencyRef = useRef();
+  const packageDescRef = useRef();
+
+  const queryClient = useQueryClient();
+
+  const { mutateAsync: packagesMutation, isLoading } = useMutation(
+    createPackage,
+    {
+      onSuccess: () => {
+        console.log("Package Created Successfully...");
+        queryClient.invalidateQueries("packages");
+        closeModal();
+      },
+    }
+  );
+
+  const handleCreatePackage = (e) => {
+    e.preventDefault();
+    const newPackage = {
+      name: packageNameRef.current.value,
+      description: packageDescRef.current.value,
+      duration: durationRef.current.value,
+      paymentFrequency: paymentFrequencyRef.current.value,
+      interest: 0,
+    };
+
+    toast.promise(packagesMutation(newPackage), {
+      loading: "Creating Package...",
+      success: "Package created successfully",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
+
   return (
     <div>
       {/* heading  */}
@@ -8,7 +46,7 @@ function AddPackageModal() {
 
       {/* input group  */}
       <form
-        // onSubmit={handleCreatePackage}
+        onSubmit={handleCreatePackage}
         className="flex flex-col gap-3 mt-5 "
       >
         <input
@@ -25,7 +63,7 @@ function AddPackageModal() {
           id="duration"
           placeholder="Duration Eg. 3 months, 6 months"
           className="input-style"
-          ref={DurationRef}
+          ref={durationRef}
         />
         <input
           type="text"

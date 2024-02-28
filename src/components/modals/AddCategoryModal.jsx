@@ -20,9 +20,6 @@ function AddCategoryModal({ closeModal }) {
 
   const handleCreateCategory = (e) => {
     e.preventDefault();
-    // create category
-    // close modal
-    // update categories list
     const category = {
       name: categoryRef.current.value,
     };
