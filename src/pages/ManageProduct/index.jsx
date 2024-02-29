@@ -7,14 +7,12 @@ import DashboardLayout from "components/layout/DashboardLayout";
 import ListItem from "./components/listItem";
 import { useQuery } from "react-query";
 import { getProducts } from "services/products.services";
+import { useGetAllProducts } from "hooks/useProducts";
 
 function ManageProducts() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const {
-    data: products,
-    isLoading,
-  } = useQuery("allProducts", getProducts);
+  const { data: products, isLoading } = useGetAllProducts();
   console.log("products: ", products);
 
   return (
@@ -59,6 +57,8 @@ function ManageProducts() {
               image={product.images}
               price={product.price}
               categoryId={product.categories}
+              productId={product._id}
+              product={product}
             />
           ))}
         </div>

@@ -1,23 +1,17 @@
 import { DeleteIcon, EditIcon } from "assets/icons/svgIcons";
 import EditPackageModal from "components/modals/EditPackageModal";
 import useCustomModal from "hooks/useCustomModal";
+import { useDeletePackage } from "hooks/usePackages";
 import React from "react";
 import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
-import { deletePackage } from "services/packages.services";
 
 function PackageItem({ number, paymentPackage }) {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const queryClient = useQueryClient();
-  const { mutateAsync: deleteCategoryAsync } = useMutation(deletePackage, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("packages");
-    },
-  });
+  const { mutateAsync: deletePackageMutation } = useDeletePackage();
 
   const handleDelete = (paymentPackage) => {
-    toast.promise(deleteCategoryAsync(paymentPackage?._id), {
+    toast.promise(deletePackageMutation(paymentPackage?._id), {
       loading: `Deleting  Package...`,
       success: "Package deleted successfully",
       error: (error) => `Error: ${error.response.data.error}`,

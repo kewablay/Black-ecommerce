@@ -9,6 +9,9 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getCategories } from "services/categories.services";
 import { getPackages } from "services/packages.services";
 import { createProduct } from "services/products.services";
+import { useCreateProduct } from "hooks/useProducts";
+import { useGetCategories } from "hooks/useCategories";
+import { useGetPackages } from "hooks/usePackages";
 
 function AddProductModal({ closeModal }) {
   const productNameRef = useRef();
@@ -17,8 +20,6 @@ function AddProductModal({ closeModal }) {
   const productDescRef = useRef();
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedPackages, setSelectedPackages] = useState([]);
-
-  const queryClient = useQueryClient();
 
   console.log("ADD PRODUCT MODAL RENDERED....................");
 
@@ -39,28 +40,20 @@ function AddProductModal({ closeModal }) {
     setSelectedImages([]);
   };
 
+  const enabled = false;
+
   const {
     data: categories,
     isLoading,
     refetch: refetchCategories,
-  } = useQuery("categories", getCategories, {
-    enabled: false,
-  });
-
+  } = useGetCategories(enabled);
   const {
     data: packages,
     isLoading: loadingPackages,
     refetch: refetchPackages,
-  } = useQuery("packages", getPackages, {
-    enabled: false,
-  });
+  } = useGetPackages(enabled);
 
-  const { mutateAsync: createProductMutation } = useMutation(createProduct, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("allProducts");
-      closeModal();
-    },
-  });
+  const { mutateAsync: createProductMutation } = useCreateProduct(closeModal);
 
   useEffect(() => {
     refetchCategories();

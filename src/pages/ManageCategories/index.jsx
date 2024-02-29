@@ -5,13 +5,13 @@ import useCustomModal from "hooks/useCustomModal";
 import DashboardLayout from "components/layout/DashboardLayout";
 import AddCategoryModal from "components/modals/AddCategoryModal";
 import CategoryItem from "./CategoryItem";
-import { useQuery } from "react-query";
-import { getCategories } from "services/categories.services";
+
+import { useGetCategories } from "hooks/useCategories";
 
 function ManageCategories() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const { data: categories, isLoading } = useQuery("categories", getCategories);
+  const { data: categories, isLoading } = useGetCategories();
 
   console.log("categories : ", categories);
 

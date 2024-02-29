@@ -1,19 +1,13 @@
 import React, { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
-import { signInUser } from "services/auth.services";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useLoginUser } from "hooks/useAuth";
 
 function LoginForm({ setAdminLogin }) {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const navigate = useNavigate();
 
-  const SignInMutation = useMutation(signInUser, {
-    onSuccess: () => {
-      navigate("/"); // Redirect to homepage
-    },
-  });
+  const SignInMutation = useLoginUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -1,11 +1,8 @@
+import { useEditPackage } from "hooks/usePackages";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
-import { editPackage } from "services/packages.services";
 
 function EditPackageModal({ paymentPackage, closeModal }) {
-  const queryClient = useQueryClient();
-
   const [packageName, setPackageName] = useState(paymentPackage?.name);
   const [duration, setDuration] = useState(paymentPackage?.duration);
   const [paymentFrequency, setPaymentFrequency] = useState(
@@ -14,12 +11,7 @@ function EditPackageModal({ paymentPackage, closeModal }) {
   const [description, setDescription] = useState(paymentPackage?.description);
   const [interest, setInterest] = useState(paymentPackage?.interest);
 
-  const { mutateAsync: editPackageMutation } = useMutation(editPackage, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("packages");
-      closeModal();
-    },
-  });
+  const { mutateAsync: editPackageMutation } = useEditPackage(closeModal);
 
   const handleEditPackage = (e) => {
     e.preventDefault();
@@ -90,7 +82,7 @@ function EditPackageModal({ paymentPackage, closeModal }) {
           className="input-style"
           value={paymentFrequency}
           onChange={(e) => {
-            paymentFrequency(e.target.value);
+            setPaymentFrequency(e.target.value);
           }}
         />
 
@@ -103,7 +95,7 @@ function EditPackageModal({ paymentPackage, closeModal }) {
           className="input-style"
           value={description}
           onChange={(e) => {
-            description(e.target.value);
+            setDescription(e.target.value);
           }}
         ></textarea>
 

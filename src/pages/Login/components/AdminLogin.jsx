@@ -1,19 +1,13 @@
 import React, { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useMutation } from "react-query";
-import { signInAdmin } from "services/auth.services";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useAdminLogin } from "hooks/useAuth";
 
 function AdminLogin({ setAdminLogin }) {
   const emailRef = useRef();
   const passwordRef = useRef();
-  const navigate = useNavigate();
 
-  const AdminSignInMutation = useMutation(signInAdmin, {
-    onSuccess: () => {
-      navigate("/admin/manage-products"); // Redirect to homepage
-    },
-  });
+  const AdminSignInMutation = useAdminLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();

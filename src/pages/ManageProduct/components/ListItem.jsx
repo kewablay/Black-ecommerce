@@ -4,27 +4,27 @@ import { DeleteIcon, EditIcon } from "assets/icons/svgIcons";
 import useCustomModal from "hooks/useCustomModal";
 import EditProductModal from "components/modals/EditProductModal";
 import { getApiImage } from "utils/getApiImage";
-import { useQuery } from "react-query";
-import { getCategoryById } from "services/categories.services";
+import { useDeleteProduct } from "hooks/useProducts";
+import toast from "react-hot-toast";
+import { useGetCategoryById } from "hooks/useCategories";
 
-function ListItem({ name, image, price, categoryId }) {
+function ListItem({ product }) {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
   // FETCH CATEGORY BY ID
-  const { isLoading, data: category } = useQuery(
-    ["categoryById", categoryId],
-    () => getCategoryById(categoryId),
-    {
-      onSuccess: (data) => {
-        // console.log("Category by id : ", data);
-      },
-    }
-  );
+  const { isLoading, data: category } = useGetCategoryById(product?.categories);
 
-  // const category = {id: "23423423", name: "fone"}
+  const { mutateAsync: DeleteProductMutation } = useDeleteProduct();
 
-  // console.log("images: ", image);
-  console.log("category: ", category);
+  const handleDeleteProduct = () => {
+    console.log("product Id: ", product?._id);
+    toast.promise(DeleteProductMutation(product?._id), {
+      loading: "Deleting Product...",
+      success: "Deleted Product successfully",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
+
   return (
     <div className="grid items-center grid-cols-12 gap-5 p-2 bg-white rounded-md shadow-sm text-300">
       {/* modal */}
@@ -34,7 +34,7 @@ function ListItem({ name, image, price, categoryId }) {
         {/* image */}
         <div className="col-span-3 p-3 rounded-md bg-bgGray flex-center">
           <img
-            src={getApiImage(image[0])}
+            src={getApiImage(product?.images[0])}
             alt="."
             className="w-[90%] sm:w-[70%]"
           />
@@ -43,10 +43,10 @@ function ListItem({ name, image, price, categoryId }) {
         {/* item name  */}
 
         <p className="col-span-5 cursor-default has-tooltip line-clamp-1 text-ellipsis">
-          {name}
+          {product?.name}
           {/* tooltip */}
           <span className="p-1 px-2 -mt-10 bg-white rounded shadow-lg text-200 tooltip text-textGray">
-            {name}
+            {product?.name}
           </span>
           {/* tooltip ends */}
         </p>
@@ -54,7 +54,7 @@ function ListItem({ name, image, price, categoryId }) {
 
       {/* price  */}
       <div className="col-span-2">
-        <p>${price}</p>
+        <p>${product?.price}</p>
       </div>
 
       {/* category */}
@@ -63,7 +63,12 @@ function ListItem({ name, image, price, categoryId }) {
       {/* user actions delete and edit  */}
       <div className="flex items-center col-span-2 gap-5">
         <button
-          onClick={() => openModal(<EditProductModal />, "customModal")}
+          onClick={() =>
+            openModal(
+              <EditProductModal product={product} closeModal={closeModal} />,
+              "customModal"
+            )
+          }
           className="flex items-center gap-1"
         >
           <span>
@@ -71,7 +76,10 @@ function ListItem({ name, image, price, categoryId }) {
           </span>
           Edit
         </button>
-        <button className="flex items-center gap-1">
+        <button
+          onClick={handleDeleteProduct}
+          className="flex items-center gap-1"
+        >
           <span>
             <DeleteIcon />
           </span>

@@ -3,22 +3,13 @@ import DashboardLayout from "components/layout/DashboardLayout";
 import AddPackageModal from "components/modals/AddPackageModal";
 import useCustomModal from "hooks/useCustomModal";
 import React from "react";
-import { useQuery } from "react-query";
-import { getPackages } from "services/packages.services";
 import PackageItem from "./PackageItem";
+import { useGetPackages } from "hooks/usePackages";
 
 function ManagePackages() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const { isLoading, data: paymentPackages } = useQuery(
-    "packages",
-    getPackages,
-    {
-      onSuccess: (data) => {
-        console.log("Packages : ", data);
-      },
-    }
-  );
+  const { isLoading, data: paymentPackages } = useGetPackages();
   return (
     <DashboardLayout>
       {ModalComponent()}

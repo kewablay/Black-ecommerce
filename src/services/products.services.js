@@ -1,5 +1,16 @@
 import API from "./api";
 
+export const getProducts = async () => {
+  console.log("Getting Products.........");
+  try {
+    const response = await API.get("/admin/products");
+    console.log("products from fetch: ", response.data.products);
+    return response.data.products;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const createProduct = async (newProduct) => {
   console.log("recieved Product: ", newProduct);
   console.log("Creating product........");
@@ -14,12 +25,27 @@ export const createProduct = async (newProduct) => {
   }
 };
 
-export const getProducts = async () => {
-  console.log("Getting Products.........");
+export const editProduct = async ({ productId, updatedProduct }) => {
+  console.log("recieved product  data: ", updatedProduct, productId);
+  console.log("Updating product......");
+  localStorage.setItem("MULTIPART", "true");
   try {
-    const response = await API.get("/admin/products");
-    console.log("products from fetch: ", response.data.products);
-    return response.data.products;
+    const response = await API.put(
+      `admin/products/${productId}`,
+      updatedProduct
+    );
+    localStorage.removeItem("MULTIPART");
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteProduct = async (productId) => {
+  console.log("Deleting product: ", productId);
+  try {
+    const response = await API.delete(`/admin/products/${productId}`);
+    return response.data;
   } catch (error) {
     throw error;
   }
