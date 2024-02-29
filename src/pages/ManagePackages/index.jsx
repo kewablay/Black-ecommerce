@@ -1,31 +1,25 @@
-import React from "react";
 import { AddIcon } from "assets/icons/svgIcons";
-
-import useCustomModal from "hooks/useCustomModal";
 import DashboardLayout from "components/layout/DashboardLayout";
-import AddCategoryModal from "components/modals/AddCategoryModal";
-import CategoryItem from "./CategoryItem";
+import AddPackageModal from "components/modals/AddPackageModal";
+import useCustomModal from "hooks/useCustomModal";
+import React from "react";
+import PackageItem from "./PackageItem";
+import { useGetPackages } from "hooks/usePackages";
 
-import { useGetCategories } from "hooks/useCategories";
-
-function ManageCategories() {
+function ManagePackages() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const { data: categories, isLoading } = useGetCategories();
-
-  console.log("categories : ", categories);
-
+  const { isLoading, data: paymentPackages } = useGetPackages();
   return (
     <DashboardLayout>
       {ModalComponent()}
-
       {/* heading  */}
       <div className="my-7 flex-between">
-        <h2 className="font-bold text-700">Product Categories</h2>
+        <h2 className="font-bold text-700">Payment Packages</h2>
         <button
           onClick={() =>
             openModal(
-              <AddCategoryModal closeModal={closeModal} />,
+              <AddPackageModal closeModal={closeModal} />,
               "customModal"
             )
           }
@@ -34,17 +28,17 @@ function ManageCategories() {
           <span>
             <AddIcon />
           </span>
-          Add Category
+          Add Package
         </button>
       </div>
 
-      {/* Categories list  */}
+      {/* Packages list */}
       <div className="space-y-4">
         {isLoading
           ? "Loading....."
-          : categories?.map((category, index) => (
-              <CategoryItem
-                category={category}
+          : paymentPackages?.map((paymentPackage, index) => (
+              <PackageItem
+                paymentPackage={paymentPackage}
                 number={index + 1}
                 key={index}
               />
@@ -54,4 +48,4 @@ function ManageCategories() {
   );
 }
 
-export default ManageCategories;
+export default ManagePackages;

@@ -7,46 +7,12 @@ import DashboardLayout from "components/layout/DashboardLayout";
 import ListItem from "./components/listItem";
 import { useQuery } from "react-query";
 import { getProducts } from "services/products.services";
+import { useGetAllProducts } from "hooks/useProducts";
 
 function ManageProducts() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  // const products = [
-  //   {
-  //     id: 1,
-  //     title: "IPhone 12 pro - 32GB",
-  //     price: "1200",
-  //     image: "/src/assets/images/iphone12.png",
-  //     category: "Iphone Collection",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "iPhone 13 pro unlocked - 128 GB",
-  //     price: "1200",
-  //     image: "/src/assets/images/iphone13pro.png",
-  //     category: "Iphone Collection",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Samsung Galaxy S21  -128GB",
-  //     price: "1200",
-  //     image: "/src/assets/images/samsungS21.png",
-  //     category: "Samsung Collection",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "IPhone 15 pro max - 256GB",
-  //     price: "1200",
-  //     image: "/src/assets/images/iphone15pro.png",
-  //     category: "Iphone Collection",
-  //   },
-  // ];
-
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useQuery("products", getProducts);
+  const { data: products, isLoading } = useGetAllProducts();
   console.log("products: ", products);
 
   return (
@@ -90,7 +56,9 @@ function ManageProducts() {
               name={product.name}
               image={product.images}
               price={product.price}
-              category={product.categories}
+              categoryId={product.categories}
+              productId={product._id}
+              product={product}
             />
           ))}
         </div>

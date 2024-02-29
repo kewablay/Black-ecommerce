@@ -1,22 +1,17 @@
+import { useSignUpUser } from "hooks/useAuth";
 import React, { useRef } from "react";
 import toast from "react-hot-toast";
-import { useMutation } from "react-query";
-import { Link, useNavigate } from "react-router-dom";
-import { signUpUser } from "services/auth.services";
+import { Link } from "react-router-dom";
+
 
 function SignUpForm() {
-  const navigate = useNavigate();
 
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
   // sign up user
-  const SignUpMutation = useMutation(signUpUser, {
-    onSuccess: () => {
-      navigate("/login");
-    },
-  });
+  const SignUpMutation = useSignUpUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();

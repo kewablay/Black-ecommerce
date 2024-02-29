@@ -9,4 +9,5 @@ export const DASHBOARD = "/admin";
 export const MANAGE_RODUCTS = "/admin/manage-products";
 export const MANAGE_ORDERS = "/admin/manage-orders";
 export const MANAGE_CATEGORIES = "/admin/manage-categories";
+export const MANAGE_PACKAGES = "/admin/manage-packages";
 export const CHATS = "/admin/chats";

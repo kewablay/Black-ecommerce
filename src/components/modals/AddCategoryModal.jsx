@@ -1,33 +1,17 @@
+import { useCreateCategory } from "hooks/useCategories";
 import React, { useRef } from "react";
 import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
-import { createCategory } from "services/categories.services";
 
 function AddCategoryModal({ closeModal }) {
   const categoryRef = useRef();
-  const queryClient = useQueryClient();
-  const {
-    mutate: createCategoryMutation,
-    mutateAsync,
-    isLoading,
-  } = useMutation(createCategory, {
-    onSuccess: () => {
-      console.log("Category Created Successfully...");
-      queryClient.invalidateQueries("categories");
-      closeModal();
-    },
-  });
+
+  const { mutateAsync, isLoading } = useCreateCategory(closeModal);
 
   const handleCreateCategory = (e) => {
     e.preventDefault();
-    // create category
-    // close modal
-    // update categories list
     const category = {
       name: categoryRef.current.value,
     };
-
-    // createCategoryMutation.mutate(category);
 
     toast.promise(mutateAsync(category), {
       loading: "Creating Category...",

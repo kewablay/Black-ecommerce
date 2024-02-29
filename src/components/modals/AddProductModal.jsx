@@ -3,9 +3,15 @@ import ImagePreview from "components/shared/ImagePreview";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import toast from "react-hot-toast";
-import { useMutation, useQuery } from "react-query";
+import Select from "react-select";
+
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { getCategories } from "services/categories.services";
+import { getPackages } from "services/packages.services";
 import { createProduct } from "services/products.services";
+import { useCreateProduct } from "hooks/useProducts";
+import { useGetCategories } from "hooks/useCategories";
+import { useGetPackages } from "hooks/usePackages";
 
 function AddProductModal({ closeModal }) {
   const productNameRef = useRef();
@@ -13,6 +19,7 @@ function AddProductModal({ closeModal }) {
   const productCategoryRef = useRef();
   const productDescRef = useRef();
   const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedPackages, setSelectedPackages] = useState([]);
 
   console.log("ADD PRODUCT MODAL RENDERED....................");
 
@@ -33,22 +40,24 @@ function AddProductModal({ closeModal }) {
     setSelectedImages([]);
   };
 
+  const enabled = false;
+
   const {
     data: categories,
     isLoading,
     refetch: refetchCategories,
-  } = useQuery("categories", getCategories, {
-    enabled: false,
-  });
+  } = useGetCategories(enabled);
+  const {
+    data: packages,
+    isLoading: loadingPackages,
+    refetch: refetchPackages,
+  } = useGetPackages(enabled);
 
-  const { mutateAsync: createProductMutation } = useMutation(createProduct, {
-    onSuccess: () => {
-      closeModal();
-    },
-  });
+  const { mutateAsync: createProductMutation } = useCreateProduct(closeModal);
 
   useEffect(() => {
     refetchCategories();
+    refetchPackages();
   }, []);
 
   // console.log("fetched categories: ", categories);
@@ -64,18 +73,28 @@ function AddProductModal({ closeModal }) {
     for (let i = 0; i < selectedImages.length; i++) {
       formData.append("images", selectedImages[i]);
     }
+    // Extract package values and join them with comma
+    const packageValues = selectedPackages
+      .map((paymentPackage) => paymentPackage.value)
+      .join(",");
+    formData.append("packages", packageValues);
 
-    // console.log("name:", formData.get("name"));
-    // console.log("price:", formData.get("price"));
-    // console.log("categories:", formData.get("categories"));
-    // console.log("description:", formData.getAll("description"));
-    // console.log("images:", formData.getAll("images"));
+    console.log("name:", formData.get("name"));
+    console.log("price:", formData.get("price"));
+    console.log("categories:", formData.get("categories"));
+    console.log("description:", formData.get("description"));
+    console.log("images:", formData.getAll("images"));
+    console.log("Packages:", formData.getAll("packages"));
 
     toast.promise(createProductMutation(formData), {
       loading: "Creating Product...",
       success: "Product created successfully",
       error: (error) => `Error: ${error.response.data.error}`,
     });
+  };
+
+  const handlePackageChange = (selectedOptions) => {
+    setSelectedPackages(selectedOptions);
   };
 
   return (
@@ -95,6 +114,7 @@ function AddProductModal({ closeModal }) {
           placeholder="Product Name"
           className="input-style"
           ref={productNameRef}
+          required
         />
         <input
           type="text"
@@ -103,6 +123,7 @@ function AddProductModal({ closeModal }) {
           placeholder="Product Price"
           className="input-style"
           ref={productPriceRef}
+          required
         />
 
         <div
@@ -128,11 +149,24 @@ function AddProductModal({ closeModal }) {
           />
         </div>
 
+        <Select
+          options={packages?.map((paymentPackage) => ({
+            value: paymentPackage?._id,
+            label: paymentPackage?.name,
+          }))}
+          isMulti
+          isLoading={isLoading}
+          onChange={handlePackageChange}
+          value={selectedPackages}
+          placeholder="Select Packages..."
+        />
+
         <select
           ref={productCategoryRef}
           name="category"
           id="category"
           className="input-style"
+          required
         >
           {isLoading ? (
             <option>Loading...</option>

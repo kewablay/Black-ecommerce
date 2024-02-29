@@ -4,29 +4,22 @@ import {
   EditIcon,
   SaveIcon,
 } from "assets/icons/svgIcons";
+import { useDeleteCategory, useEditCategory } from "hooks/useCategories";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "react-query";
-import { deleteCategory, editCategory } from "services/categories.services";
 
 function CategoryItem({ number, category }) {
-  const queryClient = useQueryClient();
   const [editing, setEditing] = useState(false);
   const [editedCategoryName, setEditedCategoryName] = useState(category.name);
 
-  const { mutateAsync: deleteCategoryAsync } = useMutation(deleteCategory, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("categories");
-    },
-  });
+  const { mutateAsync: deleteCategoryAsync } = useDeleteCategory();
 
-  const { mutateAsync: editCategoryMutation } = useMutation(editCategory, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("categories");
-      setEditing(false);
-      setEditedCategoryName(editedCategoryName);
-    },
-  });
+  const onEditSuccess = () => {
+    setEditing(false);
+    setEditedCategoryName(editedCategoryName);
+  };
+
+  const { mutateAsync: editCategoryMutation } = useEditCategory(onEditSuccess);
 
   const handleDelete = (category) => {
     toast.promise(deleteCategoryAsync(category?._id), {

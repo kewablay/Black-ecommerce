@@ -45,3 +45,14 @@ export const editCategory = async ({ categoryId, updatedCategory }) => {
     throw error;
   }
 };
+
+export const getCategoryById = async (categoryId) => {
+  console.log("recieved categoryId : ", categoryId);
+  console.log("Getting category by Id");
+  try {
+    const response = await API.get(`admin/categories/${categoryId}`);
+    return response.data.category;
+  } catch (error) {
+    throw error;
+  }
+};

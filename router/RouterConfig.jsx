@@ -7,6 +7,7 @@ import {
   Login,
   ManageCategories,
   ManageOrders,
+  ManagePackages,
   ManageProducts,
   Orders,
   PaymentInfo,
@@ -36,6 +37,7 @@ export const RouterConfig = () => {
         <Route path={path.MANAGE_RODUCTS} Component={ManageProducts} />
         <Route path={path.MANAGE_ORDERS} Component={ManageOrders} />
         <Route path={path.MANAGE_CATEGORIES} Component={ManageCategories} />
+        <Route path={path.MANAGE_PACKAGES} Component={ManagePackages} />
         <Route path={path.CHATS} Component={Chats} />
       </Route>
 

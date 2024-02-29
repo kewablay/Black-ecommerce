@@ -5,6 +5,7 @@ import {
   ManageCategoriesIcon,
   ManageOrdersIcon,
   ManageProductIcon,
+  PackagesIcon,
 } from "assets/icons/svgIcons";
 import Menu from "./Menu";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,17 +31,22 @@ function Sidebar() {
         <Menu
           icon={<ManageProductIcon />}
           link={"/admin/manage-products"}
-          text={"Manage Products"}
+          text={"Products"}
         />
         <Menu
           icon={<ManageOrdersIcon />}
           link={"/admin/manage-orders"}
-          text={"Manage Orders"}
+          text={"Orders"}
         />
         <Menu
           icon={<ManageCategoriesIcon />}
           link={"/admin/manage-categories"}
-          text={"Manage Categories"}
+          text={"Categories"}
+        />
+        <Menu
+          icon={<PackagesIcon />}
+          link={"/admin/manage-packages"}
+          text={"Packages"}
         />
         <Menu icon={<Chat />} link={"/admin/chats"} text={"Chats"} />
 
