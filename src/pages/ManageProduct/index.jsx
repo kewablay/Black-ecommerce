@@ -5,8 +5,6 @@ import useCustomModal from "hooks/useCustomModal";
 import AddProductModal from "components/modals/AddProductModal";
 import DashboardLayout from "components/layout/DashboardLayout";
 import ListItem from "./components/listItem";
-import { useQuery } from "react-query";
-import { getProducts } from "services/products.services";
 import { useGetAllProducts } from "hooks/useProducts";
 
 function ManageProducts() {

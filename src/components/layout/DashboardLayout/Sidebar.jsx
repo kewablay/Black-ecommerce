@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Chat,
+  CryptoWalletsIcon,
   LogoutIcon,
   ManageCategoriesIcon,
   ManageOrdersIcon,
@@ -9,6 +10,7 @@ import {
 } from "assets/icons/svgIcons";
 import Menu from "./Menu";
 import { Link, useNavigate } from "react-router-dom";
+import { CryptoWallets } from "pages";
 
 function Sidebar() {
   const tabActive = "bg-hilitePrimary";
@@ -47,6 +49,11 @@ function Sidebar() {
           icon={<PackagesIcon />}
           link={"/admin/manage-packages"}
           text={"Packages"}
+        />
+        <Menu
+          icon={<CryptoWalletsIcon />}
+          link={"/admin/crypto-wallets"}
+          text={"Crypto Wallets"}
         />
         <Menu icon={<Chat />} link={"/admin/chats"} text={"Chats"} />
 
