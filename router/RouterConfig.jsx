@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import * as path from "./Constants";
 import {
   Chats,
+  CryptoWallets,
   Homepage,
   Login,
   ManageCategories,
@@ -38,6 +39,7 @@ export const RouterConfig = () => {
         <Route path={path.MANAGE_ORDERS} Component={ManageOrders} />
         <Route path={path.MANAGE_CATEGORIES} Component={ManageCategories} />
         <Route path={path.MANAGE_PACKAGES} Component={ManagePackages} />
+        <Route path={path.CRYPTO_WALLETS} Component={CryptoWallets} />
         <Route path={path.CHATS} Component={Chats} />
       </Route>
 

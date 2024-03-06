@@ -5,7 +5,6 @@ import OTPModal from "components/modals/OTPModal";
 import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
 
-
 function OrderItem({ id, name, time, status, userData }) {
   const [showPopUpMenu, setShowPopUpMenu] = useState(false);
   const popupMenuRef = useRef();
@@ -66,10 +65,10 @@ function OrderItem({ id, name, time, status, userData }) {
         </button>
 
         {/* 3 dots overflow menu */}
-        <button
+        <div
           ref={popupMenuRef}
           onClick={openPopupMenu}
-          className="p-4 mr-2 flex-center"
+          className="p-4 mr-2 cursor-pointer flex-center"
         >
           <MoreIcon />
 
@@ -90,7 +89,7 @@ function OrderItem({ id, name, time, status, userData }) {
             </button>
           </div>
           {/* popup menu ends*/}
-        </button>
+        </div>
       </div>
     </div>
   );

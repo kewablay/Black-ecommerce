@@ -48,7 +48,7 @@ function CategoryItem({ number, category }) {
     <div className="p-5 bg-white rounded-md shadow-sm flex-between text-300">
       {!editing ? (
         <>
-          <p>
+          <p >
             {number}. {category?.name}
           </p>
           <div className="flex items-center gap-5">
