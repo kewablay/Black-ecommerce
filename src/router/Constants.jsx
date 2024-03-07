@@ -4,6 +4,7 @@ export const SIGNUP = "/signup";
 export const SHOP = "/shop";
 export const ORDERS = "/orders";
 export const PAYMENT_INFO = "/payment-info";
+export const PAY_BY_CRYPTO = "/pay-by-crypto";
 export const SELECT_PAYMENT = "/select-payment";
 export const CHOOSE_PAYMENT_OPTION = "/choose-payment-option";
 export const DASHBOARD = "/admin";

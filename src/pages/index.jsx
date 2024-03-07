@@ -4,6 +4,7 @@ export { default as ProductDetail } from "./ProductDetail";
 export { default as SelectPayment } from "./SelectPayment";
 export { default as Orders } from "./Orders";
 export { default as PaymentInfo } from "./PaymentInfo";
+export { default as PayByCrypto } from "./PayByCrypto";
 export { default as Dashboard } from "./Dashboard";
 export { default as ManageProducts } from "./ManageProduct";
 export { default as ManageOrders } from "./ManageOrders";

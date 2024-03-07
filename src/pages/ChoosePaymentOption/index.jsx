@@ -24,7 +24,11 @@ function ChoosePaymentOption() {
             image={creditCardImg}
             link={path.PAYMENT_INFO}
           />
-          <PaymentOptionCard option={"Pay via Crypto"} image={cryptoImg} />
+          <PaymentOptionCard
+            option={"Pay via Crypto"}
+            image={cryptoImg}
+            link={path.PAY_BY_CRYPTO}
+          />
         </div>
       </div>
     </MainLayout>

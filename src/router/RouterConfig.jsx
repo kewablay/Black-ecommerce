@@ -12,6 +12,7 @@ import {
   ManagePackages,
   ManageProducts,
   Orders,
+  PayByCrypto,
   PaymentInfo,
   ProductDetail,
   SelectPayment,
@@ -30,6 +31,7 @@ export const RouterConfig = () => {
         <Route path={path.SHOP} Component={Shop} />
         <Route path={path.SELECT_PAYMENT} Component={SelectPayment} />
         <Route path={path.PAYMENT_INFO} Component={PaymentInfo} />
+        <Route path={path.PAY_BY_CRYPTO} Component={PayByCrypto} />
         <Route path={path.ORDERS} Component={Orders} />
         <Route
           path={path.CHOOSE_PAYMENT_OPTION}
