@@ -25,7 +25,7 @@ function PaymentCard({ plan, price, desc, duration }) {
       {/* button */}
       <div>
         <Link
-          to={"/payment-info"}
+          to={"/choose-payment-option"}
           className="block text-center rounded-full btn-primary btn-lg"
         >
           Select Plan

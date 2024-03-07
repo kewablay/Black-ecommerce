@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import * as path from "./Constants";
 import {
   Chats,
+  ChoosePaymentOption,
   CryptoWallets,
   Homepage,
   Login,
@@ -16,7 +17,7 @@ import {
   SelectPayment,
   Shop,
   SignUp,
-} from "../src/pages";
+} from "../pages";
 import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
 
@@ -30,6 +31,10 @@ export const RouterConfig = () => {
         <Route path={path.SELECT_PAYMENT} Component={SelectPayment} />
         <Route path={path.PAYMENT_INFO} Component={PaymentInfo} />
         <Route path={path.ORDERS} Component={Orders} />
+        <Route
+          path={path.CHOOSE_PAYMENT_OPTION}
+          Component={ChoosePaymentOption}
+        />
         <Route path="/product/:id" Component={ProductDetail} />
       </Route>
 

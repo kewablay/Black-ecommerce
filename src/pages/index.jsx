@@ -13,3 +13,4 @@ export { default as SignUp } from "./SignUp";
 export { default as ManageCategories } from "./ManageCategories";
 export { default as ManagePackages } from "./ManagePackages";
 export { default as CryptoWallets } from "./CryptoWallets";
+export { default as ChoosePaymentOption } from "./ChoosePaymentOption";

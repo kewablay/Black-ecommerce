@@ -5,6 +5,7 @@ export const SHOP = "/shop";
 export const ORDERS = "/orders";
 export const PAYMENT_INFO = "/payment-info";
 export const SELECT_PAYMENT = "/select-payment";
+export const CHOOSE_PAYMENT_OPTION = "/choose-payment-option";
 export const DASHBOARD = "/admin";
 export const MANAGE_RODUCTS = "/admin/manage-products";
 export const MANAGE_ORDERS = "/admin/manage-orders";
