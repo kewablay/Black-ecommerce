@@ -9,7 +9,7 @@ function CryptoListItem({ crypto }) {
     <div className="grid items-center grid-cols-12 gap-5 p-5 bg-white rounded-md shadow-sm flex-between text-300">
       {ModalComponent()}
       <p className="col-span-3">{crypto.name}</p>
-      <p className="col-span-6">{crypto.address}</p>
+      <p className="col-span-6 line-clamp-1">{crypto.address}</p>
       <div className="flex items-center col-span-3 gap-5">
         <button
           className="flex items-center gap-1"

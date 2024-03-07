@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import RouterConfig from "/router/RouterConfig";
+import RouterConfig from "router/RouterConfig";
 import { Toaster } from "react-hot-toast";
 
 function App() {
