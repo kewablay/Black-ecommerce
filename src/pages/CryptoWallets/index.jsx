@@ -2,8 +2,13 @@ import { AddIcon } from "assets/icons/svgIcons";
 import DashboardLayout from "components/layout/DashboardLayout";
 import React from "react";
 import CryptoListItem from "./components/CryptoListItem";
+import useCustomModal from "hooks/useCustomModal";
+import EditCryptoModal from "components/modals/EditCryptoModal";
+import AddCryptoModal from "components/modals/AddCryptoModal";
 
 function index() {
+  const { openModal, closeModal, ModalComponent } = useCustomModal();
+
   const cryptos = [
     { name: "Bitcoin(BTC)", address: "WERWER2342354H3ETY4GSDF3Q134E1234G...." },
     {
@@ -17,14 +22,12 @@ function index() {
     <DashboardLayout>
       {/* heading  */}
       <div className="my-7 flex-between">
+        {ModalComponent()}
         <h2 className="font-bold text-700">Crypto Wallets</h2>
         <button
-          //   onClick={() =>
-          //     openModal(
-          //       <AddProductModal closeModal={closeModal} />,
-          //       "customModal"
-          //     )
-          //   }
+          onClick={() =>
+            openModal(<AddCryptoModal closeModal={closeModal} />, "customModal")
+          }
           className="flex gap-2 p-3 px-4 rounded-md btn-primary"
         >
           <span>
