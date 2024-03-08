@@ -32,11 +32,11 @@ function ListItem({ product }) {
       {/* image and item name  */}
       <div className="relative grid items-center grid-cols-8 col-span-4 gap-2">
         {/* image */}
-        <div className="col-span-3 p-3 rounded-md bg-bgGray flex-center">
+        <div className="col-span-3 p-3 md:h-[4rem] lg:h-[5rem] rounded-md bg-bgGray flex-center">
           <img
             src={getApiImage(product?.images[0])}
             alt="."
-            className="w-[90%] sm:w-[70%]"
+            className="w-[90%] sm:w-[70%] h-full object-contain"
           />
         </div>
 

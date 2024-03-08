@@ -6,12 +6,16 @@ import AddProductModal from "components/modals/AddProductModal";
 import DashboardLayout from "components/layout/DashboardLayout";
 import ListItem from "./components/listItem";
 import { useGetAllProducts } from "hooks/useProducts";
+import EmptyList from "components/shared/EmptyList";
+import Loader from "components/shared/Loader";
 
 function ManageProducts() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
   const { data: products, isLoading } = useGetAllProducts();
   console.log("products: ", products);
+
+  const isProductsEmpty = !isLoading && products?.length === 0;
 
   return (
     <DashboardLayout>
@@ -47,19 +51,34 @@ function ManageProducts() {
         </div>
 
         {/* list */}
-        <div className="space-y-4">
-          {products?.map((product, index) => (
-            <ListItem
-              key={index}
-              name={product.name}
-              image={product.images}
-              price={product.price}
-              categoryId={product.categories}
-              productId={product._id}
-              product={product}
+        {isProductsEmpty ? (
+          <div className="pt-32">
+            <EmptyList
+              title="No Products Found"
+              description="Looks like you haven't added any products!"
             />
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {isLoading ? (
+              <div className="mt-32">
+                <Loader text={"Loading Products..."} />
+              </div>
+            ) : (
+              products?.map((product, index) => (
+                <ListItem
+                  key={index}
+                  name={product.name}
+                  image={product.images}
+                  price={product.price}
+                  categoryId={product.categories}
+                  productId={product._id}
+                  product={product}
+                />
+              ))
+            )}
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );

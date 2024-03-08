@@ -5,11 +5,15 @@ import useCustomModal from "hooks/useCustomModal";
 import React from "react";
 import PackageItem from "./PackageItem";
 import { useGetPackages } from "hooks/usePackages";
+import Loader from "components/shared/Loader";
+import EmptyList from "components/shared/EmptyList";
 
 function ManagePackages() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
   const { isLoading, data: paymentPackages } = useGetPackages();
+  const isPaymentPackagesEmpty = !isLoading && paymentPackages?.length === 0;
+
   return (
     <DashboardLayout>
       {ModalComponent()}
@@ -33,17 +37,30 @@ function ManagePackages() {
       </div>
 
       {/* Packages list */}
-      <div className="space-y-4">
-        {isLoading
-          ? "Loading....."
-          : paymentPackages?.map((paymentPackage, index) => (
+      {isPaymentPackagesEmpty ? (
+        <div className="mt-32">
+          <EmptyList
+            title={"No Packages Found"}
+            description={"Looks like you haven't added any packages!"}
+          />
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {isLoading ? (
+            <div className="mt-32">
+              <Loader text={"Loading Packages..."} />
+            </div>
+          ) : (
+            paymentPackages?.map((paymentPackage, index) => (
               <PackageItem
                 paymentPackage={paymentPackage}
                 number={index + 1}
                 key={index}
               />
-            ))}
-      </div>
+            ))
+          )}
+        </div>
+      )}
     </DashboardLayout>
   );
 }
