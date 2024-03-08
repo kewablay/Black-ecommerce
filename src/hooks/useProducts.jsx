@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createProduct,
+  customerGetProducts,
   deleteProduct,
   editProduct,
   getProducts,
@@ -41,4 +42,9 @@ export const useDeleteProduct = () => {
       queryClient.invalidateQueries("allProducts");
     },
   });
+};
+
+// CUSTOMER
+export const useCustomerGetProducts = () => {
+  return useQuery("customerProducts", customerGetProducts);
 };

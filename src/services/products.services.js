@@ -50,3 +50,16 @@ export const deleteProduct = async (productId) => {
     throw error;
   }
 };
+
+
+// CUSTOMER 
+export const customerGetProducts = async () => {
+  console.log("Getting Products.........");
+  try {
+    const response = await API.get("/customer/products");
+    console.log("products from fetch: ", response.data.products);
+    return response.data.products;
+  } catch (error) {
+    throw error;
+  }
+};
