@@ -37,11 +37,15 @@
   transform: scale(1);
 }
 /* react lazy loading  */
-.product .lazy-load-image-background {
+.lazy-load-image-background {
   @apply object-contain w-full h-full;
 }
 .product .lazy-load-image-background img {
-  @apply mx-auto w-auto h-full transition-all duration-150 ease-in-out group-hover:scale-95;
+  @apply w-auto h-full mx-auto transition-all duration-150 ease-in-out group-hover:scale-95;
+}
+
+.admin-product .lazy-load-image-background img {
+  @apply w-[90%] sm:w-[70%] h-full object-contain mx-auto;
 }
 
 @layer base {

@@ -1,6 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createProduct,
+  customerGetCategoryProducts,
+  customerGetProductById,
   customerGetProducts,
   deleteProduct,
   editProduct,
@@ -47,4 +49,28 @@ export const useDeleteProduct = () => {
 // CUSTOMER
 export const useCustomerGetProducts = () => {
   return useQuery("customerProducts", customerGetProducts);
+};
+
+export const useGetCustomerProductById = (productId) => {
+  return useQuery(
+    ["customerSingleProduct", productId],
+    () => customerGetProductById(productId),
+    {
+      onSuccess: (data) => {
+        console.log("customerSingleProduct: ", data);
+      },
+    }
+  );
+};
+
+export const useCustomerGetCategoryProducts = (categoryId) => {
+  return useQuery(
+    ["customerCategoryProducts", categoryId],
+    () => customerGetCategoryProducts(categoryId),
+    {
+      onSuccess: (data) => {
+        console.log("customerCategoryProducts: ", data);
+      },
+    }
+  );
 };

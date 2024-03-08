@@ -13,11 +13,6 @@ function ProductCard({ title, image, price, id }) {
       {/* image */}
       {image ? (
         <div className="product h-[13rem] p-4 bg-bgGray rounded-xl flex-center">
-          {/* <img
-            src={image}
-            alt="."
-            className="w-auto h-full transition-all duration-150 ease-in-out group-hover:scale-95"
-          /> */}
           <LazyLoadImage alt={image} effect="opacity" src={image} />
         </div>
       ) : (

@@ -1,9 +1,16 @@
 import MainLayout from "components/layout/MainLayout";
 import React from "react";
 import PaymentCard from "./components/PaymentCard";
+import { useGetCustomerProductById } from "hooks/useProducts";
+import { useParams } from "react-router-dom";
 
 function SelectPayment() {
-  console.log("PAYMENT PLAN PAGE..............")
+  console.log("PAYMENT PLAN PAGE..............");
+  const { id } = useParams();
+  const { data: product, isLoading } = useGetCustomerProductById(id);
+
+  const packages = product?.packages;
+
   const paymentPlans = [
     {
       plan: "3 Months Plan ",
@@ -37,13 +44,15 @@ function SelectPayment() {
 
         {/* Payment plan list  */}
         <div className="grid gap-8 section-contained md:grid-cols-2 lg:grid-cols-3">
-          {paymentPlans.map((paymentPlan, index) => (
+          {packages?.map((paymentPlan, index) => (
             <PaymentCard
               key={index}
-              plan={paymentPlan.plan}
-              desc={paymentPlan.desc}
+              plan={paymentPlan.name}
+              desc={paymentPlan.description}
               duration={paymentPlan.duration}
-              price={paymentPlan.price}
+              price={product?.price}
+              frequency={paymentPlan.paymentFrequency}
+              interest={paymentPlan.interest}
             />
           ))}
         </div>
