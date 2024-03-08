@@ -17,7 +17,7 @@ function ImagePreview({ selectedImages, clearSelectedImages }) {
               <img
                 src={URL.createObjectURL(image)}
                 alt=""
-                className="object-cover w-full h-full"
+                className="object-contain w-full h-full"
               />
             </div>
           ))}

@@ -23,11 +23,12 @@ export const useCreateProduct = (closeModal) => {
 
 export const useEditProduct = (closeModal) => {
   const queryClient = useQueryClient();
-  
+
   return useMutation(editProduct, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries("allProducts");
-      closeModal()
+      console.log("updatedProduct: ", data);
+      closeModal();
     },
   });
 };

@@ -5,18 +5,21 @@ import CryptoListItem from "./components/CryptoListItem";
 import useCustomModal from "hooks/useCustomModal";
 import EditCryptoModal from "components/modals/EditCryptoModal";
 import AddCryptoModal from "components/modals/AddCryptoModal";
+import { useGetWallets } from "hooks/useCryptoWallets";
 
 function index() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const cryptos = [
-    { name: "Bitcoin(BTC)", address: "WERWER2342354H3ETY4GSDF3Q134E1234G...." },
-    {
-      name: "USDT (TRC 20)",
-      address: "WERWER2342354H3ETY4GSDF3Q134E1234G....",
-    },
-    { name: "Ethereum", address: "WERWER2342354H3ETY4GSDF3Q134E1234G...." },
-  ];
+  // const cryptos = [
+  //   { name: "Bitcoin(BTC)", address: "WERWER2342354H3ETY4GSDF3Q134E1234G...." },
+  //   {
+  //     name: "USDT (TRC 20)",
+  //     address: "WERWER2342354H3ETY4GSDF3Q134E1234G....",
+  //   },
+  //   { name: "Ethereum", address: "WERWER2342354H3ETY4GSDF3Q134E1234G...." },
+  // ];
+
+  const { data: cryptos, isLoading } = useGetWallets();
 
   return (
     <DashboardLayout>
@@ -48,9 +51,11 @@ function index() {
 
         {/* list */}
         <div className="space-y-4">
-          {cryptos.map((crypto, index) => (
-            <CryptoListItem key={index} crypto={crypto} />
-          ))}
+          {isLoading
+            ? "Loading..."
+            : cryptos.map((crypto, index) => (
+                <CryptoListItem key={index} crypto={crypto} />
+              ))}
         </div>
       </div>
     </DashboardLayout>

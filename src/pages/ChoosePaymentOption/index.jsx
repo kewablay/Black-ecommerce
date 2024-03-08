@@ -10,7 +10,7 @@ function ChoosePaymentOption() {
     <MainLayout>
       <div className="section-contained">
         <div className="mt-10 space-y-4 text-center ">
-          <h2 className="text-800">Select Payment Plan </h2>
+          <h2 className="text-800">Select Payment Option </h2>
           <p className="text-textGray text-400">
             Explore our range of 0% financing options tailored to fit your
             budget

@@ -1,8 +1,32 @@
-import React, { useRef } from "react";
+import { useUpdateWallet } from "hooks/useCryptoWallets";
+import React, { useRef, useState } from "react";
+import toast from "react-hot-toast";
 
-function EditCryptoModal() {
-  const cryptoNameRef = useRef();
-  const walletAddressRef = useRef();
+function EditCryptoModal({ crypto, closeModal }) {
+  const [cryptoName, setcryptoName] = useState(crypto?.category);
+  const [walletAddress, setWalletAddress] = useState(crypto?.walletAddress);
+
+  const { mutateAsync: updateWalletMutation } = useUpdateWallet(closeModal);
+
+  const handleUpdateWallet = (e) => {
+    e.preventDefault();
+    const updatedWallet = {
+      category: cryptoName,
+      walletAddress: walletAddress,
+    };
+
+    const updateData = {
+      walletId: crypto?._id,
+      updatedWallet,
+    };
+
+    toast.promise(updateWalletMutation(updateData), {
+      loading: "Updating Wallet...",
+      success: "Wallet updated successfully",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
+
   return (
     <>
       <h2 className="text-center text-700">Edit New Crypto Details</h2>
@@ -13,7 +37,8 @@ function EditCryptoModal() {
           className="input-style"
           name="cryptoName"
           id="cryptoName"
-          ref={cryptoNameRef}
+          value={cryptoName}
+          onChange={(e) => setcryptoName(e.target.value)}
           placeholder="Crypto Name."
         />
         <input
@@ -21,12 +46,13 @@ function EditCryptoModal() {
           className="input-style"
           name="walletAddress"
           id="walletAddress"
-          ref={walletAddressRef}
+          value={walletAddress}
+          onChange={(e) => setWalletAddress(e.target.value)}
           placeholder="Wallet Address."
         />
 
         <button
-          //   onClick={handleCreateCategory}
+          onClick={handleUpdateWallet}
           type="submit"
           className="rounded-md btn-primary btn-lg"
           // disabled={isLoading}
