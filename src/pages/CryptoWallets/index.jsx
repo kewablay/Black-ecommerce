@@ -5,18 +5,15 @@ import CryptoListItem from "./components/CryptoListItem";
 import useCustomModal from "hooks/useCustomModal";
 import EditCryptoModal from "components/modals/EditCryptoModal";
 import AddCryptoModal from "components/modals/AddCryptoModal";
+import { useGetWallets } from "hooks/useCryptoWallets";
+import Loader from "components/shared/Loader";
+import EmptyList from "components/shared/EmptyList";
 
 function index() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
-  const cryptos = [
-    { name: "Bitcoin(BTC)", address: "WERWER2342354H3ETY4GSDF3Q134E1234G...." },
-    {
-      name: "USDT (TRC 20)",
-      address: "WERWER2342354H3ETY4GSDF3Q134E1234G....",
-    },
-    { name: "Ethereum", address: "WERWER2342354H3ETY4GSDF3Q134E1234G...." },
-  ];
+  const { data: cryptos, isLoading } = useGetWallets();
+  const isCryptosEmpty = !isLoading && cryptos?.length === 0;
 
   return (
     <DashboardLayout>
@@ -38,20 +35,35 @@ function index() {
       </div>
 
       {/* Crypto list  */}
-      <div className="space-y-4">
+      <div>
         {/* list header  */}
-        <div className="grid items-center grid-cols-12 gap-5 p-3 font-bold text-white rounded-md bg-secondaryDark">
+        <div className="grid items-center grid-cols-12 gap-5 p-3 mb-4 font-bold text-white rounded-md bg-secondaryDark">
           <p className="col-span-3">Crypto</p>
           <p className="col-span-6">Wallet Address</p>
           <p className="col-span-3">Actions</p>
         </div>
 
         {/* list */}
-        <div className="space-y-4">
-          {cryptos.map((crypto, index) => (
-            <CryptoListItem key={index} crypto={crypto} />
-          ))}
-        </div>
+        {isCryptosEmpty ? (
+          <div className="mt-32">
+            <EmptyList
+              title="No Crypto Wallets Found"
+              description="Looks like you haven't added any crypto wallets!"
+            />
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {isLoading ? (
+              <div className="mt-32">
+                <Loader text={"Loading Wallets..."} />
+              </div>
+            ) : (
+              cryptos.map((crypto, index) => (
+                <CryptoListItem key={index} crypto={crypto} />
+              ))
+            )}
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );

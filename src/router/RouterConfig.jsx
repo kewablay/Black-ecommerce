@@ -29,7 +29,7 @@ export const RouterConfig = () => {
       <Route element={<ProtectedRoutes />}>
         <Route exact path={path.HOMEPAGE} Component={Homepage} />
         <Route path={path.SHOP} Component={Shop} />
-        <Route path={path.SELECT_PAYMENT} Component={SelectPayment} />
+        {/* <Route path={path.SELECT_PAYMENT} Component={SelectPayment} /> */}
         <Route path={path.PAYMENT_INFO} Component={PaymentInfo} />
         <Route path={path.PAY_BY_CRYPTO} Component={PayByCrypto} />
         <Route path={path.ORDERS} Component={Orders} />
@@ -37,6 +37,7 @@ export const RouterConfig = () => {
           path={path.CHOOSE_PAYMENT_OPTION}
           Component={ChoosePaymentOption}
         />
+        <Route path="/select-payment/:id" Component={SelectPayment} />
         <Route path="/product/:id" Component={ProductDetail} />
       </Route>
 

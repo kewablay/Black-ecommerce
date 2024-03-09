@@ -20,7 +20,7 @@ function EditProductModal({ product, closeModal }) {
 
   const [showImageSelector, setShowImageSelector] = useState(false);
 
-  console.log("Product packages : ", product?.packages);
+  // console.log("Product packages : ", product?.packages);
 
   const clearSelectedImages = (e) => {
     e.preventDefault();
@@ -142,7 +142,11 @@ function EditProductModal({ product, closeModal }) {
           <div className="relative grid grid-cols-3 gap-1 p-3 border rounded-md">
             {product?.images?.map((image, index) => (
               <div key={index} className="h-40 bg-bgGray">
-                <img src={getApiImage(image)} alt={image} />
+                <img
+                  className="object-contain w-full h-full"
+                  src={getApiImage(image)}
+                  alt={image}
+                />
               </div>
             ))}
 

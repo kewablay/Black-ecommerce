@@ -50,3 +50,36 @@ export const deleteProduct = async (productId) => {
     throw error;
   }
 };
+
+// CUSTOMER
+export const customerGetProducts = async () => {
+  console.log("Getting Products.........");
+  try {
+    const response = await API.get("/customer/products");
+    console.log("products from fetch: ", response.data.products);
+    return response.data.products;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const customerGetProductById = async (productId) => {
+  console.log("Getting Product by id: ", productId);
+  try {
+    const response = await API.get(`/customer/products/${productId}`);
+    return response.data.product;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const customerGetCategoryProducts = async (categoryId) => {
+  console.log("Getting Products by CategoryId: ", categoryId);
+  try {
+    const response = await API.get(`/customer/products?category=${categoryId}`);
+    console.log("products from fetch: ", response.data.products);
+    return response.data.products;
+  } catch (error) {
+    throw error;
+  }
+};

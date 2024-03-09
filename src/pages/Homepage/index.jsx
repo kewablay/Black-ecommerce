@@ -6,15 +6,21 @@ import OurLatestProducts from "./components/OurLatestProducts";
 import PromotionBanner from "components/shared/PromotionBanner";
 import HotDeals from "./components/HotDeals";
 import CustomerReviews from "./components/CustomerReviews";
+import { useCustomerGetProducts, useGetAllProducts } from "hooks/useProducts";
 
 function Homepage() {
+  const { data: products, isLoading } = useCustomerGetProducts();
+
+  const latestProducts = products?.slice()?.reverse()?.slice(0, 6);
+  const hotDeals = products?.slice(0, 6);
+
   return (
     <MainLayout>
       <Header />
       <Categories />
-      <OurLatestProducts />
+      <OurLatestProducts products={latestProducts} isLoading={isLoading} />
       <PromotionBanner />
-      <HotDeals />
+      <HotDeals products={hotDeals} isLoading={isLoading} />
       <CustomerReviews />
     </MainLayout>
   );

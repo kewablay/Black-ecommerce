@@ -1,6 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   createProduct,
+  customerGetCategoryProducts,
+  customerGetProductById,
+  customerGetProducts,
   deleteProduct,
   editProduct,
   getProducts,
@@ -23,11 +26,12 @@ export const useCreateProduct = (closeModal) => {
 
 export const useEditProduct = (closeModal) => {
   const queryClient = useQueryClient();
-  
+
   return useMutation(editProduct, {
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries("allProducts");
-      closeModal()
+      console.log("updatedProduct: ", data);
+      closeModal();
     },
   });
 };
@@ -40,4 +44,33 @@ export const useDeleteProduct = () => {
       queryClient.invalidateQueries("allProducts");
     },
   });
+};
+
+// CUSTOMER
+export const useCustomerGetProducts = () => {
+  return useQuery("customerProducts", customerGetProducts);
+};
+
+export const useGetCustomerProductById = (productId) => {
+  return useQuery(
+    ["customerSingleProduct", productId],
+    () => customerGetProductById(productId),
+    {
+      onSuccess: (data) => {
+        console.log("customerSingleProduct: ", data);
+      },
+    }
+  );
+};
+
+export const useCustomerGetCategoryProducts = (categoryId) => {
+  return useQuery(
+    ["customerCategoryProducts", categoryId],
+    () => customerGetCategoryProducts(categoryId),
+    {
+      onSuccess: (data) => {
+        console.log("customerCategoryProducts: ", data);
+      },
+    }
+  );
 };

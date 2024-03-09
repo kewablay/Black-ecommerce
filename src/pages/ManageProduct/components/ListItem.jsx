@@ -7,6 +7,7 @@ import { getApiImage } from "utils/getApiImage";
 import { useDeleteProduct } from "hooks/useProducts";
 import toast from "react-hot-toast";
 import { useGetCategoryById } from "hooks/useCategories";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function ListItem({ product }) {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
@@ -32,11 +33,17 @@ function ListItem({ product }) {
       {/* image and item name  */}
       <div className="relative grid items-center grid-cols-8 col-span-4 gap-2">
         {/* image */}
-        <div className="col-span-3 p-3 rounded-md bg-bgGray flex-center">
-          <img
+        <div className="admin-product col-span-3 p-3 md:h-[4rem] lg:h-[5rem] rounded-md bg-bgGray flex-center">
+          {/* <img
             src={getApiImage(product?.images[0])}
             alt="."
-            className="w-[90%] sm:w-[70%]"
+            className="w-[90%] sm:w-[70%] h-full object-contain"
+          /> */}
+
+          <LazyLoadImage
+            alt="."
+            effect="opacity"
+            src={getApiImage(product?.images[0])}
           />
         </div>
 

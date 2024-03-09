@@ -7,6 +7,8 @@ import AddCategoryModal from "components/modals/AddCategoryModal";
 import CategoryItem from "./CategoryItem";
 
 import { useGetCategories } from "hooks/useCategories";
+import Loader from "components/shared/Loader";
+import EmptyList from "components/shared/EmptyList";
 
 function ManageCategories() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
@@ -14,6 +16,7 @@ function ManageCategories() {
   const { data: categories, isLoading } = useGetCategories();
 
   console.log("categories : ", categories);
+  const isCategoriesEmpty = !isLoading && categories?.length === 0;
 
   return (
     <DashboardLayout>
@@ -37,19 +40,32 @@ function ManageCategories() {
           Add Category
         </button>
       </div>
-
       {/* Categories list  */}
-      <div className="space-y-4">
-        {isLoading
-          ? "Loading....."
-          : categories?.map((category, index) => (
+
+      {isCategoriesEmpty ? (
+        <div className="mt-32">
+          <EmptyList
+            title={"No Categories Found"}
+            description={"Looks like you haven't added any categories yet!"}
+          />
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {isLoading ? (
+            <div className="mt-32">
+              <Loader text={"Loading categories..."} />
+            </div>
+          ) : (
+            categories?.map((category, index) => (
               <CategoryItem
                 category={category}
                 number={index + 1}
                 key={index}
               />
-            ))}
-      </div>
+            ))
+          )}
+        </div>
+      )}
     </DashboardLayout>
   );
 }

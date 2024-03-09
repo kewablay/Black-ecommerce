@@ -1,20 +1,33 @@
 import MainLayout from "components/layout/MainLayout";
 import ProductCard from "components/shared/ProductCard";
+import {
+  useCustomerGetCategoryProducts,
+  useGetCustomerProductById,
+} from "hooks/useProducts";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useParams, Link } from "react-router-dom";
+import { getApiImage } from "utils/getApiImage";
 
 function ProductDetail() {
   const { id } = useParams();
 
-  console.log("PRODUCT DETAIL PAGE..................");
+  const { data: product, isLoading } = useGetCustomerProductById(id);
 
-  const product = {
-    id: 6,
-    title: "iPhone 13 pro unlocked - 128 GB",
-    price: "1200",
-    image: "/src/assets/images/iphone13pro.png",
-    desc: "Meet the iPhone 13: a technological marvel merging elegance with power. Featuring a vibrant Super Retina XDR display and an A15 Bionic chip for seamless performance, it's your gateway to extraordinary experiences. With advanced camera capabilities, top-notch security through Face ID, and seamless integration within the Apple ecosystem, the iPhone 13 redefines sophistication and innovation in the palm of your hand.",
-  };
+  const categoryId = product?.categories[0]._id;
+
+  const { data: relatedProducts, isLoading: relatedProductsLoading } =
+    useCustomerGetCategoryProducts(categoryId);
+
+  // console.log("Category id : ", categoryId);
+
+  // const product = {
+  //   id: 6,
+  //   title: "iPhone 13 pro unlocked - 128 GB",
+  //   price: "1200",
+  //   image: "/src/assets/images/iphone13pro.png",
+  //   desc: "Meet the iPhone 13: a technological marvel merging elegance with power. Featuring a vibrant Super Retina XDR display and an A15 Bionic chip for seamless performance, it's your gateway to extraordinary experiences. With advanced camera capabilities, top-notch security through Face ID, and seamless integration within the Apple ecosystem, the iPhone 13 redefines sophistication and innovation in the palm of your hand.",
+  // };
 
   const products = [
     {
@@ -47,22 +60,31 @@ function ProductDetail() {
     <MainLayout>
       <div className="grid gap-8 mt-5 lg:mt-10 section-contained lg:grid-cols-2">
         {/* image  */}
-        <div className="rounded-xl bg-bgGray flex-center">
-          <img src={product.image} alt="" className="w-[80%] sm:w-[60%]" />
+        <div className="product-lg rounded-xl bg-bgGray flex-center">
+          {/* <img
+            src={getApiImage(product?.images[0])}
+            alt=""
+            className="w-[80%] sm:w-[60%]"
+          /> */}
+          <LazyLoadImage
+            alt=""
+            effect="opacity"
+            src={getApiImage(product?.images[0])}
+          />
         </div>
 
         {/* product details */}
         <div className="space-y-6">
           <div>
-            <h2 className="text-700">{product.title}</h2>
+            <h2 className="text-700">{product?.name}</h2>
             <h4 className="mt-3 font-bold text-600 text-primary">
-              ${product.price}
+              ${product?.price}
             </h4>
           </div>
-          <p className="text-textGray text-400">{product.desc}</p>
+          <p className="text-textGray text-400">{product?.description}</p>
           <div className="mt-5 ">
             <Link
-              to={"/select-payment"}
+              to={`/select-payment/${id}`}
               className="block text-center btn-primary btn-lg"
             >
               Proceed to Payment
@@ -75,20 +97,20 @@ function ProductDetail() {
       <div className="section-contained">
         {/* section title */}
         <div className="mb-10 text-center">
-          <small className="text-textGray text-200">RELATED PRODUCTS</small>
-          <h3 className="section-title">Other Products</h3>
+          <small className="text-textGray text-200">OTHER PRODUCTS</small>
+          <h3 className="section-title">Related Products</h3>
         </div>
         {/* section title end */}
 
         {/* Product List */}
         <div className="grid grid-cols-2 gap-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product, index) => (
+          {relatedProducts?.map((product, index) => (
             <ProductCard
               key={index}
-              title={product.title}
-              image={product.image}
+              title={product.name}
+              image={getApiImage(product?.images[0])}
               price={product.price}
-              id={product.id}
+              id={product._id}
             />
           ))}
         </div>

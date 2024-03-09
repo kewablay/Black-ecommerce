@@ -2,7 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PlanInfo from "./PlanInfo";
 
-function PaymentCard({ plan, price, desc, duration }) {
+function PaymentCard({ plan, price, desc, duration, frequency, interest }) {
+  const getPriceWithInterest = () =>
+    Math.ceil((price * (1 + interest / 100)) * 100) / 100 << 0;
+
   return (
     <div className="p-10 space-y-10 bg-white border rounded-lg shadow-lg hover:border-primary transition-100">
       {/* plan and description  */}
@@ -13,12 +16,12 @@ function PaymentCard({ plan, price, desc, duration }) {
       </div>
 
       {/* price */}
-      <h2 className="text-center text-700">${price}</h2>
+      <h2 className="text-center text-700">${getPriceWithInterest()}</h2>
 
       {/* other info  */}
       <div className="space-y-2">
         <PlanInfo title={"Duration"} content={duration} />
-        <PlanInfo title={"Payment Frequency"} content={"Monthly"} />
+        <PlanInfo title={"Payment Frequency"} content={frequency} />
         <PlanInfo title={"No interest"} />
       </div>
 
