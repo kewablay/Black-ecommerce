@@ -5,6 +5,7 @@ import {
   useGetCustomerProductById,
 } from "hooks/useProducts";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useParams, Link } from "react-router-dom";
 import { getApiImage } from "utils/getApiImage";
 
@@ -59,11 +60,16 @@ function ProductDetail() {
     <MainLayout>
       <div className="grid gap-8 mt-5 lg:mt-10 section-contained lg:grid-cols-2">
         {/* image  */}
-        <div className="rounded-xl bg-bgGray flex-center">
-          <img
+        <div className="product-lg rounded-xl bg-bgGray flex-center">
+          {/* <img
             src={getApiImage(product?.images[0])}
             alt=""
             className="w-[80%] sm:w-[60%]"
+          /> */}
+          <LazyLoadImage
+            alt=""
+            effect="opacity"
+            src={getApiImage(product?.images[0])}
           />
         </div>
 
