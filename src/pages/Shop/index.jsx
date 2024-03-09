@@ -1,5 +1,5 @@
 import PromotionBanner from "components/shared/PromotionBanner";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ShopProductsList from "./components/ShopProductsList";
 import MainLayout from "components/layout/MainLayout";
 import CategoryPill from "./components/CategoryPill";
@@ -12,15 +12,22 @@ function Shop() {
   const [activeCategory, setActiveCategory] = useState("IPhone Collections");
   const [activeCategoryId, setActiveCategoryId] = useState(null);
 
-  const { data: categoryProducts, refetch: refetchCategoryProducts } =
+  const { data: categoryProducts } =
     useCustomerGetCategoryProducts(activeCategoryId);
+
+  useEffect(() => {
+    if (shopCategories) {
+      setActiveCategory(shopCategories[0].name);
+      setActiveCategoryId(shopCategories[0]._id);
+    }
+  }, [shopCategories]);
 
   console.log("Category products: ", categoryProducts);
 
   const handleCategoryClick = (categoryName, categoryId) => {
-    setActiveCategory(categoryName);
-    refetchCategoryProducts();
-    console.log("Selected CAtegory: ", categoryId);
+    setActiveCategory(categoryName); // to handle active state for the category navs
+    setActiveCategoryId(categoryId); // to fetch products for the selected category
+    console.log("Selected CAtegory: ", activeCategory);
   };
   return (
     <div>

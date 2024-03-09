@@ -21,51 +21,13 @@ function ProductDetail() {
 
   // console.log("Category id : ", categoryId);
 
-  // const product = {
-  //   id: 6,
-  //   title: "iPhone 13 pro unlocked - 128 GB",
-  //   price: "1200",
-  //   image: "/src/assets/images/iphone13pro.png",
-  //   desc: "Meet the iPhone 13: a technological marvel merging elegance with power. Featuring a vibrant Super Retina XDR display and an A15 Bionic chip for seamless performance, it's your gateway to extraordinary experiences. With advanced camera capabilities, top-notch security through Face ID, and seamless integration within the Apple ecosystem, the iPhone 13 redefines sophistication and innovation in the palm of your hand.",
-  // };
 
-  const products = [
-    {
-      id: 1,
-      title: "IPhone 12 pro - 32GB",
-      price: "1200",
-      image: "/src/assets/images/iphone12.png",
-    },
-    {
-      id: 2,
-      title: "iPhone 13 pro unlocked - 128 GB",
-      price: "1200",
-      image: "/src/assets/images/iphone13pro.png",
-    },
-    {
-      id: 3,
-      title: "Samsung Galaxy S21  -128GB",
-      price: "1200",
-      image: "/src/assets/images/samsungS21.png",
-    },
-    {
-      id: 4,
-      title: "IPhone 15 pro max - 256GB",
-      price: "1200",
-      image: "/src/assets/images/iphone15pro.png",
-    },
-  ];
 
   return (
     <MainLayout>
       <div className="grid gap-8 mt-5 lg:mt-10 section-contained lg:grid-cols-2">
         {/* image  */}
         <div className="product-lg rounded-xl bg-bgGray flex-center">
-          {/* <img
-            src={getApiImage(product?.images[0])}
-            alt=""
-            className="w-[80%] sm:w-[60%]"
-          /> */}
           <LazyLoadImage
             alt=""
             effect="opacity"

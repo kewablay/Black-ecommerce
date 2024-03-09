@@ -5,7 +5,7 @@ import { CloseIcon, MenuIcon } from "../../../assets/icons/svgIcons";
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
-  console.log("NAVBAR RENDERED .....................");
+  // console.log("NAVBAR RENDERED .....................");
 
   const handleLogout = () => {
     console.log("loging out ......");
