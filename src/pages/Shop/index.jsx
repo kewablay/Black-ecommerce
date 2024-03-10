@@ -7,12 +7,13 @@ import { useGetCategories } from "hooks/useCategories";
 import { useCustomerGetCategoryProducts } from "hooks/useProducts";
 
 function Shop() {
-  const { data: shopCategories, isLoading } = useGetCategories();
+  const { data: shopCategories, isLoading: categoriesLoading } =
+    useGetCategories();
 
   const [activeCategory, setActiveCategory] = useState("IPhone Collections");
   const [activeCategoryId, setActiveCategoryId] = useState(null);
 
-  const { data: categoryProducts } =
+  const { data: categoryProducts, isLoading: productsLoading } =
     useCustomerGetCategoryProducts(activeCategoryId);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function Shop() {
     }
   }, [shopCategories]);
 
-  console.log("Category products: ", categoryProducts);
+  // console.log("Category products: ", categoryProducts);
 
   const handleCategoryClick = (categoryName, categoryId) => {
     setActiveCategory(categoryName); // to handle active state for the category navs
@@ -37,20 +38,25 @@ function Shop() {
         <div className="container p-4 mx-auto mb-10 bg-bgGray">
           {/* category list container  */}
           <div className="flex gap-4 overflow-x-scroll scroll-hidden">
-            {shopCategories?.map((category, index) => (
-              <CategoryPill
-                key={index}
-                CategoryName={category?.name}
-                active={activeCategory === category?.name}
-                onClick={() =>
-                  handleCategoryClick(category?.name, category?._id)
-                }
-              />
-            ))}
+            {categoriesLoading
+              ? [...Array(4)].map((_, index) => <CategoryPill key={index} />)
+              : shopCategories?.map((category, index) => (
+                  <CategoryPill
+                    key={index}
+                    CategoryName={category?.name}
+                    active={activeCategory === category?.name}
+                    onClick={() =>
+                      handleCategoryClick(category?.name, category?._id)
+                    }
+                  />
+                ))}
           </div>
         </div>
 
-        <ShopProductsList products={categoryProducts} />
+        <ShopProductsList
+          isLoading={productsLoading}
+          products={categoryProducts}
+        />
       </MainLayout>
     </div>
   );

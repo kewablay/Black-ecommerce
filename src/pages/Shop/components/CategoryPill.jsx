@@ -1,4 +1,5 @@
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 
 function CategoryPill({ CategoryName, active, onClick }) {
   return (
@@ -8,7 +9,7 @@ function CategoryPill({ CategoryName, active, onClick }) {
         active && "bg-[#030303] font-bold text-white"
       }`}
     >
-      {CategoryName}
+      {CategoryName || <Skeleton width={80} />}
     </button>
   );
 }
