@@ -17,7 +17,7 @@ function Shop() {
     useCustomerGetCategoryProducts(activeCategoryId);
 
   useEffect(() => {
-    if (shopCategories) {
+    if (shopCategories && activeCategoryId === null) {
       setActiveCategory(shopCategories[0].name);
       setActiveCategoryId(shopCategories[0]._id);
     }
