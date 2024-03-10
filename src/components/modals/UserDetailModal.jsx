@@ -1,13 +1,24 @@
 import React from "react";
 import { TickIcon } from "assets/icons/svgIcons";
+import { useMakeOrder } from "hooks/useOrders";
+import toast from "react-hot-toast";
 
 function UserDetailModal({ userData, closeModal, isAdmin }) {
+  const { mutateAsync: makeOrderMutation } = useMakeOrder(closeModal);
+
+  const handleOrder = (e) => {
+    e.preventDefault();
+    toast.promise(makeOrderMutation(userData), {
+      loading: "Placing Order...",
+      success: "Order Placed Successfully",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
+
   return (
     <div className="p-5 rounded-xl font-plusJakartaSans">
       {isAdmin ? (
-        <h2 className="mb-5 text-center text-600">
-          Payment Information
-        </h2>
+        <h2 className="mb-5 text-center text-600">Payment Information</h2>
       ) : (
         <h2 className="mb-5 text-center text-600">
           Confirm Payment Information
@@ -26,7 +37,7 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Name</p>
-              <p className=" text-textGray">{userData.name}</p>
+              <p className=" text-textGray">{userData.cardName}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
@@ -80,7 +91,7 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
           <div className="grid grid-cols-12">
             <div className="items-center col-span-8 text-100 sm:text-200">
               <p className="font-semibold">Name on Card</p>
-              <p className=" text-textGray">{userData.nameOnCard}</p>
+              <p className=" text-textGray">{userData.cardName}</p>
             </div>
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
@@ -97,7 +108,7 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
             {/*  */}
             <div className="items-center col-span-4 text-100 sm:text-200">
               <p className="font-semibold">Expr Date</p>
-              <p className=" text-textGray">{userData.date}</p>
+              <p className=" text-textGray">{userData.expDate}</p>
             </div>
           </div>
         </div>
@@ -115,7 +126,12 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4 mt-5">
-          <button className="rounded-md btn-primary btn-lg">Confirm</button>
+          <button
+            onClick={handleOrder}
+            className="rounded-md btn-primary btn-lg"
+          >
+            Confirm
+          </button>
           <button onClick={() => closeModal()} className="text-primary">
             Continue Editing
           </button>

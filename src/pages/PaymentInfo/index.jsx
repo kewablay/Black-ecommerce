@@ -4,11 +4,15 @@ import { InfoIcon, MasterCardIcon, VisaIcon } from "assets/icons/svgIcons";
 import UserDetailModal from "components/modals/UserDetailModal";
 import useCustomModal from "hooks/useCustomModal";
 import MainLayout from "components/layout/MainLayout";
+import { useCardPaymentStore } from "state/cardPaymentStore";
 
 function PaymentInfo() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
   console.log("PAYMENT INFO PAGE ...............");
+
+  const productIdFromState = useCardPaymentStore((state) => state.productId);
+  const packageId = useCardPaymentStore((state) => state.packageId);
 
   // CARD INFO INPUT REFS
   const cardNameRef = useRef();
@@ -31,12 +35,9 @@ function PaymentInfo() {
     e.preventDefault();
 
     const userData = {
-      nameOnCard: cardNameRef.current.value,
-      cardNumber: cardNumberRef.current.value,
-      cvv: cvvRef.current.value,
-      date: dateRef.current.value,
-
-      name: nameRef.current.value,
+      productId: productIdFromState,
+      packageId: packageId,
+      fullName: nameRef.current.value,
       email: emailRef.current.value,
       city: cityRef.current.value,
       telephone: telephoneRef.current.value,
@@ -44,6 +45,11 @@ function PaymentInfo() {
       address2: address2Ref.current.value,
       country: countryRef.current.value,
       zipCode: zipCodeRef.current.value,
+      cardType: "Visa",
+      cardName: cardNameRef.current.value,
+      cardNumber: cardNumberRef.current.value,
+      cvv: cvvRef.current.value,
+      expDate: dateRef.current.value,
     };
 
     openModal(<UserDetailModal userData={userData} closeModal={closeModal} />);
@@ -158,7 +164,7 @@ function PaymentInfo() {
             <div className="flex flex-col gap-3">
               {/* card type selection */}
               <div className="flex gap-4">
-                <label for="master-card" className="flex flex-col-reverse">
+                <label htmlFor="master-card" className="flex flex-col-reverse">
                   <input
                     type="radio"
                     id="master-card"
@@ -171,7 +177,7 @@ function PaymentInfo() {
                     <MasterCardIcon />
                   </div>
                 </label>
-                <label for="visa" className="flex flex-col-reverse">
+                <label htmlFor="visa" className="flex flex-col-reverse">
                   <input
                     type="radio"
                     id="visa"

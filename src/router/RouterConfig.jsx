@@ -34,7 +34,7 @@ export const RouterConfig = () => {
         <Route path={path.PAY_BY_CRYPTO} Component={PayByCrypto} />
         <Route path={path.ORDERS} Component={Orders} />
         <Route
-          path={path.CHOOSE_PAYMENT_OPTION}
+          path="/choose-payment-option/:id"
           Component={ChoosePaymentOption}
         />
         <Route path="/select-payment/:id" Component={SelectPayment} />

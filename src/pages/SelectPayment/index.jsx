@@ -3,34 +3,20 @@ import React from "react";
 import PaymentCard from "./components/PaymentCard";
 import { useGetCustomerProductById } from "hooks/useProducts";
 import { useParams } from "react-router-dom";
+import { useCardPaymentStore } from "state/cardPaymentStore";
 
 function SelectPayment() {
   console.log("PAYMENT PLAN PAGE..............");
   const { id } = useParams();
+
+  // SET SELECTED PRODUCT ID IN STATE
+  const setProductId = useCardPaymentStore((state) => state.setProductId);
+  setProductId(id);
+
   const { data: product, isLoading } = useGetCustomerProductById(id);
 
   const packages = product?.packages;
 
-  const paymentPlans = [
-    {
-      plan: "3 Months Plan ",
-      desc: "With this plan,  your payment is divided into 3 Equal Parts which is paid across a 3 months span.",
-      price: "1400",
-      duration: "3 months",
-    },
-    {
-      plan: "6 Months Plan  ",
-      desc: "With this plan we divide your payment into 6 Equal Parts which is paid across a 6 months span.",
-      price: "1500",
-      duration: "6 months",
-    },
-    {
-      plan: "1 Year Plan  ",
-      desc: "With this plan we divide your payment into 12 Equal Parts which is paid across a 12 months span.",
-      price: "1600",
-      duration: "12 months",
-    },
-  ];
   return (
     <div>
       <MainLayout>
@@ -53,6 +39,7 @@ function SelectPayment() {
               price={product?.price}
               frequency={paymentPlan.paymentFrequency}
               interest={paymentPlan.interest}
+              id={paymentPlan._id}
             />
           ))}
         </div>
