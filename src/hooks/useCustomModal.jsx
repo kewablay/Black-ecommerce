@@ -29,7 +29,7 @@ const useCustomModal = () => {
         blockScroll={true}
         onClose={closeModal}
         center
-        showCloseIcon={modalStyle !== ""}
+        showCloseIcon={false}
         classNames={{
           modal: ` ${modalStyle ? modalStyle : "customModal"}`,
         }}

@@ -18,6 +18,9 @@ export default {
         // purple
         secondaryDarker: "#C1B7E6",
 
+        // Black
+        selected: "#030303",
+
         // orange
         tertiary: "#E6BBB7",
 

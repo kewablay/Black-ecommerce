@@ -1,13 +1,15 @@
 import React from "react";
 
-function Loader({ text }) {
+function Loader({ text, small }) {
   return (
     <>
-      <div class="text-center">
+      <div className="text-center">
         <div role="status">
           <svg
             aria-hidden="true"
-            class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            class={`${
+              small ? "w-4 h-4" : " w-8 h-8"
+            } inline  text-gray-200 animate-spin dark:text-gray-600 fill-blue-600`}
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +26,9 @@ function Loader({ text }) {
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <p className="mt-3 text-center text-200 text-textGray">{text}</p>
+      {text && (
+        <p className="mt-3 text-center text-200 text-textGray">{text}</p>
+      )}
     </>
   );
 }
