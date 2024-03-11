@@ -2,9 +2,13 @@ import DashboardLayout from "components/layout/DashboardLayout";
 import React from "react";
 import OrderItem from "./OrderItem";
 import { useGetOrders } from "hooks/useOrders";
+import Loader from "components/shared/Loader";
+import EmptyList from "components/shared/EmptyList";
 
 function ManageOrders() {
   const { data: orders, isLoading } = useGetOrders();
+
+  const isOrdersEmpty = !isLoading && orders?.length === 0;
 
   return (
     <DashboardLayout>
@@ -26,9 +30,22 @@ function ManageOrders() {
 
         {/* list */}
         <div className="space-y-4">
-          {orders?.map((order, index) => (
-            <OrderItem key={index} order={order} />
-          ))}
+          {isOrdersEmpty ? (
+            <div className="mt-32">
+              <EmptyList
+                title={"No Orders Found"}
+                description={"Looks like there are no orders yet!"}
+              />
+            </div>
+          ) : isLoading ? (
+            <div className="mt-32">
+              <Loader text={"Loading Orders..."} />
+            </div>
+          ) : (
+            orders?.map((order, index) => (
+              <OrderItem key={index} order={order} />
+            ))
+          )}
         </div>
         {/* list end*/}
       </div>

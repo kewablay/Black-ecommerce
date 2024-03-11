@@ -8,7 +8,7 @@ import useOutsideClick from "hooks/useOutsideClick";
 function OrderItem({ order }) {
   const [showPopUpMenu, setShowPopUpMenu] = useState(false);
   const popupMenuRef = useRef();
-  const [orderStatus, setorderStatus] = useState(null);
+  const [orderStatus, setorderStatus] = useState("Loading");
 
   useEffect(() => {
     setorderStatus(order?.status);
