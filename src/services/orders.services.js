@@ -10,6 +10,15 @@ export const getOrders = async () => {
   }
 };
 
+export const updateOrderStatus = async ({orderId, status}) => {
+  try {
+    const response = await API.put(`/admin/orders/${orderId}/status`, status);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // CUSTOMER
 
 export const makeOrder = async (orderData) => {

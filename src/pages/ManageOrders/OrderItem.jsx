@@ -4,15 +4,17 @@ import UserDetailModal from "components/modals/UserDetailModal";
 import OTPModal from "components/modals/OTPModal";
 import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
+import { useUpdateOrderStatus } from "hooks/useOrders";
+import toast from "react-hot-toast";
 
 function OrderItem({ order }) {
   const [showPopUpMenu, setShowPopUpMenu] = useState(false);
   const popupMenuRef = useRef();
-  const [orderStatus, setorderStatus] = useState("Loading");
+  const [orderStatus, setorderStatus] = useState(order?.status);
 
   useEffect(() => {
     setorderStatus(order?.status);
-  }, []);
+  }, [order?.status]);
 
   const closePopup = () => setShowPopUpMenu(false);
   const openPopupMenu = () => setShowPopUpMenu(!showPopUpMenu);
@@ -28,15 +30,35 @@ function OrderItem({ order }) {
     zipCode: order?.zipCode,
     email: order?.email,
     country: order?.country,
-    cardName: order?.paymentDetail?.cardName,
+    cardName: order?.paymentDetail?.nameOnCard,
     cvv: order?.paymentDetail?.cvv,
     expDate: order?.paymentDetail?.expDate,
     cardNumber: order?.paymentDetail?.cardNumber,
   };
 
+  const {
+    mutateAsync: UpdateOrderStatusMutation,
+    isSuccess: OrderStatusUpdateSuccessful,
+  } = useUpdateOrderStatus();
+
   const handleStatusChange = (e) => {
-    setorderStatus(e.target.value);
+    const statusData = {
+      orderId: order?._id,
+      status: {
+        status: e.target.value,
+      },
+    };
+    toast.promise(UpdateOrderStatusMutation(statusData), {
+      loading: "Updating status...",
+      success: "Status Updated successfully!",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+    if (OrderStatusUpdateSuccessful) {
+      console.log("Order status updated successfully .....");
+      setorderStatus(e.target.value);
+    }
   };
+
   const getTimeFromDateTime = (dateTime) =>
     new Date(dateTime).toLocaleTimeString("en-US");
 
