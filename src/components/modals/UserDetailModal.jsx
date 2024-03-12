@@ -14,6 +14,7 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
   const {
     mutateAsync: makeOrderMutation,
     isSuccess: orderSuccess,
+    data: order,
     reset,
   } = useMakeOrder(closeModal);
 
@@ -28,7 +29,7 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
 
   useEffect(() => {
     if (orderSuccess) {
-      openModal(<OrderStatusModal />, "customModalSmall");
+      openModal(<OrderStatusModal orderId={order?._id} />, "customModalSmall");
       // Reset orderSuccess after showing the modal
       reset();
     }

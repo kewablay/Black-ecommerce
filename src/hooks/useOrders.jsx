@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
+  getOrderDetail,
   getOrders,
   makeOrder,
   updateOrderStatus,
@@ -19,6 +20,7 @@ export const useUpdateOrderStatus = () => {
 
   return useMutation(updateOrderStatus, {
     onSuccess: (data) => {
+      queryClient.invalidateQueries(["orderDetail", data?.order?.order?._id]);
       queryClient.invalidateQueries("liveOrders");
       console.log("update order status successful: ", data);
     },
@@ -31,6 +33,14 @@ export const useMakeOrder = (closeModal) => {
     onSuccess: (data) => {
       console.log("Order placed successfully: ", data);
       // closeModal();
+    },
+  });
+};
+
+export const usegetOrderDetail = (orderId) => {
+  return useQuery(["orderDetail", orderId], () => getOrderDetail(orderId), {
+    onSuccess: (data) => {
+      console.log("get order detail successful: ", data);
     },
   });
 };

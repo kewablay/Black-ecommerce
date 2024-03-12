@@ -10,7 +10,7 @@ export const getOrders = async () => {
   }
 };
 
-export const updateOrderStatus = async ({orderId, status}) => {
+export const updateOrderStatus = async ({ orderId, status }) => {
   try {
     const response = await API.put(`/admin/orders/${orderId}/status`, status);
     return response.data;
@@ -24,8 +24,18 @@ export const updateOrderStatus = async ({orderId, status}) => {
 export const makeOrder = async (orderData) => {
   try {
     const response = await API.post("/customer/orders", orderData);
-    return response.data;
+    return response.data.order;
   } catch (error) {
     throw error;
   }
 };
+
+
+export const getOrderDetail = async (orderId) => {
+  try {
+    const response = await API.get(`/customer/orders/${orderId}`);
+    return response.data.order;
+  } catch (error) {
+    throw error;
+  }
+}
