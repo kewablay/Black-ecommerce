@@ -23,7 +23,7 @@ function Sidebar() {
   return (
     <div className="w-full h-screen p-5 bg-white lg:col-span-3">
       <div className="px-5 text-500">
-        <Link to={"/"} className="font-bold">
+        <Link to={"/admin/manage-products"} className="font-bold">
           Logo
         </Link>
       </div>

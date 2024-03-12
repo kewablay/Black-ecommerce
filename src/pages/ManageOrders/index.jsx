@@ -1,52 +1,14 @@
 import DashboardLayout from "components/layout/DashboardLayout";
 import React from "react";
 import OrderItem from "./OrderItem";
+import { useGetOrders } from "hooks/useOrders";
+import Loader from "components/shared/Loader";
+import EmptyList from "components/shared/EmptyList";
 
 function ManageOrders() {
-  const orders = [
-    {
-      id: 1234,
-      name: "Kingsley Jackson",
-      time: "12:00",
-      status: "pending",
-      OTP: 24564,
-      userData: {
-        nameOnCard: "Kingsley Jackson",
-        cardNumber: "123456789067",
-        cvv: "1234",
-        date: "12/12/2023",
-        name: "Kingsley Jackson",
-        email: "Kingsley@gmail.com",
-        city: "Texas",
-        telephone: "023213564576",
-        address1: " address1Ref.current.value",
-        address2: "address2Ref.current.value",
-        country: "USA",
-        zipCode: "123",
-      },
-    },
-    {
-      id: 1234,
-      name: "Kevin Hart",
-      time: "12:00",
-      status: "pending",
-      OTP: 24564,
-      userData: {
-        nameOnCard: "Kevin Hart",
-        cardNumber: "123456789067",
-        cvv: "1234",
-        date: "12/12/2023",
-        name: "Kevin Hart",
-        email: "kevin@gmail.com",
-        city: "New York",
-        telephone: "023213564326",
-        address1: " address1Ref.current.value",
-        address2: "address2Ref.current.value",
-        country: "USA",
-        zipCode: "123",
-      },
-    },
-  ];
+  const { data: orders, isLoading } = useGetOrders();
+
+  const isOrdersEmpty = !isLoading && orders?.length === 0;
 
   return (
     <DashboardLayout>
@@ -68,16 +30,22 @@ function ManageOrders() {
 
         {/* list */}
         <div className="space-y-4">
-          {orders.map((order, index) => (
-            <OrderItem
-              key={index}
-              id={order.id}
-              name={order.name}
-              time={order.time}
-              status={order.status}
-              userData={order.userData}
-            />
-          ))}
+          {isOrdersEmpty ? (
+            <div className="mt-32">
+              <EmptyList
+                title={"No Orders Found"}
+                description={"Looks like there are no orders yet!"}
+              />
+            </div>
+          ) : isLoading ? (
+            <div className="mt-32">
+              <Loader text={"Loading Orders..."} />
+            </div>
+          ) : (
+            orders?.map((order, index) => (
+              <OrderItem key={index} order={order} />
+            ))
+          )}
         </div>
         {/* list end*/}
       </div>

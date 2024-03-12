@@ -3,11 +3,6 @@ import CategoryPill from "./CategoryPill";
 import { useGetCategories } from "hooks/useCategories";
 
 function ShopCategoriesNav() {
-  // const shopCategories = [
-  //   "IPhone Collections",
-  //   "Samsung Collections",
-  //   "Airpods and Others",
-  // ];
 
   const { data: shopCategories, isLoading } = useGetCategories();
 
