@@ -3,6 +3,7 @@ import {
   getOrderDetail,
   getOrders,
   makeOrder,
+  sendOrderOTP,
   updateOrderStatus,
 } from "services/orders.services";
 
@@ -41,6 +42,14 @@ export const usegetOrderDetail = (orderId) => {
   return useQuery(["orderDetail", orderId], () => getOrderDetail(orderId), {
     onSuccess: (data) => {
       console.log("get order detail successful: ", data);
+    },
+  });
+};
+
+export const useSendOrderOTP = () => {
+  return useMutation(sendOrderOTP, {
+    onSuccess: (data) => {
+      console.log("OTP sent successfully: ", data);
     },
   });
 };

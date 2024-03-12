@@ -30,6 +30,14 @@ export const makeOrder = async (orderData) => {
   }
 };
 
+export const sendOrderOTP = async (OTPData) => {
+  try {
+    const response = await API.post(`/customer/orderOTP`, OTPData);
+    return response.data.OrderOTP;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getOrderDetail = async (orderId) => {
   try {
@@ -38,4 +46,4 @@ export const getOrderDetail = async (orderId) => {
   } catch (error) {
     throw error;
   }
-}
+};
