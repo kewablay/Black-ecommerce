@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
+  getCustomerOrders,
   getOrderDetail,
   getOrders,
   makeOrder,
@@ -50,6 +51,14 @@ export const useSendOrderOTP = () => {
   return useMutation(sendOrderOTP, {
     onSuccess: (data) => {
       console.log("OTP sent successfully: ", data);
+    },
+  });
+};
+
+export const useGetCustomerOrders = () => {
+  return useQuery("customerOrders", getCustomerOrders, {
+    onSuccess: (data) => {
+      console.log("get customer orders successful: ", data);
     },
   });
 };

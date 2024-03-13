@@ -47,3 +47,13 @@ export const getOrderDetail = async (orderId) => {
     throw error;
   }
 };
+
+
+export const getCustomerOrders = async () => {
+  try {
+    const response = await API.get("/customer/orders");
+    return response.data.orders;
+  } catch (error) {
+    throw error;
+  }
+}

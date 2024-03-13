@@ -6,6 +6,7 @@ import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
 import { useUpdateOrderStatus } from "hooks/useOrders";
 import toast from "react-hot-toast";
+import OrderDetailModal from "components/modals/OrderDetailModal";
 
 function OrderItem({ order }) {
   const [showPopUpMenu, setShowPopUpMenu] = useState(false);
@@ -73,7 +74,7 @@ function OrderItem({ order }) {
       </div>
       {/* Name  */}
       <div className="col-span-3">
-        <p>{order?.fullName}</p>
+        <p>{order?.fullName || "Crypto Order"}</p>
       </div>
       {/* Time  */}
       <div className="col-span-2 ">
@@ -118,7 +119,7 @@ function OrderItem({ order }) {
         <div
           ref={popupMenuRef}
           onClick={openPopupMenu}
-          className="p-4 mr-2 cursor-pointer flex-center"
+          className="p-4 mr-2 text-200 text-textGray cursor-pointer flex-center"
         >
           <MoreIcon />
 
@@ -129,11 +130,26 @@ function OrderItem({ order }) {
             } flex-col flex gap-1 menu-popup `}
           >
             <button
+              onClick={() =>
+                openModal(
+                  <OrderDetailModal
+                    closeModal={closeModal}
+                    product={order?.product}
+                    paymentPackage={order?.package}
+                  />
+                )
+              }
+              className="w-full p-2 text-left hover:bg-bgGray"
+            >
+              View Order Detail
+            </button>
+            <button
               onClick={() => openModal(<OTPModal closeModal={closeModal} />)}
               className="w-full p-2 text-left hover:bg-bgGray"
             >
               View Verification OTP
             </button>
+
             <button className="w-full p-2 text-left hover:bg-bgGray">
               Message
             </button>

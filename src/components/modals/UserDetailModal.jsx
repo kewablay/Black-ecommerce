@@ -22,7 +22,7 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
     e.preventDefault();
     toast.promise(makeOrderMutation(userData), {
       loading: "Placing Order...",
-      success: "Order Placed Successfully",
+      success: "Order submited successfully",
       error: (error) => `Error: ${error.response.data.error}`,
     });
   };

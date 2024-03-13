@@ -7,7 +7,7 @@ function Loader({ text, small }) {
         <div role="status">
           <svg
             aria-hidden="true"
-            class={`${
+            className={`${
               small ? "w-4 h-4" : " w-8 h-8"
             } inline  text-gray-200 animate-spin dark:text-gray-600 fill-blue-600`}
             viewBox="0 0 100 101"
@@ -23,7 +23,7 @@ function Loader({ text, small }) {
               fill="currentFill"
             />
           </svg>
-          <span class="sr-only">Loading...</span>
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
       {text && (
