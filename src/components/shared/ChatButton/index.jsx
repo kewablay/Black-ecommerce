@@ -10,7 +10,7 @@ function ChatButton() {
       {/* CHAT WINDOW */}
       <div
         className={`${
-          !showChatWindow && "scale-0"
+          !showChatWindow && " hidden"
         } transition-transform  duration-100 ease-in-out`}
       >
         <ChatWindow />
