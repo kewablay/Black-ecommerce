@@ -7,6 +7,7 @@ import PromotionBanner from "components/shared/PromotionBanner";
 import HotDeals from "./components/HotDeals";
 import CustomerReviews from "./components/CustomerReviews";
 import { useCustomerGetProducts, useGetAllProducts } from "hooks/useProducts";
+import ChatButton from "components/shared/ChatButton";
 
 function Homepage() {
   const { data: products, isLoading } = useCustomerGetProducts();
@@ -22,6 +23,7 @@ function Homepage() {
       <PromotionBanner />
       <HotDeals products={hotDeals} isLoading={isLoading} />
       <CustomerReviews />
+      <ChatButton />
     </MainLayout>
   );
 }

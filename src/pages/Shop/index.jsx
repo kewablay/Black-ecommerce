@@ -18,8 +18,8 @@ function Shop() {
 
   useEffect(() => {
     if (shopCategories && activeCategoryId === null) {
-      setActiveCategory(shopCategories[0].name);
-      setActiveCategoryId(shopCategories[0]._id);
+      setActiveCategory(shopCategories[0]?.name);
+      setActiveCategoryId(shopCategories[0]?._id);
     }
   }, [shopCategories]);
 

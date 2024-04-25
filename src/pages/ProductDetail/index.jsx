@@ -81,7 +81,7 @@ function ProductDetail() {
             />
           ))} */}
           {relatedProductsLoading
-            ? [...Array(3)].map((_, index) => <ProductCard key={index} />)
+            ? [...Array(4)].map((_, index) => <ProductCard key={index} />)
             : relatedProducts?.map((product, index) => (
                 <ProductCard
                   key={index}

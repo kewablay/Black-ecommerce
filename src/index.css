@@ -78,6 +78,7 @@
   .menu-popup {
     @apply absolute z-10 p-2 transition-transform duration-75 origin-top scale-0 bg-white rounded-md shadow-md -right-2 -bottom-[9.5rem];
   }
+
 }
 
 @layer utilities {
