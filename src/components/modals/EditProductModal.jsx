@@ -46,6 +46,7 @@ function EditProductModal({ product, closeModal }) {
     isLoading,
     refetch: refetchCategories,
   } = useGetCategories(enabled);
+  
   const {
     data: packages,
     isLoading: loadingPackages,

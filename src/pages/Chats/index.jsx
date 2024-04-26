@@ -1,8 +1,14 @@
 import { SendIcon } from "assets/icons/svgIcons";
 import DashboardLayout from "components/layout/DashboardLayout";
+import { useGetAdminProfile } from "hooks/useProfile";
 import React from "react";
 
 function Chats() {
+  // GET ADMIN PROFILE
+  // const { data: adminProfile } = useGetAdminProfile();
+  // console.log("AdminProfile : ", adminProfile);
+
+
   return (
     <DashboardLayout>
       {/* heading  */}
@@ -13,7 +19,7 @@ function Chats() {
       {/* chat section  */}
       <div className="grid grid-cols-12 gap-8 mt-5">
         {/* chat */}
-        <div className="col-span-9 p-3 bg-white rounded-md max-h-[70vh]">
+        <div className="col-span-8 xl:col-span-9 p-3 bg-white rounded-md max-h-[70vh]">
           {/* header  */}
           <div className="p-3 border-b border-gray-200">
             <div className="flex items-center gap-2">
@@ -52,7 +58,7 @@ function Chats() {
             <textarea
               name="message-box"
               id="message-box"
-              class="text-100 p-2 w-full h-12 border border-gray-300 rounded-md focus-visible:outline-blue-300 resize-none"
+              className="text-100 p-2 w-full h-12 border border-gray-300 rounded-md focus-visible:outline-blue-300 resize-none"
             ></textarea>
 
             {/* SEND BUTTON */}
@@ -62,7 +68,7 @@ function Chats() {
           </div>
         </div>
 
-        <div className="col-span-3 p-3 h-[20rem] bg-white rounded-md">
+        <div className="col-span-4 xl:col-span-3 p-3 h-[20rem] bg-white rounded-md">
           <div className="p-3 mb-3 border-b border-gray-200 flex-between">
             <h3 className="font-bold">Messages</h3>
             <span className="w-5 h-5 font-medium text-white bg-green-600 rounded-full text-100 flex-center">

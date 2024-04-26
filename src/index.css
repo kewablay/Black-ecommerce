@@ -127,4 +127,10 @@
   .menu-active {
     @apply bg-hilitePrimary;
   }
+  .incoming-message {
+    @apply w-2/3 p-2 mr-auto bg-gray-200 rounded-md
+  }
+  .outgoing-message {
+    @apply w-2/3 p-2 ml-auto bg-blue-200 rounded-md 
+  }
 }
