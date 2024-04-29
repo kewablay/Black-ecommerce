@@ -4,6 +4,7 @@ import {
   createConversation,
   getConversationByUserId,
   getMessages,
+  getUserDetails,
   sendMessage,
 } from "services/chat.services";
 
@@ -40,11 +41,28 @@ export const useGetMessages = ({ conversationId, enabled }) => {
 };
 
 export const useGetConversationByUserId = (userId) => {
-  return useQuery(["conversationById", userId], () =>
-    getConversationByUserId(userId), {
-        onSuccess: (data) => {
-            console.log("conversation by user id: ", data);
-        }
+  return useQuery(
+    ["conversationById", userId],
+    () => getConversationByUserId(userId),
+    {
+      onSuccess: (data) => {
+        // console.log("conversation by user id: ", data);
+      },
+      select: (data) => {
+        return data.slice().reverse();
+      },
+    }
+  );
+};
+
+export const useGetUserDetails = (userId) => {
+  return useQuery(
+    ["conversationUserDetails", userId],
+    () => getUserDetails(userId),
+    {
+      onSuccess: (data) => {
+        // console.log("conversation user details: ", data);
+      },
     }
   );
 };

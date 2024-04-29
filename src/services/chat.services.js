@@ -48,3 +48,12 @@ export const getConversationByUserId = async (userId) => {
     throw error;
   }
 };
+export const getUserDetails = async (userId) => {
+  console.log("Getting user details.... ");
+  try {
+    const response = await API.get(`/conversations/user/${userId}`);
+    return response.data.user;
+  } catch (error) {
+    throw error;
+  }
+};
