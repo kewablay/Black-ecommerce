@@ -65,7 +65,13 @@ function AdminChatArea({ activeConversation, adminId }) {
       {/* header  */}
       <div className="p-3 border-b border-gray-200">
         <div className="flex items-center gap-2">
-          <span className="w-10 h-10 overflow-hidden bg-gray-300 rounded-full"></span>
+          <span className="w-10 h-10 overflow-hidden bg-gray-300 rounded-full">
+            <img
+              src={`https://ui-avatars.com/api/?name=${userDetail?.username}?&background=random&?bold=true`}
+              alt=""
+              className="object-cover w-full h-full"
+            />
+          </span>
           <h3 className="font-bold capitalize">
             {userDetail?.username || <Skeleton width={100} />}
           </h3>

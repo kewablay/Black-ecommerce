@@ -27,14 +27,7 @@ function ChatWindow({ conversationId, userId }) {
     enabled,
   });
 
-  // GET MESSAGES ONLY WHEN THERE IS A CONVERSATION
-  //   useEffect(() => {
-  //     if (conversationId) {
-  //       refetchMessages();
-  //     }
-  //   }, [conversationId]);
 
-  //   console.log("Messages in chat window: ", messages);
 
   const sendMessage = (e) => {
     e.preventDefault();

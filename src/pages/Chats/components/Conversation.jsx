@@ -16,7 +16,6 @@ function Conversation({ convo, setActiveConversation }) {
 
   //   GET USER DETAILS
   const { data: userDetail } = useGetUserDetails(getUserId());
-//   console.log("userDetail: ", userDetail)
 
   return (
     <div
@@ -25,8 +24,16 @@ function Conversation({ convo, setActiveConversation }) {
     >
       <div className="items-center flex-between ">
         <div className="flex items-center gap-2">
-          <span className="w-8 h-8 overflow-hidden bg-gray-300 rounded-full"></span>
-          <h3 className="capitalize">{userDetail?.username || <Skeleton width={100}/>} </h3>
+          <span className="w-8 h-8 overflow-hidden bg-gray-300 rounded-full">
+            <img
+              src={`https://ui-avatars.com/api/?name=${userDetail?.username}?&background=random&?bold=true`}
+              alt=""
+              className="object-cover w-full h-full"
+            />
+          </span>
+          <h3 className="capitalize">
+            {userDetail?.username || <Skeleton width={100} />}
+          </h3>
         </div>
 
         <small className="text-gray-400">{formatTime(convo.updatedAt)}</small>

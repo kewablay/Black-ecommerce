@@ -23,12 +23,10 @@ function Chats() {
 
   const isConversationsEmpty = conversations?.length === 0;
 
-  // const {} = useGetUserDetails();
 
   // console.log("chats trigered...............");
   // console.log("Conversations: ", conversations);
 
-  // Function to format time
 
   return (
     <DashboardLayout>
