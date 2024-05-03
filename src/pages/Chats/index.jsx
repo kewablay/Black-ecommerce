@@ -23,10 +23,8 @@ function Chats() {
 
   const isConversationsEmpty = conversations?.length === 0;
 
-
   // console.log("chats trigered...............");
   // console.log("Conversations: ", conversations);
-
 
   return (
     <DashboardLayout>
@@ -40,7 +38,10 @@ function Chats() {
         {/* chat */}
         <div className="col-span-8 xl:col-span-9 p-3 bg-white rounded-md max-h-[70vh]">
           {activeConversation ? (
-            <AdminChatArea activeConversation={activeConversation} adminId={adminId}/>
+            <AdminChatArea
+              activeConversation={activeConversation}
+              adminId={adminId}
+            />
           ) : (
             <StartConversation />
           )}
@@ -55,13 +56,15 @@ function Chats() {
             </span>
           </div>
 
-          {conversations?.map((convo, index) => (
-            <Conversation
-              key={index}
-              convo={convo}
-              setActiveConversation={setActiveConversation}
-            />
-          ))}
+          <div className="h-[15rem] overflow-y-auto">
+            {conversations?.map((convo, index) => (
+              <Conversation
+                key={index}
+                convo={convo}
+                setActiveConversation={setActiveConversation}
+              />
+            ))}
+          </div>
 
           {isConversationsEmpty && <EmptyConversation />}
         </div>

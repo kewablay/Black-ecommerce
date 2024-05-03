@@ -20,6 +20,7 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
 
   const handleOrder = (e) => {
     e.preventDefault();
+    console.log("Order: ", userData);
     toast.promise(makeOrderMutation(userData), {
       loading: "Placing Order...",
       success: "Order submited successfully",

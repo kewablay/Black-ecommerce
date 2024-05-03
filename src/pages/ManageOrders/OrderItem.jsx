@@ -4,7 +4,7 @@ import UserDetailModal from "components/modals/UserDetailModal";
 import OTPModal from "components/modals/OTPModal";
 import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
-import { useUpdateOrderStatus } from "hooks/useOrders";
+import { useUpdateOrderStatus, useViewOrderOTP } from "hooks/useOrders";
 import toast from "react-hot-toast";
 import OrderDetailModal from "components/modals/OrderDetailModal";
 
@@ -31,10 +31,10 @@ function OrderItem({ order }) {
     zipCode: order?.zipCode,
     email: order?.email,
     country: order?.country,
-    cardName: order?.paymentDetail?.nameOnCard,
-    cvv: order?.paymentDetail?.cvv,
-    expDate: order?.paymentDetail?.expDate,
-    cardNumber: order?.paymentDetail?.cardNumber,
+    cardName: order?.paymentDetails?.cardName,
+    cvv: order?.paymentDetails?.cvv,
+    expDate: order?.paymentDetails?.expDate,
+    cardNumber: order?.paymentDetails?.cardNumber,
   };
 
   const {
@@ -64,6 +64,9 @@ function OrderItem({ order }) {
     new Date(dateTime).toLocaleTimeString("en-US");
 
   useOutsideClick(popupMenuRef, closePopup);
+
+  const { data: orderOTP } = useViewOrderOTP(order?._id);
+
   return (
     <div className="relative grid items-center grid-cols-12 gap-5 p-2 py-4 bg-white rounded-md shadow-sm text-300">
       {/* modal  */}
@@ -119,7 +122,7 @@ function OrderItem({ order }) {
         <div
           ref={popupMenuRef}
           onClick={openPopupMenu}
-          className="p-4 mr-2 text-200 text-textGray cursor-pointer flex-center"
+          className="p-4 mr-2 cursor-pointer text-200 text-textGray flex-center"
         >
           <MoreIcon />
 
@@ -144,7 +147,11 @@ function OrderItem({ order }) {
               View Order Detail
             </button>
             <button
-              onClick={() => openModal(<OTPModal closeModal={closeModal} />)}
+              onClick={() =>
+                openModal(
+                  <OTPModal closeModal={closeModal} orderOTP={orderOTP} />
+                )
+              }
               className="w-full p-2 text-left hover:bg-bgGray"
             >
               View Verification OTP
