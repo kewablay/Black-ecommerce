@@ -15,7 +15,7 @@ function Footer() {
           <div className="justify-center space-y-2 ">
             {/* LOgo */}
             <p>Logo</p>
-            <p className="font-light">
+            <p className=" text-200 text-[#797979]">
               © Company
               <br /> All Rights Reserved.
             </p>
@@ -24,10 +24,10 @@ function Footer() {
         {/*  */}
 
         <div>
-          <h3 className="mb-2 font-bold text-300 sm:text-400 sm:font-bold">
+          <h3 className="mb-2 font-medium text-300 sm:text-400 sm:font-bold">
             Our Company
           </h3>
-          <div className="flex flex-col gap-2 font-light">
+          <div className="flex flex-col gap-2  text-200 text-[#797979]">
             <Link>About Us</Link>
             <Link>FAQS</Link>
             <Link>Privacy Policy</Link>
@@ -38,10 +38,10 @@ function Footer() {
         {/*  */}
 
         <div>
-          <h3 className="mb-2 font-bold text-300 sm:text-400 sm:font-bold">
+          <h3 className="mb-2 font-medium text-300 sm:text-400 sm:font-bold">
             Contact
           </h3>
-          <div className="flex flex-col gap-2 font-light">
+          <div className="flex flex-col gap-2  text-200 text-[#797979]">
             <p>
               123 Main Street,
               <br />
@@ -58,7 +58,7 @@ function Footer() {
         <div className="space-y-8">
           {/* social icons */}
           <div>
-            <h3 className="mb-2 font-bold text-300 sm:text-400 sm:font-bold">
+            <h3 className="mb-2 font-medium text-300 sm:text-400 sm:font-bold">
               Social Media
             </h3>
             <div className="flex gap-2">

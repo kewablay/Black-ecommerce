@@ -6,6 +6,7 @@ import {
   makeOrder,
   sendOrderOTP,
   updateOrderStatus,
+  viewOrderOTP,
 } from "services/orders.services";
 
 export const useGetOrders = () => {
@@ -48,9 +49,19 @@ export const usegetOrderDetail = (orderId) => {
 };
 
 export const useSendOrderOTP = () => {
+  const queryClient = useQueryClient();
   return useMutation(sendOrderOTP, {
     onSuccess: (data) => {
       console.log("OTP sent successfully: ", data);
+      queryClient.invalidateQueries("orderOTPs");
+    },
+  });
+};
+
+export const useViewOrderOTP = (orderId) => {
+  return useQuery(["orderOTPs", orderId], () => viewOrderOTP(orderId), {
+    onSuccess: (data) => {
+      console.log("get order otp successful: ", data);
     },
   });
 };

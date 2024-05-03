@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RouterConfig from "router/RouterConfig";
 import { Toaster } from "react-hot-toast";
 import "react-loading-skeleton/dist/skeleton.css";
-import 'react-lazy-load-image-component/src/effects/opacity.css';
+import "react-lazy-load-image-component/src/effects/opacity.css";
 import { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {

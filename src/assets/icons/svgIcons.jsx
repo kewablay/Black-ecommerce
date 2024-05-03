@@ -817,3 +817,22 @@ export function ApprovedIcon() {
     </svg>
   );
 }
+export function SendIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="18"
+      viewBox="0 0 27 25"
+      fill="none"
+    >
+      <path
+        d="M2.69486 12.5001L1.78886 4.57116C1.52936 2.30199 3.93236 0.635116 6.05486 1.61366L23.9709 9.86491C26.2584 10.9178 26.2584 14.0824 23.9709 15.1353L6.05486 23.388C3.93236 24.3651 1.52936 22.6997 1.78886 20.4305L2.69486 12.5001ZM2.69486 12.5001H13.1949"
+        stroke="#ABABAB"
+        strokeWidth="1.66667"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

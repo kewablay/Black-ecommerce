@@ -28,7 +28,7 @@ function AdminLogin({ setAdminLogin }) {
   console.log("signin data: ", AdminSignInMutation.data);
 
   return (
-    <form onSubmit={handleSubmit} className="lg:w-[40%] ">
+    <form onSubmit={handleSubmit} className="lg:w-[40%] xl:w-[30%]">
       {/* heading */}
       <h2 className="text-center text-800">Admin Login</h2>
 

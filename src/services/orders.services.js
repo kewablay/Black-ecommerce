@@ -38,6 +38,16 @@ export const sendOrderOTP = async (OTPData) => {
     throw error;
   }
 };
+export const viewOrderOTP = async (orderId) => {
+  try {
+    const response = await API.get(`/admin/orders/${orderId}/orderotps`);
+    return response.data.orderOTPs;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
 export const getOrderDetail = async (orderId) => {
   try {
