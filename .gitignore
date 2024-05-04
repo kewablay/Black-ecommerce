@@ -22,3 +22,30 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Additional patterns for React project built with Vite and Tanstack Query
+
+# Dependency directories
+node_modules/
+.pnpm/
+yarn-error.log
+
+# Build files
+dist/
+build/
+.eslintcache
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependency lock files
+yarn.lock
+package-lock.json
+.pnpm-lock.yaml
+
+# Cache directories
+.cache/
