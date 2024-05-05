@@ -4,7 +4,7 @@ import { useGetConversationByUserId, useGetUserDetails } from "hooks/useChat";
 import { useGetAdminProfile } from "hooks/useProfile";
 import React, { useState } from "react";
 import { getSuperAdmin } from "utils/getSuperAdmin";
-import AdminChatArea from "./components/adminChatArea";
+import AdminChatArea from "./components/AdminChatArea";
 import EmptyChat from "./components/EmptyConversation";
 import StartConversation from "./components/StartConversation";
 import EmptyConversation from "./components/EmptyConversation";
