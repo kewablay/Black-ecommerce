@@ -4,7 +4,7 @@ import { AddIcon } from "assets/icons/svgIcons";
 import useCustomModal from "hooks/useCustomModal";
 import AddProductModal from "components/modals/AddProductModal";
 import DashboardLayout from "components/layout/DashboardLayout";
-import ListItem from "./components/listItem";
+import ListItem from "./components/ListItem";
 import { useGetAllProducts } from "hooks/useProducts";
 import EmptyList from "components/shared/EmptyList";
 import Loader from "components/shared/Loader";
