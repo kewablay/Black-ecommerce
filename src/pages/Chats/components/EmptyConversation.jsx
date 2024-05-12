@@ -1,5 +1,5 @@
 import React from "react";
-import emptyConvo from "assets/images/no-messages.png";
+import emptyConvo from "/public/images/no-messages.png";
 
 function EmptyConversation() {
   return (
