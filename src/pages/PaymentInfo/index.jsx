@@ -56,8 +56,8 @@ function PaymentInfo() {
   };
 
   return (
-    <div>A
-      {ModalComponent()}
+    <div>
+      A{ModalComponent()}
       <MainLayout>
         <div className="mt-10 section-contained">
           <h2 className="mb-10 text-center text-700">

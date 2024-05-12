@@ -1,8 +1,8 @@
 import MainLayout from "components/layout/MainLayout";
 import React from "react";
 import PaymentOptionCard from "./components/PaymentOptionCard";
-import creditCardImg from "assets/images/credit-card-image.jpeg";
-import cryptoImg from "assets/images/crypto-image.jpeg";
+import creditCardImg from "/public/images/credit-card-image.jpeg";
+import cryptoImg from "/public/images/crypto-image.jpeg";
 import * as path from "router/Constants";
 import { useParams } from "react-router-dom";
 import { useCardPaymentStore } from "state/cardPaymentStore";
