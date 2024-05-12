@@ -20,19 +20,19 @@ function CustomerReviews() {
     {
       message:
         "The flexible payment options made buying my iPhone a breeze. The 0% financing for 6 months. Love it!",
-      image: "/src/assets/images/Esther-Howard.png",
+      image: "public/images/Esther-Howard.png",
       name: "Esther Howard",
     },
     {
       message:
         "The 3-month financing option on my Galaxy S21 Ultra was fantastic. Easy checkout and swift delivery. ",
-      image: "/src/assets/images/Jacob-Jones.png",
+      image: "public/images/Jacob-Jones.png",
       name: "Jacob Jones",
     },
     {
       message:
         "Absolutely thrilled with my AirPods purchase! The 1-year financing plan made it so convenient for me. Love it!",
-      image: "/src/assets/images/Ralph-Edward.png",
+      image: "public/images/Ralph-Edward.png",
       name: "Ralph Edwards",
     },
   ];

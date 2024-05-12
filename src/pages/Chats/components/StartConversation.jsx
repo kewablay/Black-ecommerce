@@ -1,5 +1,5 @@
 import React from "react";
-import startConvo from "assets/images/start-conversation.png";
+import startConvo from "/public/images/start-conversation.png";
 
 function StartConversation() {
   return (

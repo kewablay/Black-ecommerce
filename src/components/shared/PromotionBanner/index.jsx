@@ -1,5 +1,5 @@
 import React from "react";
-import hero from 'assets/images/flexible-payment-hero.png';
+import hero from '/public/images/flexible-payment-hero.png';
 import BgSoftText from "../BgSoftText";
 import { BgPath } from "assets/icons/svgIcons";
 
