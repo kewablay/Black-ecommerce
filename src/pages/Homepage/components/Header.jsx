@@ -14,19 +14,19 @@ import Slide from "components/shared/Slide";
 function Header() {
   const slides = [
     {
-      image: "/public/images/iphone-hero.png",
+      image: "/images/iphone-hero.png",
       title: "IPhone Collections ",
       bg: "bg-secondary",
       category: "Mobile Phones",
     },
     {
-      image: "/public/images/samsung-hero.png",
+      image: "/images/samsung-hero.png",
       title: "Samsung Collections",
       bg: "bg-tertiary",
       category: "Mobile Phones",
     },
     {
-      image: "/public/images/airpods-hero.png",
+      image: "/images/airpods-hero.png",
       title: "Airpod Collections",
       category: "Phone Accessories",
       bg: "bg-secondaryLight",
