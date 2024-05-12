@@ -6,17 +6,17 @@ function Categories() {
     {
       title: "IPhone Collection",
       bg: "#E6BBB7",
-      image: "public/images/iphones-collection.png",
+      image: "/images/iphones-collection.png",
     },
     {
       title: "Samsung Phones",
       bg: "#B9E6B7",
-      image: "public/images/samsung-phones.png",
+      image: "/images/samsung-phones.png",
     },
     {
       title: "Airpod Collection",
       bg: "#C1B7E6",
-      image: "public/images/airpods-collection.png",
+      image: "/images/airpods-collection.png",
     },
   ];
   return (
