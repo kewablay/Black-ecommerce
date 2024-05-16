@@ -12,6 +12,7 @@ export const getUserProfile = async () => {
 export const getAdminProfile = async () => {
   try {
     const response = await API.get("/admin/profile");
+    localStorage.setItem("ADMIN_PROFILE", JSON.stringify(response.data));
     return response.data;
   } catch (error) {
     throw error;

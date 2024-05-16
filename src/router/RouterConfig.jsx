@@ -18,6 +18,7 @@ import {
   SelectPayment,
   Shop,
   SignUp,
+  Users,
 } from "../pages";
 import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
@@ -49,6 +50,7 @@ export const RouterConfig = () => {
         <Route path={path.MANAGE_PACKAGES} Component={ManagePackages} />
         <Route path={path.CRYPTO_WALLETS} Component={CryptoWallets} />
         <Route path={path.CHATS} Component={Chats} />
+        <Route path={path.USERS} Component={Users} />
       </Route>
 
       {/* PUBLIC ROUTES */}

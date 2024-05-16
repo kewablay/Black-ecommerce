@@ -21,6 +21,16 @@ export const getWallets = async () => {
   }
 };
 
+export const customerGetWallets = async () => {
+  console.log("Getting Wallets.... ");
+  try {
+    const response = await API.get("/customer/wallets");
+    return response.data.wallets;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const deleteWallet = async (walletId) => {
   console.log("Recieved Id: ", walletId);
   try {
