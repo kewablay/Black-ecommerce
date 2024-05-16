@@ -15,3 +15,4 @@ export { default as ManageCategories } from "./ManageCategories";
 export { default as ManagePackages } from "./ManagePackages";
 export { default as CryptoWallets } from "./CryptoWallets";
 export { default as ChoosePaymentOption } from "./ChoosePaymentOption";
+export { default as Users } from "./Users";

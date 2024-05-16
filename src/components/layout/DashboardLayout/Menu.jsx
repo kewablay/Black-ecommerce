@@ -12,8 +12,8 @@ function Menu({ link, icon, text }) {
     <Link
       to={`${link}`}
       className={`${
-        isActive ? "menu-active hover:brightness-110" : "hover:bg-bgGray"
-      } flex p-3 px-5 rounded-md `}
+        isActive ? " menu-active hover:brightness-110" : "hover:bg-bgGray"
+      } flex p-3 px-5 rounded-md truncate`}
     >
       <span className="w-5 mr-3 flex-center">{icon}</span>
       {text}

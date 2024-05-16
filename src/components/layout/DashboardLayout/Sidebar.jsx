@@ -7,6 +7,7 @@ import {
   ManageOrdersIcon,
   ManageProductIcon,
   PackagesIcon,
+  UsersIcon,
 } from "assets/icons/svgIcons";
 import Menu from "./Menu";
 import { Link, useNavigate } from "react-router-dom";
@@ -56,6 +57,7 @@ function Sidebar() {
           text={"Crypto Wallets"}
         />
         <Menu icon={<Chat />} link={"/admin/chats"} text={"Chats"} />
+        <Menu icon={<UsersIcon />} link={"/admin/users"} text={"Users"} />
 
         {/* LOGOUT */}
         <button

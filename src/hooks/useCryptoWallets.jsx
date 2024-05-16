@@ -1,6 +1,7 @@
 import { useMutation, useQueries, useQuery, useQueryClient } from "react-query";
 import {
   createWallet,
+  customerGetWallets,
   deleteWallet,
   getWallets,
   updateWallet,
@@ -24,6 +25,14 @@ export const useGetWallets = () => {
     },
   });
 };
+export const useCustomerGetWallets = () => {
+  return useQuery("wallets", customerGetWallets, {
+    onSuccess: (data) => {
+      //   console.log("Wallets fetched successful: ", data);
+    },
+  });
+};
+
 
 export const useDeletWallet = () => {
   const queryClient = useQueryClient();

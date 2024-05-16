@@ -14,3 +14,4 @@ export const MANAGE_CATEGORIES = "/admin/manage-categories";
 export const MANAGE_PACKAGES = "/admin/manage-packages";
 export const CRYPTO_WALLETS = "/admin/crypto-wallets";
 export const CHATS = "/admin/chats";
+export const USERS = "/admin/users";

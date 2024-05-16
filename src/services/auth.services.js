@@ -21,7 +21,7 @@ export const signInUser = async (credentials) => {
     return response.data;
   } catch (error) {
     // console.log("ERror: ", error.response.data.error);
-    throw error; 
+    throw error;
   }
 };
 export const signInAdmin = async (credentials) => {
