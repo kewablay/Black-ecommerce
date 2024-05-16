@@ -1,7 +1,7 @@
 import DashboardLayout from "components/layout/DashboardLayout";
 import React from "react";
 import { getCurrentUser } from "utils/getCurrentUser";
-import SingleUser from "./components/singleUser";
+import SingleUser from "./components/SingleUser";
 import { useGetAllUsers } from "hooks/useUsers";
 import Loader from "components/shared/Loader";
 
