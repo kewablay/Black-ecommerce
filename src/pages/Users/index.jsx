@@ -2,20 +2,23 @@ import DashboardLayout from "components/layout/DashboardLayout";
 import React from "react";
 import { getCurrentUser } from "utils/getCurrentUser";
 import SingleUser from "./components/singleUser";
+import { useGetAllUsers } from "hooks/useUsers";
+import Loader from "components/shared/Loader";
 
 function Users() {
   const currentUser = getCurrentUser();
   console.log("current user: ", currentUser);
 
-  const users = [
-    { username: "Raymond Jackson", email: "raymondj132@gmail.com", _id: 31 },
-    { username: "Jude Bellingham", email: "judej132@gmail.com", _id: 54 },
-    { username: "Kingsley Lamptey", email: "kingsleyj132@gmail.com", _id: 52 },
-    { username: "Auxy Jay", email: "auxyj132@gmail.com", _id: 16 },
-  ];
+  // const users = [
+  //   { username: "Raymond Jackson", email: "raymondj132@gmail.com", _id: 31 },
+  //   { username: "Jude Bellingham", email: "judej132@gmail.com", _id: 54 },
+  //   { username: "Kingsley Lamptey", email: "kingsleyj132@gmail.com", _id: 52 },
+  //   { username: "Auxy Jay", email: "auxyj132@gmail.com", _id: 16 },
+  // ];
 
-  const isUsersEmpty = false;
-  const isLoading = false;
+  const { data: users, isLoading } = useGetAllUsers();
+
+  const isUsersEmpty = users?.length === 0;
   return (
     <DashboardLayout>
       {/* heading  */}

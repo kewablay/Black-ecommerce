@@ -1,9 +1,18 @@
 import { DeleteIcon } from "assets/icons/svgIcons";
+import { useDeleteUser } from "hooks/useUsers";
 import React from "react";
+import toast from "react-hot-toast";
 
 function SingleUser({ username, email, userId }) {
+  const { data, mutateAsync: deletUserMutation } = useDeleteUser();
+
   const handleUserDelete = () => {
     console.log("Deleting user: ", userId);
+    toast.promise(deletUserMutation(userId), {
+      loading: "Deleting user...",
+      success: "User deleted successfully.",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
   };
 
   return (

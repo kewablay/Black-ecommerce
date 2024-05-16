@@ -1,14 +1,19 @@
 import { ApprovedIcon } from "assets/icons/svgIcons";
 import Loader from "components/shared/Loader";
 import { usegetOrderDetail } from "hooks/useOrders";
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 function CryptoOrderStatus({ orderId }) {
-  
+  const transactionIdRef = useRef();
   const { data: orderDetail } = usegetOrderDetail(orderId);
 
   const isOrderApproved = orderDetail?.status === "Approved";
+
+  const handleTransactionIdSubmit = (e) => {
+    e.preventDefault();
+    console.log("handling transactionId submit...");
+  };
   return (
     <>
       {isOrderApproved ? (
@@ -44,8 +49,23 @@ function CryptoOrderStatus({ orderId }) {
             <p className="font-bold text-400">Awaiting Transaction</p>
           </div>
           <p className="text-center text-100 text-textGray">
-            Kindly complete transaction and await approval.
+            Kindly enter the transaction id after the crypto transfer.
           </p>
+
+          <form onSubmit={handleTransactionIdSubmit}>
+            <input
+              type="text"
+              name="OTP"
+              ref={transactionIdRef}
+              placeholder="Enter Transaction ID"
+              className="p-2 w-[80%] mt-8 border rounded-md text-200 focus-within:outline-secondary"
+            />
+            <input
+              className="p-2 w-[20%] text-white rounded-tr-md rounded-br-md text-200 bg-primary"
+              type="submit"
+              value="Send"
+            />
+          </form>
         </>
       )}
     </>

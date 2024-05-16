@@ -9,6 +9,7 @@ import EmptyChat from "./components/EmptyConversation";
 import StartConversation from "./components/StartConversation";
 import EmptyConversation from "./components/EmptyConversation";
 import Conversation from "./components/Conversation";
+import Loader from "components/shared/Loader";
 
 function Chats() {
   // GET ADMIN PROFILE
@@ -18,7 +19,7 @@ function Chats() {
   const [userId, setUserId] = useState("");
 
   const adminId = getSuperAdmin()._id;
-  const { data: conversations, isLoading } =
+  const { data: conversations, isLoading:conversationsLoading } =
     useGetConversationByUserId(adminId);
 
   const isConversationsEmpty = conversations?.length === 0;
@@ -57,7 +58,7 @@ function Chats() {
           </div>
 
           <div className="h-[15rem] overflow-y-auto">
-            {conversations?.map((convo, index) => (
+            {conversationsLoading ? <div className="mt-[25%]"><Loader text={"loading..."}/></div> : conversations?.map((convo, index) => (
               <Conversation
                 key={index}
                 convo={convo}
