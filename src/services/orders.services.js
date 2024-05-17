@@ -67,3 +67,23 @@ export const getCustomerOrders = async () => {
     throw error;
   }
 }
+
+export const sendTransactionId = async (data) => {
+  try {
+    const response = await API.post(`/customer/crypto/transaction/`, data);
+    return response.data.transaction;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const viewTransactionId = async (orderId) => {
+  
+  try {
+    const response = await API.get(`/admin/crypto/transaction/order/${orderId}`);
+    return response.data.transactions;
+  } catch (error) {
+    throw error;
+  }
+};

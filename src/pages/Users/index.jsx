@@ -7,14 +7,7 @@ import Loader from "components/shared/Loader";
 
 function Users() {
   const currentUser = getCurrentUser();
-  console.log("current user: ", currentUser);
-
-  // const users = [
-  //   { username: "Raymond Jackson", email: "raymondj132@gmail.com", _id: 31 },
-  //   { username: "Jude Bellingham", email: "judej132@gmail.com", _id: 54 },
-  //   { username: "Kingsley Lamptey", email: "kingsleyj132@gmail.com", _id: 52 },
-  //   { username: "Auxy Jay", email: "auxyj132@gmail.com", _id: 16 },
-  // ];
+  // console.log("current user: ", currentUser);
 
   const { data: users, isLoading } = useGetAllUsers();
 

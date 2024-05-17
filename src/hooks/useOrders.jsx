@@ -5,8 +5,10 @@ import {
   getOrders,
   makeOrder,
   sendOrderOTP,
+  sendTransactionId,
   updateOrderStatus,
   viewOrderOTP,
+  viewTransactionId,
 } from "services/orders.services";
 
 export const useGetOrders = () => {
@@ -70,6 +72,28 @@ export const useGetCustomerOrders = () => {
   return useQuery("customerOrders", getCustomerOrders, {
     onSuccess: (data) => {
       console.log("get customer orders successful: ", data);
+    },
+  });
+};
+
+export const useViewTransactionId = (orderId) => {
+  return useQuery(
+    ["transactionIds", orderId],
+    () => viewTransactionId(orderId),
+    {
+      onSuccess: (data) => {
+        console.log("get transactionId successful: ", data);
+      },
+    }
+  );
+};
+
+export const useSendTransactionId = () => {
+  const queryClient = useQueryClient();
+  return useMutation(sendTransactionId, {
+    onSuccess: (data) => {
+      console.log("Transaction id sent successfully: ", data);
+      queryClient.invalidateQueries("transactionIds");
     },
   });
 };

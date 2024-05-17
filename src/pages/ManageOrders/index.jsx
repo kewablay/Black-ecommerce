@@ -4,6 +4,7 @@ import OrderItem from "./OrderItem";
 import { useGetOrders } from "hooks/useOrders";
 import Loader from "components/shared/Loader";
 import EmptyList from "components/shared/EmptyList";
+import CryptoOrderItem from "./CryptoOrderItem";
 
 function ManageOrders() {
   const { data: orders, isLoading } = useGetOrders();
@@ -42,9 +43,13 @@ function ManageOrders() {
               <Loader text={"Loading Orders..."} />
             </div>
           ) : (
-            orders?.map((order, index) => (
-              <OrderItem key={index} order={order} />
-            ))
+            orders?.map((order, index) =>
+              order?.isCrypto ? (
+                <CryptoOrderItem key={index} order={order} />
+              ) : (
+                <OrderItem key={index} order={order} />
+              )
+            )
           )}
         </div>
         {/* list end*/}

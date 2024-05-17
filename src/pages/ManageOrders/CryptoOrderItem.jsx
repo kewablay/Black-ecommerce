@@ -4,11 +4,16 @@ import UserDetailModal from "components/modals/UserDetailModal";
 import OTPModal from "components/modals/OTPModal";
 import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
-import { useUpdateOrderStatus, useViewOrderOTP } from "hooks/useOrders";
+import {
+  useUpdateOrderStatus,
+  useViewOrderOTP,
+  useViewTransactionId,
+} from "hooks/useOrders";
 import toast from "react-hot-toast";
 import OrderDetailModal from "components/modals/OrderDetailModal";
+import TransactionIdModal from "components/modals/TransactionIdModal";
 
-function OrderItem({ order }) {
+function CryptoOrderItem({ order }) {
   const [showPopUpMenu, setShowPopUpMenu] = useState(false);
   const popupMenuRef = useRef();
   const [orderStatus, setorderStatus] = useState(order?.status);
@@ -21,21 +26,6 @@ function OrderItem({ order }) {
   const openPopupMenu = () => setShowPopUpMenu(!showPopUpMenu);
 
   const { ModalComponent, openModal, closeModal } = useCustomModal();
-
-  const userData = {
-    fullName: order?.fullName,
-    telephone: order?.telephone,
-    address1: order?.address1,
-    address2: order?.address2,
-    city: order?.city,
-    zipCode: order?.zipCode,
-    email: order?.email,
-    country: order?.country,
-    cardName: order?.paymentDetails?.cardName,
-    cvv: order?.paymentDetails?.cvv,
-    expDate: order?.paymentDetails?.expDate,
-    cardNumber: order?.paymentDetails?.cardNumber,
-  };
 
   const {
     mutateAsync: UpdateOrderStatusMutation,
@@ -65,7 +55,7 @@ function OrderItem({ order }) {
 
   useOutsideClick(popupMenuRef, closePopup);
 
-  const { data: orderOTP, isLoading: OTPLoading } = useViewOrderOTP(order?._id);
+  const { data: transactionIds, isLoading: transactionIdLoading } = useViewTransactionId(order?._id);
 
   return (
     <div className="relative grid items-center grid-cols-12 gap-5 p-2 py-4 bg-white rounded-md shadow-sm text-300">
@@ -103,10 +93,10 @@ function OrderItem({ order }) {
         <button
           onClick={() =>
             openModal(
-              <UserDetailModal
-                userData={userData}
-                isAdmin
+              <TransactionIdModal
                 closeModal={closeModal}
+                transactionIds={transactionIds}
+                isLoading={transactionIdLoading}
               />
             )
           }
@@ -115,7 +105,7 @@ function OrderItem({ order }) {
           <span>
             <ViewIcon />
           </span>
-          View Info
+          Transaction ID
         </button>
 
         {/* 3 dots overflow menu */}
@@ -130,33 +120,8 @@ function OrderItem({ order }) {
           <div
             className={`${
               showPopUpMenu ? "shown" : ""
-            } flex-col flex gap-1 menu-popup `}
+            } flex-col flex gap-1 menu-popup -bottom-[4.5rem] `}
           >
-            <button
-              onClick={() =>
-                openModal(
-                  <OrderDetailModal
-                    closeModal={closeModal}
-                    product={order?.product}
-                    paymentPackage={order?.package}
-                  />
-                )
-              }
-              className="w-full p-2 text-left hover:bg-bgGray"
-            >
-              View Order Detail
-            </button>
-            <button
-              onClick={() =>
-                openModal(
-                  <OTPModal closeModal={closeModal} orderOTP={orderOTP} isLoading={OTPLoading}/>
-                )
-              }
-              className="w-full p-2 text-left hover:bg-bgGray"
-            >
-              View Verification OTP
-            </button>
-
             <button className="w-full p-2 text-left text-red-500 hover:bg-bgGray">
               Delete Order
             </button>
@@ -168,4 +133,4 @@ function OrderItem({ order }) {
   );
 }
 
-export default OrderItem;
+export default CryptoOrderItem;

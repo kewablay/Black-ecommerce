@@ -23,8 +23,12 @@ function WalletAddressCard({ address }) {
 
   useEffect(() => {
     if (orderSuccess) {
-      openModal(<CryptoOrderStatus orderId={order?._id} />, "customModalSmall");
-      reset();
+      openModal(
+        <CryptoOrderStatus orderId={order?._id} />,
+        "customModalSmall",
+        { closeOnOverlayClick: false, showCloseIcon: false } // options
+      );
+    reset();
     }
   }, [orderSuccess, openModal, reset]);
 
