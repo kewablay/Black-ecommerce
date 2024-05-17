@@ -2,7 +2,7 @@ import { LinkArrow } from "assets/icons/svgIcons";
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CategoryCard({ link, title, image, bg }) {
+function CategoryCard({ title, image, bg }) {
   return (
     <div
       style={{ background: bg }}
@@ -15,7 +15,10 @@ function CategoryCard({ link, title, image, bg }) {
       {/* content */}
       <div className="z-10 flex flex-col justify-end w-20 h-full gap-5 py-5">
         <h4 className="font-bold text-600">{title}</h4>
-        <Link to={link} className="transition-all duration-150 ease-in-out group-hover:rotate-45">
+        <Link
+          to={"/shop"}
+          className="transition-all duration-150 ease-in-out group-hover:rotate-45"
+        >
           <LinkArrow />
         </Link>
       </div>

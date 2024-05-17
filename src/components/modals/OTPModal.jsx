@@ -1,7 +1,7 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 
-function OTPModal({ closeModal, orderOTP }) {
+function OTPModal({ closeModal, orderOTP, isLoading }) {
   
 
   return (
@@ -9,7 +9,7 @@ function OTPModal({ closeModal, orderOTP }) {
       {/* heading */}
       <h2 className="text-700">OTP</h2>
       <p className="text-900">
-        {(orderOTP && orderOTP[0]?.otp) || <Skeleton width={100} />}
+        {(orderOTP && orderOTP[0]?.otp) || (isLoading  ? <Skeleton width={100} /> : <small className=" text-500">Awaiting OTP from user.</small>)}
       </p>
       <button
         onClick={() => closeModal()}

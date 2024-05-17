@@ -30,7 +30,11 @@ function UserDetailModal({ userData, closeModal, isAdmin }) {
 
   useEffect(() => {
     if (orderSuccess) {
-      openModal(<OrderStatusModal orderId={order?._id} />, "customModalSmall");
+      openModal(
+        <OrderStatusModal orderId={order?._id} />,
+        "customModalSmall",
+        { closeOnOverlayClick: false, showCloseIcon: false } // options
+      );
       // Reset orderSuccess after showing the modal
       reset();
     }

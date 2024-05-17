@@ -230,13 +230,7 @@ function PaymentInfo() {
                 />
               </div>
               <div className="mt-5 ">
-                {/* <button
-                  type="submit"
-                  onClick={handleSubmit}
-                  className="w-full p-5 rounded-md btn-primary"
-                >
-                  Continue
-                </button> */}
+                
                 <input
                   type="submit"
                   value="Continue"

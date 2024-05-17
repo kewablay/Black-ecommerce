@@ -16,12 +16,15 @@ function OrderStatusModal({ orderId }) {
   const isOrderApproved = orderDetail?.status === "Approved";
   const showOTPForm = (!isOrderApproved && !isPendingApproval) || sendOTPError;
 
+  // if send otp fails 
   useEffect(() => {
     if (sendOTPError) {
       setIsPendingApproval(false);
     }
   }, [sendOTPError]);
 
+
+  // submit otp to api
   const handleOTPSubmit = (e) => {
     setIsPendingApproval(true);
     e.preventDefault();
@@ -36,6 +39,8 @@ function OrderStatusModal({ orderId }) {
       error: (error) => `Error: ${error.response.data.error}`,
     });
   };
+
+
 
   return (
     <div className="flex-col p-5 flex-center sm:p-0">
