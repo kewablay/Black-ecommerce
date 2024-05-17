@@ -3,8 +3,6 @@ import React from "react";
 import { getApiImage } from "utils/getApiImage";
 
 function ShopProductsList({ products, isLoading }) {
-  // console.log("SHOP PRODUCTS LIST RENDERED ...................");
-
   return (
     <div className="container px-4 mx-auto mb-20">
       {/* products list */}
