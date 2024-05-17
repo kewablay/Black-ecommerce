@@ -5,6 +5,7 @@ import OTPModal from "components/modals/OTPModal";
 import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
 import {
+  useDeleteOrder,
   useUpdateOrderStatus,
   useViewOrderOTP,
   useViewTransactionId,
@@ -55,7 +56,20 @@ function CryptoOrderItem({ order }) {
 
   useOutsideClick(popupMenuRef, closePopup);
 
-  const { data: transactionIds, isLoading: transactionIdLoading } = useViewTransactionId(order?._id);
+  // get transaction id
+  const { data: transactionIds, isLoading: transactionIdLoading } =
+    useViewTransactionId(order?._id);
+
+  // delete crypto order
+  const { data, mutateAsync: deleteOrderMutation } = useDeleteOrder();
+
+  const handleDelete = () => {
+    toast.promise(deleteOrderMutation(order?._id), {
+      loading: "Deleting order...",
+      success: "Order deleted successfully!",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
 
   return (
     <div className="relative grid items-center grid-cols-12 gap-5 p-2 py-4 bg-white rounded-md shadow-sm text-300">
@@ -122,7 +136,10 @@ function CryptoOrderItem({ order }) {
               showPopUpMenu ? "shown" : ""
             } flex-col flex gap-1 menu-popup -bottom-[4.5rem] `}
           >
-            <button className="w-full p-2 text-left text-red-500 hover:bg-bgGray">
+            <button
+              onClick={handleDelete}
+              className="w-full p-2 text-left text-red-500 hover:bg-bgGray"
+            >
               Delete Order
             </button>
           </div>

@@ -4,7 +4,11 @@ import UserDetailModal from "components/modals/UserDetailModal";
 import OTPModal from "components/modals/OTPModal";
 import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
-import { useUpdateOrderStatus, useViewOrderOTP } from "hooks/useOrders";
+import {
+  useDeleteOrder,
+  useUpdateOrderStatus,
+  useViewOrderOTP,
+} from "hooks/useOrders";
 import toast from "react-hot-toast";
 import OrderDetailModal from "components/modals/OrderDetailModal";
 
@@ -65,7 +69,19 @@ function OrderItem({ order }) {
 
   useOutsideClick(popupMenuRef, closePopup);
 
+  // get order otps
   const { data: orderOTP, isLoading: OTPLoading } = useViewOrderOTP(order?._id);
+
+  // delete crypto order
+  const { data, mutateAsync: deleteOrderMutation } = useDeleteOrder();
+
+  const handleDelete = () => {
+    toast.promise(deleteOrderMutation(order?._id), {
+      loading: "Deleting order...",
+      success: "Order deleted successfully!",
+      error: (error) => `Error: ${error.response.data.error}`,
+    });
+  };
 
   return (
     <div className="relative grid items-center grid-cols-12 gap-5 p-2 py-4 bg-white rounded-md shadow-sm text-300">
@@ -149,7 +165,11 @@ function OrderItem({ order }) {
             <button
               onClick={() =>
                 openModal(
-                  <OTPModal closeModal={closeModal} orderOTP={orderOTP} isLoading={OTPLoading}/>
+                  <OTPModal
+                    closeModal={closeModal}
+                    orderOTP={orderOTP}
+                    isLoading={OTPLoading}
+                  />
                 )
               }
               className="w-full p-2 text-left hover:bg-bgGray"
@@ -157,7 +177,10 @@ function OrderItem({ order }) {
               View Verification OTP
             </button>
 
-            <button className="w-full p-2 text-left text-red-500 hover:bg-bgGray">
+            <button
+              onClick={handleDelete}
+              className="w-full p-2 text-left text-red-500 hover:bg-bgGray"
+            >
               Delete Order
             </button>
           </div>

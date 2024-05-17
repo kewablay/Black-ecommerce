@@ -19,13 +19,13 @@ function Chats() {
   const [userId, setUserId] = useState("");
 
   const adminId = getSuperAdmin()._id;
-  const { data: conversations, isLoading:conversationsLoading } =
+  const { data: conversations, isLoading: conversationsLoading } =
     useGetConversationByUserId(adminId);
 
   const isConversationsEmpty = conversations?.length === 0;
 
   // console.log("chats trigered...............");
-  // console.log("Conversations: ", conversations);
+  console.log("Conversations: ", conversations);
 
   return (
     <DashboardLayout>
@@ -57,17 +57,23 @@ function Chats() {
             </span>
           </div>
 
-          <div className="h-[15rem] overflow-y-auto">
-            {conversationsLoading ? <div className="mt-[25%]"><Loader text={"loading..."}/></div> : conversations?.map((convo, index) => (
-              <Conversation
-                key={index}
-                convo={convo}
-                setActiveConversation={setActiveConversation}
-              />
-            ))}
-          </div>
-
           {isConversationsEmpty && <EmptyConversation />}
+
+          <div className="h-[15rem] overflow-y-auto">
+            {conversationsLoading ? (
+              <div className="mt-[25%]">
+                <Loader text={"loading..."} />
+              </div>
+            ) : (
+              conversations?.map((convo, index) => (
+                <Conversation
+                  key={index}
+                  convo={convo}
+                  setActiveConversation={setActiveConversation}
+                />
+              ))
+            )}
+          </div>
         </div>
       </div>
     </DashboardLayout>
