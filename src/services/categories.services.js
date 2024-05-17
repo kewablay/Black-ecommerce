@@ -11,8 +11,8 @@ export const getCategories = async () => {
 };
 
 export const createCategory = async (category) => {
-  console.log("recieved category: ", category);
-  console.log("Creating category .......");
+  // console.log("recieved category: ", category);
+  // console.log("Creating category .......");
   try {
     const response = await API.post("/admin/category", category);
     return response;
@@ -22,8 +22,8 @@ export const createCategory = async (category) => {
 };
 
 export const deleteCategory = async (categoryId) => {
-  console.log("Recieved Id: ", categoryId);
-  console.log("Deleting Category..........");
+  // console.log("Recieved Id: ", categoryId);
+  // console.log("Deleting Category..........");
   try {
     const response = await API.delete(`admin/categories/${categoryId}`);
     return response;
@@ -33,8 +33,8 @@ export const deleteCategory = async (categoryId) => {
 };
 
 export const editCategory = async ({ categoryId, updatedCategory }) => {
-  console.log("recieved category  data: ", updatedCategory, categoryId);
-  console.log("Updating category......");
+  // console.log("recieved category  data: ", updatedCategory, categoryId);
+  // console.log("Updating category......");
   try {
     const response = await API.put(
       `admin/categories/${categoryId}`,
@@ -47,8 +47,8 @@ export const editCategory = async ({ categoryId, updatedCategory }) => {
 };
 
 export const getCategoryById = async (categoryId) => {
-  console.log("recieved categoryId : ", categoryId);
-  console.log("Getting category by Id");
+  // console.log("recieved categoryId : ", categoryId);
+  // console.log("Getting category by Id");
   try {
     const response = await API.get(`admin/categories/${categoryId}`);
     return response.data.category;

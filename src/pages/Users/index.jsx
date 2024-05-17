@@ -5,6 +5,7 @@ import SingleUser from "./components/SingleUser";
 import { useGetAllUsers } from "hooks/useUsers";
 import Loader from "components/shared/Loader";
 import EmptyList from "components/shared/EmptyList";
+import noUserIcon from "assets/icons/no-users.png";
 
 function Users() {
   const currentUser = getCurrentUser();
@@ -35,7 +36,7 @@ function Users() {
             <EmptyList
               title="No Users Found"
               description="Looks like you there are no users yet!"
-              icon="/src/assets/icons/no-users.png"
+              icon={noUserIcon}
             />
           </div>
         ) : (

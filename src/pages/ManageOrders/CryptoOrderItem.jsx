@@ -1,17 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MoreIcon, ViewIcon } from "assets/icons/svgIcons";
-import UserDetailModal from "components/modals/UserDetailModal";
-import OTPModal from "components/modals/OTPModal";
 import useCustomModal from "hooks/useCustomModal";
 import useOutsideClick from "hooks/useOutsideClick";
 import {
   useDeleteOrder,
   useUpdateOrderStatus,
-  useViewOrderOTP,
   useViewTransactionId,
 } from "hooks/useOrders";
 import toast from "react-hot-toast";
-import OrderDetailModal from "components/modals/OrderDetailModal";
 import TransactionIdModal from "components/modals/TransactionIdModal";
 
 function CryptoOrderItem({ order }) {
@@ -46,7 +42,6 @@ function CryptoOrderItem({ order }) {
       error: (error) => `Error: ${error.response.data.error}`,
     });
     if (OrderStatusUpdateSuccessful) {
-      console.log("Order status updated successfully .....");
       setorderStatus(e.target.value);
     }
   };

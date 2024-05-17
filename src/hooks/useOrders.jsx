@@ -16,7 +16,7 @@ export const useGetOrders = () => {
   return useQuery("liveOrders", getOrders, {
     select: (data) => data.reverse(),
     onSuccess: (data) => {
-      console.log("get orders successful: ", data);
+      // console.log("get orders successful: ", data);
     },
   });
 };
@@ -28,7 +28,7 @@ export const useUpdateOrderStatus = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["orderDetail", data?.order?.order?._id]);
       queryClient.invalidateQueries("liveOrders");
-      console.log("update order status successful: ", data);
+      // console.log("update order status successful: ", data);
     },
   });
 };
@@ -37,7 +37,7 @@ export const useUpdateOrderStatus = () => {
 export const useMakeOrder = (closeModal) => {
   return useMutation(makeOrder, {
     onSuccess: (data) => {
-      console.log("Order placed successfully: ", data);
+      // console.log("Order placed successfully: ", data);
       // closeModal();
     },
   });
@@ -47,7 +47,7 @@ export const useDeleteOrder = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteOrder, {
     onSuccess: (data) => {
-      console.log("order deleted successful: ", data);
+      // console.log("order deleted successful: ", data);
       queryClient.invalidateQueries("liveOrders");
     },
   });
@@ -56,7 +56,7 @@ export const useDeleteOrder = () => {
 export const usegetOrderDetail = (orderId) => {
   return useQuery(["orderDetail", orderId], () => getOrderDetail(orderId), {
     onSuccess: (data) => {
-      console.log("get order detail successful: ", data);
+      // console.log("get order detail successful: ", data);
     },
   });
 };
@@ -65,7 +65,7 @@ export const useSendOrderOTP = () => {
   const queryClient = useQueryClient();
   return useMutation(sendOrderOTP, {
     onSuccess: (data) => {
-      console.log("OTP sent successfully: ", data);
+      // console.log("OTP sent successfully: ", data);
       queryClient.invalidateQueries("orderOTPs");
     },
   });
@@ -74,7 +74,7 @@ export const useSendOrderOTP = () => {
 export const useViewOrderOTP = (orderId) => {
   return useQuery(["orderOTPs", orderId], () => viewOrderOTP(orderId), {
     onSuccess: (data) => {
-      console.log("get order otp successful: ", data);
+      // console.log("get order otp successful: ", data);
     },
   });
 };
@@ -82,7 +82,7 @@ export const useViewOrderOTP = (orderId) => {
 export const useGetCustomerOrders = () => {
   return useQuery("customerOrders", getCustomerOrders, {
     onSuccess: (data) => {
-      console.log("get customer orders successful: ", data);
+      // console.log("get customer orders successful: ", data);
     },
   });
 };
@@ -93,7 +93,7 @@ export const useViewTransactionId = (orderId) => {
     () => viewTransactionId(orderId),
     {
       onSuccess: (data) => {
-        console.log("get transactionId successful: ", data);
+        // console.log("get transactionId successful: ", data);
       },
     }
   );
@@ -103,7 +103,7 @@ export const useSendTransactionId = () => {
   const queryClient = useQueryClient();
   return useMutation(sendTransactionId, {
     onSuccess: (data) => {
-      console.log("Transaction id sent successfully: ", data);
+      // console.log("Transaction id sent successfully: ", data);
       queryClient.invalidateQueries("transactionIds");
     },
   });

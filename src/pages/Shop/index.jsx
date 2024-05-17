@@ -23,12 +23,10 @@ function Shop() {
     }
   }, [shopCategories]);
 
-  // console.log("Category products: ", categoryProducts);
-
   const handleCategoryClick = (categoryName, categoryId) => {
     setActiveCategory(categoryName); // to handle active state for the category navs
     setActiveCategoryId(categoryId); // to fetch products for the selected category
-    console.log("Selected CAtegory: ", activeCategory);
+    // console.log("Selected CAtegory: ", activeCategory);
   };
   return (
     <div>
