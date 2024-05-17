@@ -83,7 +83,7 @@ function AdminChatArea({ activeConversation, adminId }) {
       {/* CHATS AREA */}
       <div className="p-3 text-200 h-[50vh] flex flex-col justify-end">
         {messagesLoading ? (
-          <div className="pb-[38%]">
+          <div className="pb-[38%] xl:pb-[20%]">
             <Loader text={"Loading Messages..."} />
           </div>
         ) : (

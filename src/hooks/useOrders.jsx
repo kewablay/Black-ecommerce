@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
+  deleteOrder,
   getCustomerOrders,
   getOrderDetail,
   getOrders,
@@ -38,6 +39,16 @@ export const useMakeOrder = (closeModal) => {
     onSuccess: (data) => {
       console.log("Order placed successfully: ", data);
       // closeModal();
+    },
+  });
+};
+
+export const useDeleteOrder = () => {
+  const queryClient = useQueryClient();
+  return useMutation(deleteOrder, {
+    onSuccess: (data) => {
+      console.log("order deleted successful: ", data);
+      queryClient.invalidateQueries("liveOrders");
     },
   });
 };
