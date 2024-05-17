@@ -30,7 +30,7 @@ export const useCreateCategory = (closeModal) => {
 
   return useMutation(createCategory, {
     onSuccess: () => {
-      console.log("Category Created Successfully...");
+      // console.log("Category Created Successfully...");
       queryClient.invalidateQueries("categories");
       closeModal();
     },

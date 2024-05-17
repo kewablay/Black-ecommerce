@@ -2,7 +2,6 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 
 function CategoryPill({ CategoryName, active, onClick }) {
-  console.log("current active state: ", active);
   return (
     <button
       onClick={onClick}

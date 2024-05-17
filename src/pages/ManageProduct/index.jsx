@@ -13,7 +13,7 @@ function ManageProducts() {
   const { openModal, closeModal, ModalComponent } = useCustomModal();
 
   const { data: products, isLoading } = useGetAllProducts();
-  console.log("products: ", products);
+  // console.log("products: ", products);
 
   const isProductsEmpty = !isLoading && products?.length === 0;
 

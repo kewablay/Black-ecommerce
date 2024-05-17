@@ -21,7 +21,7 @@ export const useSendMessage = () => {
   const queryClient = useQueryClient();
   return useMutation(sendMessage, {
     onSuccess: (data) => {
-      console.log("Send Message: ", data);
+      // console.log("Send Message: ", data);
       queryClient.invalidateQueries("messages");
     },
   });

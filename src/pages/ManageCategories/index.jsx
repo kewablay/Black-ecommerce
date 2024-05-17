@@ -15,7 +15,7 @@ function ManageCategories() {
 
   const { data: categories, isLoading } = useGetCategories();
 
-  console.log("categories : ", categories);
+  // console.log("categories : ", categories);
   const isCategoriesEmpty = !isLoading && categories?.length === 0;
 
   return (

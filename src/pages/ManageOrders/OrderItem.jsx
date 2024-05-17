@@ -59,7 +59,6 @@ function OrderItem({ order }) {
       error: (error) => `Error: ${error.response.data.error}`,
     });
     if (OrderStatusUpdateSuccessful) {
-      console.log("Order status updated successfully .....");
       setorderStatus(e.target.value);
     }
   };

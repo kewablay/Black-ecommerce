@@ -30,7 +30,7 @@ export const useEditProduct = (closeModal) => {
   return useMutation(editProduct, {
     onSuccess: (data) => {
       queryClient.invalidateQueries("allProducts");
-      console.log("updatedProduct: ", data);
+      // console.log("updatedProduct: ", data);
       closeModal();
     },
   });
@@ -57,7 +57,7 @@ export const useGetCustomerProductById = (productId) => {
     () => customerGetProductById(productId),
     {
       onSuccess: (data) => {
-        console.log("customerSingleProduct: ", data);
+        // console.log("customerSingleProduct: ", data);
       },
     }
   );
@@ -69,7 +69,7 @@ export const useCustomerGetCategoryProducts = (categoryId) => {
     () => customerGetCategoryProducts(categoryId),
     {
       onSuccess: (data) => {
-        console.log("customerCategoryProducts: ", data);
+        // console.log("customerCategoryProducts: ", data);
       },
     }
   );

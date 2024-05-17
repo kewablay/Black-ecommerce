@@ -9,7 +9,7 @@ export const useGetPackages = (enabled) => {
   return useQuery("packages", getPackages, {
     enabled,
     onSuccess: (data) => {
-      console.log("Packages : ", data);
+      // console.log("Packages : ", data);
     },
   });
 };
