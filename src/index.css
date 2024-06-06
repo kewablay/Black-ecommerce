@@ -128,15 +128,15 @@
   }
 
   .incoming-message {
-    @apply w-fit max-w-[60%]  p-2 px-3 mr-auto bg-gray-200 rounded-md;
+    @apply w-fit max-w-[60%]  p-2 pb-1 px-3 mr-auto bg-gray-200 rounded-md;
   }
   .outgoing-message {
-    @apply w-fit max-w-[60%] p-2 px-3 ml-auto bg-blue-200 rounded-md;
+    @apply w-fit max-w-[60%] p-2 pb-1 px-3 ml-auto bg-blue-200 rounded-md;
   }
   .admin-incoming-message {
-    @apply p-4 w-fit mr-auto bg-gray-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
+    @apply p-4 pb-1 w-fit mr-auto bg-gray-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
   }
   .admin-outgoing-message {
-    @apply p-4 w-fit ml-auto bg-blue-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
+    @apply p-4 pb-1 w-fit ml-auto bg-blue-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
   }
 }

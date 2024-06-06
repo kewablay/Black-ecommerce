@@ -18,7 +18,7 @@ function Chats() {
   // console.log("AdminProfile : ", adminProfile);
   const [activeConversation, setActiveConversation] = useState(null);
   const [userId, setUserId] = useState("");
- 
+  const [newMessageSenderId, setNewMessageSenderId] = useState("");
 
   const adminId = getSuperAdmin()._id;
   const { data: conversations, isLoading: conversationsLoading } =
@@ -51,9 +51,10 @@ function Chats() {
             <AdminChatArea
               activeConversation={activeConversation}
               adminId={adminId}
+              setNewMessageSenderId={setNewMessageSenderId}
             />
           ) : (
-            <StartConversation />
+            <StartConversation setNewMessageSenderId={setNewMessageSenderId} />
           )}
         </div>
 
@@ -80,6 +81,8 @@ function Chats() {
                   convo={convo}
                   activeConversation={activeConversation}
                   setActiveConversation={setActiveConversation}
+                  newMessageSenderId={newMessageSenderId}
+                  setNewMessageSenderId={setNewMessageSenderId}
                 />
               ))
             )}

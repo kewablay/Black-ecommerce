@@ -34,7 +34,7 @@ export const useGetMessages = (conversationId) => {
     () => getMessages(conversationId),
     {
       onSuccess: (data) => {
-        // console.log("get messages : ", data);
+        console.log("get messages : ", data);
       },
     }
   );

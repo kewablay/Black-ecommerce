@@ -11,8 +11,9 @@ import { getSuperAdmin } from "utils/getSuperAdmin";
 import ScrollToBottom from "react-scroll-to-bottom";
 import socket from "services/socket.services";
 import { useQueryClient } from "react-query";
+import { getMessageTimeStamp } from "utils/formatTme";
 
-function AdminChatArea({ activeConversation, adminId }) {
+function AdminChatArea({ activeConversation, adminId, setNewMessageSenderId }) {
   const inputRef = useRef();
   const conversationId = activeConversation?._id;
   const queryClient = useQueryClient();
@@ -42,6 +43,8 @@ function AdminChatArea({ activeConversation, adminId }) {
     socket.on("getMessage", (data) => {
       console.log("Received message: ", data);
       refetchMessages();
+      // update sender id state to be used to show new message tag
+      setNewMessageSenderId(data.senderId);
     });
 
     // Clean up socket listener on unmount
@@ -110,16 +113,20 @@ function AdminChatArea({ activeConversation, adminId }) {
         ) : (
           <ScrollToBottom className="flex flex-col w-full h-full gap-2 pr-1 mt-auto messages">
             {messages?.map((message, index) => (
-              <p
+              <div
                 key={index}
                 className={`${
                   message.sender === adminId
                     ? "admin-outgoing-message"
                     : "admin-incoming-message"
-                } mb-2 mr-1`}
+                } mb-2 mr-1 `}
               >
-                {message.text}
-              </p>
+                <p>{message.text}</p>
+
+                <small className="text-[8px] w-full flex justify-end text-gray-800">
+                  {getMessageTimeStamp(message.createdAt)}
+                </small>
+              </div>
             ))}
             {sendMessageLoading && (
               <p className="admin-outgoing-message">

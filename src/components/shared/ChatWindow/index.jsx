@@ -11,12 +11,11 @@ import Loader from "../Loader";
 import ScrollToBottom from "react-scroll-to-bottom";
 import socket from "services/socket.services";
 import { useQueryClient } from "react-query";
-import { useChatStore } from "state/chatStore";
+import { getMessageTimeStamp } from "utils/formatTme";
 
 function ChatWindow({ conversationId, userId }) {
   const inputRef = useRef();
   const queryClient = useQueryClient();
-  const setNewMessage = useChatStore((state) => state.setNewMessage);
 
   // SEND MESSAGE
   const { mutateAsync: sendMessageMutation } = useSendMessage();
@@ -39,7 +38,7 @@ function ChatWindow({ conversationId, userId }) {
     };
     console.log("sending message data: ", messageData);
     sendMessageMutation(messageData, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         console.log(
           "sending message from: ",
           userId,
@@ -60,8 +59,6 @@ function ChatWindow({ conversationId, userId }) {
     socket.on("getMessage", (data) => {
       console.log("Received message: ", data);
       refetchMessages();
-      // store the new message in state
-      setNewMessage(data);
     });
 
     // Clean up socket listener on unmount
@@ -93,7 +90,7 @@ function ChatWindow({ conversationId, userId }) {
           </div>
         ) : (
           messages?.map((message, index) => (
-            <p
+            <div
               key={index}
               className={`${
                 message.sender === userId
@@ -101,8 +98,12 @@ function ChatWindow({ conversationId, userId }) {
                   : "incoming-message"
               } mb-1.5 mr-1`}
             >
-              {message.text}
-            </p>
+              <p>{message.text}</p>
+
+              <small className="text-[8px] w-full flex justify-end text-gray-800">
+                {getMessageTimeStamp(message.createdAt)}
+              </small>
+            </div>
           ))
         )}
       </ScrollToBottom>
