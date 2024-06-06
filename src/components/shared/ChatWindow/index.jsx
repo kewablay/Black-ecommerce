@@ -1,4 +1,4 @@
-import { SendIcon } from "assets/icons/svgIcons";
+import { CheckIcon, SendIcon } from "assets/icons/svgIcons";
 import {
   useCreateConversation,
   useGetMessages,
@@ -10,15 +10,17 @@ import { getSuperAdmin } from "utils/getSuperAdmin";
 import Loader from "../Loader";
 import ScrollToBottom from "react-scroll-to-bottom";
 import socket from "services/socket.services";
-import { useQueryClient } from "react-query";
+
 import { getMessageTimeStamp } from "utils/formatTme";
+import MessageLoader from "../messageLoader";
 
 function ChatWindow({ conversationId, userId }) {
   const inputRef = useRef();
-  const queryClient = useQueryClient();
+  const [localMessages, setLocalMessages] = useState([]);
 
   // SEND MESSAGE
-  const { mutateAsync: sendMessageMutation } = useSendMessage();
+  const { mutateAsync: sendMessageMutation, onSuccess: sendMessageSuccess } =
+    useSendMessage();
 
   // GET MESSAGES
   const {
@@ -27,10 +29,31 @@ function ChatWindow({ conversationId, userId }) {
     refetch: refetchMessages,
   } = useGetMessages(conversationId);
 
+  // SET THE LOCAL MESSAGES TO THE MESSAGES WE FETCH
+  useEffect(() => {
+    if (messages) {
+      setLocalMessages(messages);
+    }
+  }, [messages]);
+
   // On send button click send message to the admin
   const sendMessage = (e) => {
     e.preventDefault();
 
+    // add message to localMessages state
+    const tempId = Date.now().toString(); // Temporary ID for the local message
+
+    const newMessage = {
+      _id: tempId,
+      conversationId: conversationId,
+      sender: userId,
+      text: inputRef.current.value,
+      createdAt: new Date().toISOString(),
+      isSending: true, // Mark the message as being sent
+    };
+    setLocalMessages((prevMessages) => [...prevMessages, newMessage]);
+
+    // send message to the API
     const messageData = {
       conversationId: conversationId,
       sender: userId,
@@ -45,11 +68,24 @@ function ChatWindow({ conversationId, userId }) {
           "to : ",
           getSuperAdmin()?._id
         );
+        // find the new message and change the isSending status
+        setLocalMessages((prevMessages) =>
+          prevMessages.map((msg) =>
+            msg._id === tempId
+              ? { ...msg, isSending: false, _id: data._id }
+              : msg
+          )
+        );
         socket.emit("sendMessage", {
           senderId: userId,
           receiverId: getSuperAdmin()?._id,
           text: messageData.text,
         });
+      },
+      onError: () => {
+        setLocalMessages((prevMessages) =>
+          prevMessages.filter((msg) => msg._id !== tempId)
+        );
       },
     });
     inputRef.current.value = "";
@@ -89,7 +125,7 @@ function ChatWindow({ conversationId, userId }) {
             <Loader text={"Loading Messages..."} />
           </div>
         ) : (
-          messages?.map((message, index) => (
+          localMessages?.map((message, index) => (
             <div
               key={index}
               className={`${
@@ -100,8 +136,17 @@ function ChatWindow({ conversationId, userId }) {
             >
               <p>{message.text}</p>
 
-              <small className="text-[8px] w-full flex justify-end text-gray-800">
+              <small className="text-[9.5px] w-full flex justify-end items-center text-gray-800">
                 {getMessageTimeStamp(message.createdAt)}
+                {message.isSending ? (
+                  <span className="ml-1.5 flex items-center">
+                    <MessageLoader />
+                  </span>
+                ) : (
+                  <span className="ml-1">
+                    <CheckIcon />
+                  </span>
+                )}
               </small>
             </div>
           ))
