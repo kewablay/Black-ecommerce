@@ -9,12 +9,15 @@ import {
 } from "hooks/useChat";
 import { getSuperAdmin } from "utils/getSuperAdmin";
 import { useGetUserProfile } from "hooks/useProfile";
+import socket from "services/socket.services";
+import { useQueryClient } from "react-query";
 
 function ChatButton() {
   const [showChatWindow, setshowChatWindow] = useState(false);
   const [conversationId, setConversationId] = useState("");
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef();
+  const queryClient = useQueryClient();
 
   // GET CURRENT USER PROFILE
   const { data: userProfile, isFetchedAfterMount } = useGetUserProfile();
@@ -26,82 +29,36 @@ function ChatButton() {
   const { mutateAsync: createConversationMutation } =
     useCreateConversation(setConversationId);
 
-  // // GET CONVERSATION BY USER ID
-  // const { data: conversationById, isError: conversationByIdError } =
-  //   useGetConversationByUserId(userId);
-
-  // // SEND MESSAGE
-  // const { mutateAsync: sendMessageMutation } = useSendMessage();
-
-  // const testConvoId = "662ba2df4452c45c8c6fd74d";
-
-  // const enabled = false;
-  // // GET MESSAGES
-  // const {
-  //   data: messages,
-  //   isLoading: messagesLoading,
-  //   refetch: refetchMessages,
-  // } = useGetMessages({
-  //   conversationId,
-  //   enabled,
-  // });
-
-  // //   console.log("Messages in chat window: ", messages);
-
-  // const sendMessage = (e) => {
-  //   e.preventDefault();
-
-  //   const messageData = {
-  //     conversationId: conversationId,
-  //     sender: userId,
-  //     text: inputRef.current.value,
-  //   };
-  //   console.log("sending message data: ", messageData);
-  //   sendMessageMutation(messageData);
-  //   inputRef.current.value = "";
-  // };
-
-  // // console.log("From server convo by user id : ", conversationById)
-
-  // // START A CONVERSATION
-  // // const startConversation = () => {
-  // //   if (conversationById) {
-  // //     if (conversationById?.length === 0) {
-  // //       createConversationMutation({
-  // //         senderId: userId,
-  // //         receiverId: adminId,
-  // //       });
-  // //     } else {
-  // //       setConversationId(conversationById[0]?._id);
-  // //       // console.log("first conversation id: ", conversationById?._id);
-  // //     }
-  // //   }
-  // // };
-  // console.log("is there convo id : ", conversationId);
-
-  // // GET MESSAGES ONLY WHEN THERE IS A CONVERSATION
   // useEffect(() => {
-  //   if (conversationId) {
-  //     refetchMessages();
-  //   }
-  // }, [conversationId]);
-
-  // // useEffect(() => {
-  // //   if (userId && isFetchedAfterMount) {
-  // //     startConversation();
-  // //   }
-  // // }, [userId, isFetchedAfterMount]);
+  //   createConversationMutation({
+  //     senderId: userId,
+  //     receiverId: adminId,
+  //   });
+  // }, [showChatWindow]);
 
   useEffect(() => {
-    createConversationMutation({
-      senderId: userId,
-      receiverId: adminId,
-    });
-  }, [showChatWindow]);
+    if (showChatWindow && userId) {
+      createConversationMutation({
+        senderId: userId,
+        receiverId: adminId,
+      });
+
+      console.log("About to run socket....");
+
+      socket.emit("addUser", userId, () => {
+        queryClient.invalidateQueries(["conversationById", adminId]);
+      });
+      socket.on("getUsers", (users) => {
+        console.log("users from socket: ", users);
+      });
+    }
+  }, [showChatWindow, userId]);
 
   return (
     <>
-      {showChatWindow && <ChatWindow conversationId={conversationId} userId={userId}/>}
+      {showChatWindow && (
+        <ChatWindow conversationId={conversationId} userId={userId} />
+      )}
 
       <div className="absolute z-50 right-5 bottom-5 md:right-10 md:bottom-10">
         <button

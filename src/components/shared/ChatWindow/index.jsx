@@ -1,4 +1,4 @@
-import { SendIcon } from "assets/icons/svgIcons";
+import { CheckIcon, SendIcon } from "assets/icons/svgIcons";
 import {
   useCreateConversation,
   useGetMessages,
@@ -9,38 +9,99 @@ import React, { useEffect, useRef, useState } from "react";
 import { getSuperAdmin } from "utils/getSuperAdmin";
 import Loader from "../Loader";
 import ScrollToBottom from "react-scroll-to-bottom";
+import socket from "services/socket.services";
+
+import { getMessageTimeStamp } from "utils/formatTme";
+import MessageLoader from "../MessageLoader";
 
 function ChatWindow({ conversationId, userId }) {
   const inputRef = useRef();
+  const [localMessages, setLocalMessages] = useState([]);
 
   // SEND MESSAGE
-  const { mutateAsync: sendMessageMutation } = useSendMessage();
+  const { mutateAsync: sendMessageMutation, onSuccess: sendMessageSuccess } =
+    useSendMessage();
 
-  const enabled = true;
   // GET MESSAGES
   const {
     data: messages,
     isLoading: messagesLoading,
     refetch: refetchMessages,
-  } = useGetMessages({
-    conversationId,
-    enabled,
-  });
+  } = useGetMessages(conversationId);
 
+  // SET THE LOCAL MESSAGES TO THE MESSAGES WE FETCH
+  useEffect(() => {
+    if (messages) {
+      setLocalMessages(messages);
+    }
+  }, [messages]);
 
-
+  // On send button click send message to the admin
   const sendMessage = (e) => {
     e.preventDefault();
 
+    // add message to localMessages state
+    const tempId = Date.now().toString(); // Temporary ID for the local message
+
+    const newMessage = {
+      _id: tempId,
+      conversationId: conversationId,
+      sender: userId,
+      text: inputRef.current.value,
+      createdAt: new Date().toISOString(),
+      isSending: true, // Mark the message as being sent
+    };
+    setLocalMessages((prevMessages) => [...prevMessages, newMessage]);
+
+    // send message to the API
     const messageData = {
       conversationId: conversationId,
       sender: userId,
       text: inputRef.current.value,
     };
     console.log("sending message data: ", messageData);
-    sendMessageMutation(messageData);
+    sendMessageMutation(messageData, {
+      onSuccess: (data) => {
+        console.log(
+          "sending message from: ",
+          userId,
+          "to : ",
+          getSuperAdmin()?._id
+        );
+        // find the new message and change the isSending status
+        setLocalMessages((prevMessages) =>
+          prevMessages.map((msg) =>
+            msg._id === tempId
+              ? { ...msg, isSending: false, _id: data._id }
+              : msg
+          )
+        );
+        socket.emit("sendMessage", {
+          senderId: userId,
+          receiverId: getSuperAdmin()?._id,
+          text: messageData.text,
+        });
+      },
+      onError: () => {
+        setLocalMessages((prevMessages) =>
+          prevMessages.filter((msg) => msg._id !== tempId)
+        );
+      },
+    });
     inputRef.current.value = "";
   };
+
+  useEffect(() => {
+    socket.on("getMessage", (data) => {
+      console.log("Received message: ", data);
+      refetchMessages();
+    });
+
+    // Clean up socket listener on unmount
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [conversationId, refetchMessages]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -64,8 +125,8 @@ function ChatWindow({ conversationId, userId }) {
             <Loader text={"Loading Messages..."} />
           </div>
         ) : (
-          messages?.map((message, index) => (
-            <p
+          localMessages?.map((message, index) => (
+            <div
               key={index}
               className={`${
                 message.sender === userId
@@ -73,8 +134,21 @@ function ChatWindow({ conversationId, userId }) {
                   : "incoming-message"
               } mb-1.5 mr-1`}
             >
-              {message.text}
-            </p>
+              <p>{message.text}</p>
+
+              <small className="text-[9.5px] w-full flex justify-end items-center text-gray-800">
+                {getMessageTimeStamp(message.createdAt)}
+                {message.isSending ? (
+                  <span className="ml-1.5 flex items-center">
+                    <MessageLoader />
+                  </span>
+                ) : (
+                  <span className="ml-1">
+                    <CheckIcon />
+                  </span>
+                )}
+              </small>
+            </div>
           ))
         )}
       </ScrollToBottom>

@@ -877,3 +877,23 @@ export function UsersIcon() {
     </svg>
   );
 }
+
+export function CheckIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2.5 8.06219L4.46437 10.3122L8.75 5.3125M12.1875 4.6875L7.1425 10.3516L6.875 9.99969"
+        stroke="#828282"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

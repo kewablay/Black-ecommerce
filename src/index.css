@@ -124,19 +124,19 @@
     @apply rounded-xl sm:h-auto sm:bg-white sm:shadow-lg sm:rounded-xl sm:p-10 sm:px-16 sm:pt-10  sm:w-[60%] md:w-[50%] lg:w-[30%] xl:w-[25%];
   }
   .menu-active {
-    @apply font-bold border bg-hilitePrimary ;
+    @apply font-bold border bg-hilitePrimary;
   }
-  
+
   .incoming-message {
-    @apply w-2/3 p-2 mr-auto bg-gray-200 rounded-md;
+    @apply w-fit max-w-[60%]  p-2 pb-1 px-3 mr-auto bg-gray-200 rounded-md;
   }
   .outgoing-message {
-    @apply w-2/3 p-2 ml-auto bg-blue-200 rounded-md;
+    @apply w-fit max-w-[60%] p-2 pb-1 px-3 ml-auto bg-blue-200 rounded-md;
   }
   .admin-incoming-message {
-    @apply p-6 mr-auto bg-gray-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
+    @apply p-4 pb-1 w-fit mr-auto bg-gray-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
   }
   .admin-outgoing-message {
-    @apply p-6 ml-auto bg-blue-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
+    @apply p-4 pb-1 w-fit ml-auto bg-blue-200 rounded-md lg:max-w-[60%] xl:max-w-[45%];
   }
 }
