@@ -12,7 +12,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import socket from "services/socket.services";
 
 import { getMessageTimeStamp } from "utils/formatTme";
-import MessageLoader from "../messageLoader";
+import MessageLoader from "../MessageLoader";
 
 function ChatWindow({ conversationId, userId }) {
   const inputRef = useRef();

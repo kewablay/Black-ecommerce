@@ -11,7 +11,7 @@ import { getSuperAdmin } from "utils/getSuperAdmin";
 import ScrollToBottom from "react-scroll-to-bottom";
 import socket from "services/socket.services";
 import { getMessageTimeStamp } from "utils/formatTme";
-import MessageLoader from "components/shared/messageLoader";
+import MessageLoader from "components/shared/MessageLoader";
 
 function AdminChatArea({ activeConversation, adminId, setNewMessageSenderId }) {
   const inputRef = useRef();
