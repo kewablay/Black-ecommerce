@@ -23,7 +23,6 @@ function Homepage() {
       <PromotionBanner />
       <HotDeals products={hotDeals} isLoading={isLoading} />
       <CustomerReviews />
-      <ChatButton />
     </MainLayout>
   );
 }

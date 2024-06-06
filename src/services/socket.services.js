@@ -1,5 +1,9 @@
-import io from 'socket.io-client';
+import io from "socket.io-client";
 
-const socket = io('http://localhost:8900'); 
+const socketURL = import.meta.env.VITE_SOCKET_URL;
+
+console.log("Socket url: ", socketURL)
+
+const socket = io.connect(socketURL);
 
 export default socket;

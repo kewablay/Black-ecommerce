@@ -4,21 +4,23 @@ import {
   useCustomerGetCategoryProducts,
   useGetCustomerProductById,
 } from "hooks/useProducts";
-import React from "react";
+import React, { useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Skeleton from "react-loading-skeleton";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { getApiImage } from "utils/getApiImage";
 import ProductDetailSkeleton from "./components/ProductDetailSkeleton";
+import ScrollToTop from "components/shared/ScrollToTop";
 
 function ProductDetail() {
   const { id } = useParams();
-
+  
+  // GET SINGLE PRODUCT
   const { data: product, isLoading: productLoading } =
     useGetCustomerProductById(id);
 
   const categoryId = product?.categories[0]._id;
 
+  // GET RELATED PRODUCTS
   const { data: relatedProducts, isLoading: relatedProductsLoading } =
     useCustomerGetCategoryProducts(categoryId);
 
@@ -26,6 +28,7 @@ function ProductDetail() {
 
   return (
     <MainLayout>
+      <ScrollToTop />
       {productLoading ? (
         <ProductDetailSkeleton />
       ) : (
@@ -71,15 +74,6 @@ function ProductDetail() {
 
         {/* Product List */}
         <div className="grid grid-cols-2 gap-4 gap-y-8 lg:grid-cols-3 xl:grid-cols-4">
-          {/* {relatedProducts?.map((product, index) => (
-            <ProductCard
-              key={index}
-              title={product.name}
-              image={getApiImage(product?.images[0])}
-              price={product.price}
-              id={product._id}
-            />
-          ))} */}
           {relatedProductsLoading
             ? [...Array(4)].map((_, index) => <ProductCard key={index} />)
             : relatedProducts?.map((product, index) => (

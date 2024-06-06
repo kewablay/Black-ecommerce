@@ -5,30 +5,28 @@ import {
   useGetUserDetails,
   useSendMessage,
 } from "hooks/useChat";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Skeleton from "react-loading-skeleton";
 import { getSuperAdmin } from "utils/getSuperAdmin";
 import ScrollToBottom from "react-scroll-to-bottom";
+import socket from "services/socket.services";
+import { useQueryClient } from "react-query";
 
 function AdminChatArea({ activeConversation, adminId }) {
   const inputRef = useRef();
-  // console.log("Active conversation: ", activeConversation);
   const conversationId = activeConversation?._id;
+  const queryClient = useQueryClient();
 
   // SEND MESSAGE
   const { mutateAsync: sendMessageMutation, isLoading: sendMessageLoading } =
     useSendMessage();
 
-  const enabled = true;
   // GET MESSAGES
   const {
     data: messages,
     isLoading: messagesLoading,
     refetch: refetchMessages,
-  } = useGetMessages({
-    conversationId,
-    enabled,
-  });
+  } = useGetMessages(conversationId);
 
   const getUserId = () => {
     const admin = getSuperAdmin()._id;
@@ -36,8 +34,21 @@ function AdminChatArea({ activeConversation, adminId }) {
     return memberId;
   };
 
-  // //   GET USER DETAILS
+  // GET USER DETAILS
   const { data: userDetail } = useGetUserDetails(getUserId());
+
+  useEffect(() => {
+    // Add socket listener for receiving messages
+    socket.on("getMessage", (data) => {
+      console.log("Received message: ", data);
+      refetchMessages();
+    });
+
+    // Clean up socket listener on unmount
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [conversationId, refetchMessages]);
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -48,7 +59,16 @@ function AdminChatArea({ activeConversation, adminId }) {
       text: inputRef.current.value,
     };
     console.log("sending message data: ", messageData);
-    sendMessageMutation(messageData);
+    sendMessageMutation(messageData, {
+      onSuccess: () => {
+        console.log("sending message from: ", adminId, "to : ", getUserId());
+        socket.emit("sendMessage", {
+          senderId: adminId,
+          receiverId: getUserId(),
+          text: messageData.text,
+        });
+      },
+    });
     inputRef.current.value = "";
   };
 
@@ -59,18 +79,19 @@ function AdminChatArea({ activeConversation, adminId }) {
     }
   };
 
-  // console.log("Fetched messages:", messages);
   return (
     <>
       {/* header  */}
       <div className="p-3 border-b border-gray-200">
         <div className="flex items-center gap-2">
           <span className="w-10 h-10 overflow-hidden bg-gray-300 rounded-full">
-            <img
-              src={`https://ui-avatars.com/api/?name=${userDetail?.username}?&background=random&?bold=true`}
-              alt=""
-              className="object-cover w-full h-full"
-            />
+            {userDetail && (
+              <img
+                src={`https://ui-avatars.com/api/?name=${userDetail?.username}?&background=random&?bold=true`}
+                alt=""
+                className="object-cover w-full h-full"
+              />
+            )}
           </span>
           <h3 className="font-bold capitalize">
             {userDetail?.username || <Skeleton width={100} />}

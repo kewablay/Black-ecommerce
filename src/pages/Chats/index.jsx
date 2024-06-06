@@ -2,7 +2,7 @@ import { SendIcon } from "assets/icons/svgIcons";
 import DashboardLayout from "components/layout/DashboardLayout";
 import { useGetConversationByUserId, useGetUserDetails } from "hooks/useChat";
 import { useGetAdminProfile } from "hooks/useProfile";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getSuperAdmin } from "utils/getSuperAdmin";
 import AdminChatArea from "./components/AdminChatArea";
 import EmptyChat from "./components/EmptyConversation";
@@ -10,6 +10,7 @@ import StartConversation from "./components/StartConversation";
 import EmptyConversation from "./components/EmptyConversation";
 import Conversation from "./components/Conversation";
 import Loader from "components/shared/Loader";
+import socket from "services/socket.services";
 
 function Chats() {
   // GET ADMIN PROFILE
@@ -17,6 +18,7 @@ function Chats() {
   // console.log("AdminProfile : ", adminProfile);
   const [activeConversation, setActiveConversation] = useState(null);
   const [userId, setUserId] = useState("");
+ 
 
   const adminId = getSuperAdmin()._id;
   const { data: conversations, isLoading: conversationsLoading } =
@@ -26,6 +28,13 @@ function Chats() {
 
   // console.log("chats trigered...............");
   console.log("Conversations: ", conversations);
+
+  useEffect(() => {
+    socket.emit("addUser", adminId);
+    socket.on("getUsers", (users) => {
+      console.log("users from socket: ", users);
+    });
+  }, []);
 
   return (
     <DashboardLayout>
@@ -69,6 +78,7 @@ function Chats() {
                 <Conversation
                   key={index}
                   convo={convo}
+                  activeConversation={activeConversation}
                   setActiveConversation={setActiveConversation}
                 />
               ))

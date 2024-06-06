@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ChatButton from "components/shared/ChatButton";
 
 function MainLayout({ children }) {
   // console.log("MAIN LAYOUT RENDERED ...............");
@@ -8,6 +9,7 @@ function MainLayout({ children }) {
     <>
       <Navbar />
       {children}
+      <ChatButton />
       <Footer />
     </>
   );

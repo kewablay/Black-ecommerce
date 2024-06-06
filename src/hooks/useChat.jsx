@@ -20,19 +20,19 @@ export const useCreateConversation = (setConversationId) => {
 export const useSendMessage = () => {
   const queryClient = useQueryClient();
   return useMutation(sendMessage, {
-    onSuccess: (data) => {
-      // console.log("Send Message: ", data);
-      queryClient.invalidateQueries("messages");
+    onSuccess: (data, variables) => {
+      // Assuming variables contains the conversationId
+      const { conversationId } = variables;
+      queryClient.invalidateQueries(["messages", conversationId]);
     },
   });
 };
 
-export const useGetMessages = ({ conversationId, enabled }) => {
+export const useGetMessages = (conversationId) => {
   return useQuery(
     ["messages", conversationId],
     () => getMessages(conversationId),
     {
-      enabled,
       onSuccess: (data) => {
         // console.log("get messages : ", data);
       },

@@ -25,7 +25,7 @@ function LoginForm({ setAdminLogin }) {
     });
   };
 
-  // console.log("signin data: ", SignInMutation.data);
+  console.log("signin data: ", SignInMutation.data);
 
   return (
     <form onSubmit={handleSubmit} className="lg:w-[40%] xl:w-[30%]">

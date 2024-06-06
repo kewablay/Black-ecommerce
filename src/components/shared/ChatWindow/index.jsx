@@ -9,26 +9,26 @@ import React, { useEffect, useRef, useState } from "react";
 import { getSuperAdmin } from "utils/getSuperAdmin";
 import Loader from "../Loader";
 import ScrollToBottom from "react-scroll-to-bottom";
+import socket from "services/socket.services";
+import { useQueryClient } from "react-query";
+import { useChatStore } from "state/chatStore";
 
 function ChatWindow({ conversationId, userId }) {
   const inputRef = useRef();
+  const queryClient = useQueryClient();
+  const setNewMessage = useChatStore((state) => state.setNewMessage);
 
   // SEND MESSAGE
   const { mutateAsync: sendMessageMutation } = useSendMessage();
 
-  const enabled = true;
   // GET MESSAGES
   const {
     data: messages,
     isLoading: messagesLoading,
     refetch: refetchMessages,
-  } = useGetMessages({
-    conversationId,
-    enabled,
-  });
+  } = useGetMessages(conversationId);
 
-
-
+  // On send button click send message to the admin
   const sendMessage = (e) => {
     e.preventDefault();
 
@@ -38,9 +38,37 @@ function ChatWindow({ conversationId, userId }) {
       text: inputRef.current.value,
     };
     console.log("sending message data: ", messageData);
-    sendMessageMutation(messageData);
+    sendMessageMutation(messageData, {
+      onSuccess: () => {
+        console.log(
+          "sending message from: ",
+          userId,
+          "to : ",
+          getSuperAdmin()?._id
+        );
+        socket.emit("sendMessage", {
+          senderId: userId,
+          receiverId: getSuperAdmin()?._id,
+          text: messageData.text,
+        });
+      },
+    });
     inputRef.current.value = "";
   };
+
+  useEffect(() => {
+    socket.on("getMessage", (data) => {
+      console.log("Received message: ", data);
+      refetchMessages();
+      // store the new message in state
+      setNewMessage(data);
+    });
+
+    // Clean up socket listener on unmount
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [conversationId, refetchMessages]);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
