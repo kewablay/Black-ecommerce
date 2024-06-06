@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import PlanInfo from "./PlanInfo";
 import { useCardPaymentStore } from "state/cardPaymentStore";
-import { getPriceWithInterest } from "utils/getApiImage";
+import {  getPriceWithInterest } from "utils/getApiImage";
 
 function PaymentCard({ id, plan, price, desc, duration, frequency, interest }) {
   
-  
+  const priceWithInterest = getPriceWithInterest(price, interest, duration)
   return (
     <div className="p-10 space-y-10 bg-white border rounded-lg shadow-lg hover:border-primary transition-100">
       {/* plan and description  */}
@@ -17,12 +17,12 @@ function PaymentCard({ id, plan, price, desc, duration, frequency, interest }) {
       </div>
 
       {/* price */}
-      <h2 className="text-center text-700">${getPriceWithInterest(price, interest)}</h2>
+      <h2 className="text-center text-700">${priceWithInterest.totalPriceWithInterest}</h2>
 
       {/* other info  */}
       <div className="space-y-2">
         <PlanInfo title={"Duration"} content={duration} />
-        <PlanInfo title={"Payment Frequency"} content={frequency} />
+        <PlanInfo title={"Payment Frequency"} content={ `$${priceWithInterest.pricePerMonth + " " + frequency}`} />
         <PlanInfo title={"No interest"} />
       </div>
 

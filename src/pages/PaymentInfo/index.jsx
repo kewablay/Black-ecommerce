@@ -171,7 +171,6 @@ function PaymentInfo() {
                     name="fav_language"
                     value="Master card"
                     className="mr-2 opacity-0 peer"
-                    required
                   />
                   <div className="p-5 px-10 border rounded-lg peer-checked:border-primary flex-center">
                     <MasterCardIcon />
@@ -230,7 +229,6 @@ function PaymentInfo() {
                 />
               </div>
               <div className="mt-5 ">
-                
                 <input
                   type="submit"
                   value="Continue"
