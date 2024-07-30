@@ -4,21 +4,22 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { getApiImage, getPriceWithInterest } from "utils/getApiImage";
 
 function OrderDetailModal({ product, paymentPackage }) {
+  console.log("payment package: ", paymentPackage);
   return (
     <div className="lg:max-h-[60vh] overflow-y-auto pr-2 mt-8 font-plusJakartaSans">
       {/* heading  */}
-      <h2 className="text-center text-700 mb-4">Order Detail</h2>
+      <h2 className="mb-4 text-center text-700">Order Detail</h2>
 
       {/* PRODUCT */}
-      <div className="reciept mb-4">
-        <h4 className="mb-3 flex items-center gap-2 font-bold">
+      <div className="mb-4 reciept">
+        <h4 className="flex items-center gap-2 mb-3 font-bold">
           <span>
             <TickIcon />
           </span>
           Product
         </h4>
 
-        <div className="flex gap-6 items-center">
+        <div className="flex items-center gap-6">
           {/* product image  */}
           <div className="h-[6em] product w-[6em] rounded-md bg-bgGray overflow-hidden">
             <LazyLoadImage
@@ -39,14 +40,14 @@ function OrderDetailModal({ product, paymentPackage }) {
 
       {/* PACKAGE */}
       <div className="reciept ">
-        <h4 className="mb-3 flex items-center gap-2 font-bold">
+        <h4 className="flex items-center gap-2 mb-3 font-bold">
           <span>
             <TickIcon />
           </span>
           Package
         </h4>
 
-        <div className="flex gap-6 items-center">
+        <div className="flex items-center gap-6">
           {/* package image  */}
           <div className="h-[6em] product w-[6em] rounded-md bg-bgGray overflow-hidden">
             <LazyLoadImage
@@ -60,8 +61,15 @@ function OrderDetailModal({ product, paymentPackage }) {
           {/* product content  */}
           <div>
             <p className="font-semibold">{paymentPackage?.name}</p>
+            {/* <p className="font-semibold">{product?.price}</p>
+            <p className="font-semibold">{paymentPackage?.interest}</p> */}
+            {/* <p className="font-semibold">{paymentPackage?.duration}</p> */}
             <p className=" text-textGray">
-              {getPriceWithInterest(product?.price, paymentPackage?.interest)}
+               {getPriceWithInterest(
+                product?.price,
+                paymentPackage?.interest,
+                paymentPackage?.duration
+              ).pricePerMonth}$ per month
             </p>
           </div>
         </div>
