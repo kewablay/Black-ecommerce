@@ -14,7 +14,9 @@ function Footer() {
         <div className="space-y-8 ">
           <div className="justify-center space-y-2 ">
             {/* LOgo */}
-            <p>Logo</p>
+            <div>
+              <img src="/src/assets/logo.png" alt="" />
+            </div>
             <p className=" text-200 text-[#797979]">
               © Company
               <br /> All Rights Reserved.
@@ -43,14 +45,14 @@ function Footer() {
           </h3>
           <div className="flex flex-col gap-2  text-200 text-[#797979]">
             <p>
-              123 Main Street,
+              Best Buy Co., Inc.
               <br />
-              Suite 101 Cityville,
+              7601 Penn Ave S.,
               <br />
-              State, Zip
+              Richfield, MN 55423
             </p>
             <Link> info@company.com</Link>
-            <p>Phone: +1 (555) 123-4567</p>
+            <p>Phone: 1(803) 347-1758</p>
           </div>
         </div>
 
@@ -62,16 +64,16 @@ function Footer() {
               Social Media
             </h3>
             <div className="flex gap-2">
-              <Link to={"#"}>
+              <Link to={"https://www.facebook.com/bestbuy"}>
                 <FacebookIcon />
               </Link>
-              <Link to={"#"}>
+              <Link to={"https://www.linkedin.com/company/best-buy"}>
                 <LinkedInIcon />
               </Link>
-              <Link to={"#"}>
+              <Link to={"https://x.com/BestBuy"}>
                 <TwitterIcon />
               </Link>
-              <Link to={"#"}>
+              <Link to={"https://www.instagram.com/bestbuy/"}>
                 <InstagramIcon />
               </Link>
             </div>
