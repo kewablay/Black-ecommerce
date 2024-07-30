@@ -15,7 +15,7 @@ function Footer() {
           <div className="justify-center space-y-2 ">
             {/* LOgo */}
             <div>
-              <img src="/src/assets/logo.png" alt="" />
+              <img src="/images/logo.png" alt="logo" />
             </div>
             <p className=" text-200 text-[#797979]">
               © Company

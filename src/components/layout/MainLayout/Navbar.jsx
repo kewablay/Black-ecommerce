@@ -19,7 +19,7 @@ function Navbar() {
       <div className="container p-5 mx-auto wrapper flex-between">
         <div>
           <Link to={"/"} className="font-bold">
-          <img src="/src/assets/logo.png" className="h-9" alt="" />
+            <img src="/images/logo.png" className="h-9" alt="logo" />
           </Link>
         </div>
         {/* menu Backdrop */}
