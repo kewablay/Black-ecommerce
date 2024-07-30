@@ -61,15 +61,15 @@ function OrderDetailModal({ product, paymentPackage }) {
           {/* product content  */}
           <div>
             <p className="font-semibold">{paymentPackage?.name}</p>
-            {/* <p className="font-semibold">{product?.price}</p>
-            <p className="font-semibold">{paymentPackage?.interest}</p> */}
-            {/* <p className="font-semibold">{paymentPackage?.duration}</p> */}
             <p className=" text-textGray">
-               {getPriceWithInterest(
-                product?.price,
-                paymentPackage?.interest,
-                paymentPackage?.duration
-              ).pricePerMonth}$ per month
+              {
+                getPriceWithInterest(
+                  product?.price,
+                  paymentPackage?.interest,
+                  paymentPackage?.duration
+                ).pricePerMonth
+              }
+              $ per month
             </p>
           </div>
         </div>

@@ -62,7 +62,7 @@ function AddPackageModal({ closeModal }) {
           type="text"
           name="duration"
           id="duration"
-          placeholder="Duration Eg. 3 months, 6 months"
+          placeholder="Duration Eg. 3 months, 6 months, 12 months"
           className="input-style"
           ref={durationRef}
         />
