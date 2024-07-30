@@ -22,6 +22,7 @@ import {
 } from "../pages";
 import ProtectedRoutes from "./ProtectedRoutes";
 import AdminRoutes from "./AdminRoutes";
+import AdminLogin from "pages/AdminLogin/AdminLogin";
 
 export const RouterConfig = () => {
   return (
@@ -56,6 +57,7 @@ export const RouterConfig = () => {
       {/* PUBLIC ROUTES */}
       <Route path={path.SIGNUP} Component={SignUp} />
       <Route path={path.LOGIN} Component={Login} />
+      <Route path={path.ADMIN_LOGIN} Component={AdminLogin} />
     </Routes>
   );
 };

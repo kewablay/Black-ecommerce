@@ -1,5 +1,6 @@
 export const HOMEPAGE = "/";
 export const LOGIN = "/login";
+export const ADMIN_LOGIN = "/login/admin";
 export const SIGNUP = "/signup";
 export const SHOP = "/shop";
 export const ORDERS = "/orders";

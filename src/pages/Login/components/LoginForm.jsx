@@ -64,7 +64,6 @@ function LoginForm({ setAdminLogin }) {
               Sign up
             </Link>
           </p>
-          
         </div>
       </div>
     </form>
