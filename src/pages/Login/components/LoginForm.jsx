@@ -64,15 +64,7 @@ function LoginForm({ setAdminLogin }) {
               Sign up
             </Link>
           </p>
-          <p className="text-center text-textGray">
-            Login as an
-            <button
-              onClick={() => setAdminLogin(true)}
-              className="ml-2 text-orange-600 underline"
-            >
-              Admin
-            </button>
-          </p>
+          
         </div>
       </div>
     </form>
