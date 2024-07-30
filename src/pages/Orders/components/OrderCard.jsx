@@ -31,7 +31,7 @@ function OrderCard({ image, title, price, date, status }) {
         <p className="text-textGray text-100 sm:text-200 md:text-300">
           Price:{" "}
           <span className="font-bold text-tertiary">
-            {price && "GHC"} {price || <Skeleton width={60} />}
+            {price && "$"} {price || <Skeleton width={60} />}
           </span>
         </p>
         <p className="text-textGray text-100 sm:text-200 md:text-300">
