@@ -61,13 +61,13 @@
   padding-block: 1.8rem !important;
   padding-inline: 4rem !important;
   width: 100%   !important;
-  border-color: #f7f8ff
+  border-color: #dfe1e6
  
 }
 
 .react-tel-input .flag-dropdown {
   padding-inline: .5rem;
-  border-color: #f7f8ff;
+  border-color: #dfe1e6;
   border-right: 1px solid rgb(232, 232, 232)
 }
 
