@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSignUpUser } from "hooks/useAuth";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -9,7 +9,7 @@ function SignUpForm() {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const phoneRef = useRef();
+  const [phone, setPhone] = useState("");
 
   // sign up user
   const SignUpMutation = useSignUpUser();
@@ -20,7 +20,7 @@ function SignUpForm() {
       username: usernameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
-      phone: phoneRef.current.state.value, // Get the phone number value
+      phone, // Get the phone number value from state
     };
 
     SignUpMutation.mutate(userData);
@@ -63,20 +63,20 @@ function SignUpForm() {
         <PhoneInput
           country={"us"}
           placeholder="Phone Number"
+          value={phone}
+          onChange={(value) => setPhone(value)}
           inputProps={{
             name: "phone",
             required: true,
-            ref: phoneRef,
           }}
           containerClass="w-full"
           inputClass="input-style w-full"
-          
         />
 
         <input
           type="submit"
           value="Sign Up"
-          className="py-5 rounded-md btn-primary "
+          className="py-5 rounded-md btn-primary"
         />
 
         <p className="text-center text-textGray">
