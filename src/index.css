@@ -52,6 +52,25 @@
   @apply w-[90%] sm:w-[70%] h-full object-contain mx-auto;
 }
 
+/* react internation phone input style  */
+.react-tel-input .form-control{
+  border-radius: 0.5rem !important;
+  border-width: 1px !important;
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(247 248 255 / var(--tw-bg-opacity)) !important;
+  padding-block: 1.8rem !important;
+  padding-inline: 4rem !important;
+  width: 100%   !important;
+  border-color: #f7f8ff
+ 
+}
+
+.react-tel-input .flag-dropdown {
+  padding-inline: .5rem;
+  border-color: #f7f8ff;
+  border-right: 1px solid rgb(232, 232, 232)
+}
+
 @layer base {
   #root {
     @apply w-[100vw] h-[100vh] overflow-x-hidden;

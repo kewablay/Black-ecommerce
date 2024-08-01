@@ -1,12 +1,15 @@
-import { useSignUpUser } from "hooks/useAuth";
 import React, { useRef } from "react";
+import { useSignUpUser } from "hooks/useAuth";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 function SignUpForm() {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const phoneRef = useRef();
 
   // sign up user
   const SignUpMutation = useSignUpUser();
@@ -17,6 +20,7 @@ function SignUpForm() {
       username: usernameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
+      phone: phoneRef.current.state.value, // Get the phone number value
     };
 
     SignUpMutation.mutate(userData);
@@ -51,10 +55,22 @@ function SignUpForm() {
         />
         <input
           type="password"
-          name="passowrd"
+          name="password"
           className="w-full input-style"
           placeholder="Password"
           ref={passwordRef}
+        />
+        <PhoneInput
+          country={"us"}
+          placeholder="Phone Number"
+          inputProps={{
+            name: "phone",
+            required: true,
+            ref: phoneRef,
+          }}
+          containerClass="w-full"
+          inputClass="input-style w-full"
+          
         />
 
         <input
