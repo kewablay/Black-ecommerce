@@ -13,6 +13,8 @@ function Users() {
 
   const { data: users, isLoading } = useGetAllUsers();
 
+  console.log("users from api: ", users);
+
   const isUsersEmpty = users?.length === 0;
   return (
     <DashboardLayout>
@@ -25,9 +27,10 @@ function Users() {
       <div className="space-y-4">
         {/* list header  */}
         <div className="grid items-center grid-cols-12 gap-5 p-3 font-bold text-white rounded-md bg-secondaryDark">
-          <p className="col-span-5">Username</p>
-          <p className="col-span-5">Email</p>
-          <p className="col-span-2">Actions</p>
+          <p className="col-span-3">Username</p>
+          <p className="col-span-3">Phone</p>
+          <p className="col-span-4">Email</p>
+          <p className="col-span-1">Actions</p>
         </div>
 
         {/* list */}
@@ -52,6 +55,7 @@ function Users() {
                   username={user?.username}
                   email={user?.email}
                   userId={user?._id}
+                  phone={user?.phone || "N/A"}
                 />
               ))
             )}
