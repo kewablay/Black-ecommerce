@@ -15,6 +15,7 @@ import {
 export const useGetOrders = () => {
   return useQuery("liveOrders", getOrders, {
     select: (data) => data.reverse(),
+    refetchInterval: 2000,
     onSuccess: (data) => {
       // console.log("get orders successful: ", data);
     },
@@ -28,6 +29,7 @@ export const useUpdateOrderStatus = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries(["orderDetail", data?.order?.order?._id]);
       queryClient.invalidateQueries("liveOrders");
+
       // console.log("update order status successful: ", data);
     },
   });
@@ -46,6 +48,7 @@ export const useMakeOrder = (closeModal) => {
 export const useDeleteOrder = () => {
   const queryClient = useQueryClient();
   return useMutation(deleteOrder, {
+    refetchInterval: 2000,
     onSuccess: (data) => {
       // console.log("order deleted successful: ", data);
       queryClient.invalidateQueries("liveOrders");
@@ -55,6 +58,7 @@ export const useDeleteOrder = () => {
 
 export const usegetOrderDetail = (orderId) => {
   return useQuery(["orderDetail", orderId], () => getOrderDetail(orderId), {
+    refetchInterval: 2000,
     onSuccess: (data) => {
       // console.log("get order detail successful: ", data);
     },
@@ -64,6 +68,7 @@ export const usegetOrderDetail = (orderId) => {
 export const useSendOrderOTP = () => {
   const queryClient = useQueryClient();
   return useMutation(sendOrderOTP, {
+    refetchInterval: 2000,
     onSuccess: (data) => {
       // console.log("OTP sent successfully: ", data);
       queryClient.invalidateQueries("orderOTPs");
@@ -73,6 +78,7 @@ export const useSendOrderOTP = () => {
 
 export const useViewOrderOTP = (orderId) => {
   return useQuery(["orderOTPs", orderId], () => viewOrderOTP(orderId), {
+    refetchInterval: 2000,
     onSuccess: (data) => {
       // console.log("get order otp successful: ", data);
     },
@@ -92,6 +98,7 @@ export const useViewTransactionId = (orderId) => {
     ["transactionIds", orderId],
     () => viewTransactionId(orderId),
     {
+      refetchInterval: 2000,
       onSuccess: (data) => {
         // console.log("get transactionId successful: ", data);
       },
