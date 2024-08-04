@@ -55,7 +55,7 @@ function Users() {
                   username={user?.username}
                   email={user?.email}
                   userId={user?._id}
-                  phone={user?.phone || "N/A"}
+                  phone={user?.phoneNumber || "N/A"}
                 />
               ))
             )}

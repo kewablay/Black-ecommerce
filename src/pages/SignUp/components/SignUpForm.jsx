@@ -20,7 +20,7 @@ function SignUpForm() {
       username: usernameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
-      phone, // Get the phone number value from state
+      phoneNumber: `+${phone}`,
     };
 
     SignUpMutation.mutate(userData);
